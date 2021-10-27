@@ -346,7 +346,7 @@
 		<url-pattern>*.miaps</url-pattern>
 	</servlet-mapping>
 	
-	<!-- mobile dtp  -->
+	<!-- mobile dtp setting -->
 	<servlet>
 		<servlet-name>mobiledtp</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

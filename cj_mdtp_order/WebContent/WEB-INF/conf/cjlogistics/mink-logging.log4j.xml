@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Properties>
+		<Property name="log.dir">/logs/mobile/miaps</Property>
+	</Properties>
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}][%-5p][%C:%M:%L] %n%m [%X{sessionId}][%X{deviceId}][%X{userNo}:%X{grpId}:%X{userId}][%X{targetUrl}]%n"/>
+		</Console>
+		<RollingFile name="service" fileName="${log.dir}/service/mink.service.log"
+					filePattern="$${log.dir}/service/mink.service-%d{yyyyMMdd-HH}.log.gz">
+			<PatternLayout>
+				<Pattern>[%d{yyyy-MM-dd HH:mm:ss:SSS}][%-5p][%C:%M:%L] %n%m [%X{sessionId}][%X{deviceId}][%X{userNo}:%X{grpId}:%X{userId}][%X{targetUrl}]%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="6" modulate="true" /> <!-- 6시간 마다 백업파일 생성 -->
+			</Policies>
+			<!--
+			  * 30일 이상된 백업파일 삭제
+			  * Log4j-2.5 이상에서 가능하고, 자바 7이 필요함 
+			-->
+			<DefaultRolloverStrategy>
+				<Delete basePath="${log.dir}/service" maxDepth="1">
+					<IfFileName glob="mink.service-*.log.gz" />
+					<IfLastModified age="30d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+		<RollingFile name="protocol" fileName="${log.dir}/protocol/mink.protocol.log"
+					filePattern="$${log.dir}/protocol/mink.protocol-%d{yyyyMMdd}.log.gz">
+			<PatternLayout>
+				<Pattern>=====%n%m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" /> <!-- 매일 백업파일 생성 -->
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="${log.dir}/protocol" maxDepth="1">
+					<IfFileName glob="mink.protocol-*.log.gz" />
+					<IfLastModified age="30d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+		<RollingFile name="javamail" fileName="${log.dir}/javamail/mink.javamail.log"
+					filePattern="$${log.dir}/javamail/mink.javamail-%d{yyyyMMdd}.log.gz">
+			<PatternLayout>
+				<Pattern>[%d{yyyy-MM-dd HH:mm:ss:SSS}][%X{sessionId}][%X{deviceId}][%X{userNo}:%X{grpId}:%X{userId}][%X{targetUrl}] &gt;&gt; %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" /> <!-- 매일 백업파일 생성 -->
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="${log.dir}/javamail" maxDepth="1">
+					<IfFileName glob="mink.javamail-*.log.gz" />
+					<IfLastModified age="30d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+		<RollingFile name="distributor" fileName="${log.dir}/distributor/mink.distributor.log"
+					filePattern="$${log.dir}/distributor/mink.distributor-%d{yyyyMMdd}.log.gz">
+			<PatternLayout>
+				<Pattern>[%d{yyyy-MM-dd HH:mm:ss:SSS}][%X{sessionId}] %m [%X{userId}]%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" /> <!-- 매일 백업파일 생성 -->
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="${log.dir}/distributor" maxDepth="1">
+					<IfFileName glob="mink.distributor-*.log.gz" />
+					<IfLastModified age="30d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+		<RollingFile name="sql" fileName="${log.dir}/sql/mink.sql.log"
+					filePattern="$${log.dir}/sql/mink.sql-%d{yyyyMMdd-HH}.log.gz">
+			<PatternLayout>
+				<Pattern>%d [%t] %-5p %c{1} - %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="12" modulate="true" /> <!-- 0시, 12시에 백업파일 생성 -->
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="${log.dir}/sql" maxDepth="1">
+					<IfFileName glob="mink.sql-*.log.gz" />
+					<IfLastModified age="30d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+		<RollingFile name="device" fileName="${log.dir}/device/mink.device.log"
+					filePattern="$${log.dir}/device/mink.device-%d{yyyyMMdd}.log.gz">
+			<PatternLayout>
+				<Pattern>[%d{yyyy-MM-dd HH:mm:ss:SSS}] [deviceId:%X{deviceId}] [targetUrl:%X{targetUrl}] [%X{startTm} ~ %X{endTm}] [intervals:%X{intervals}] [user: %X{userNo}:%X{grpId}:%X{userId}] [result: %X{resultCd}] %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" /> <!-- 매일 백업파일 생성 -->
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="${log.dir}/device" maxDepth="1">
+					<IfFileName glob="mink.device-*.log.gz" />
+					<IfLastModified age="30d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+		<JDBC name="deviceDb" tableName="miaps_device_log">
+			<ConnectionFactory class="com.thinkm.mink.commons.logging.MinkLog4jConnectionFactory" method="getConnection" />
+			<Column name="log_tm" pattern="%X{logTm}" />
+			<Column name="log_tp" pattern="%X{logTp}" />
+			<Column name="device_id" pattern="%X{deviceId}" />
+			<Column name="target_url" pattern="%X{targetUrl}" />
+			<Column name="start_tm" pattern="%X{startTm}" />
+			<Column name="end_tm" pattern="%X{endTm}" />
+			<Column name="intervals" pattern="%X{intervals}" />
+			<Column name="result_cd" pattern="%X{resultCd}" />
+			<Column name="user_no" pattern="%X{userNo}" />
+			<Column name="error_dtl" pattern="%m" />
+			<Column name="requests" pattern="%X{requests}" />
+			<Column name="responses" pattern="%X{responses}" />
+			<Column name="log_year" pattern="%X{logYear}" />
+			<Column name="log_month" pattern="%X{logMonth}" />
+			<Column name="log_date" pattern="%X{logDate}" />
+			<Column name="package_nm" pattern="%X{packageNm}" />
+			<Column name="platform_cd" pattern="%X{platformCd}" />
+			<Column name="version_nm" pattern="%X{versionNm}" />
+		</JDBC>
+		<RollingFile name="MailServerWatchdog" fileName="${log.dir}/mailwatchdog/mink.mailwatchdog.log"
+					filePattern="$${log.dir}/mailwatchdog/mink.mailwatchdog-%d{yyyyMMdd}.log.gz">
+			<PatternLayout>
+				<Pattern>[%d{yyyy-MM-dd HH:mm:ss:SSS}][%-5p][%X{sessionId}] %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" /> <!-- 매일 백업파일 생성 -->
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="${log.dir}/mailwatchdog" maxDepth="1">
+					<IfFileName glob="mink.mailwatchdog-*.log.gz" />
+					<IfLastModified age="30d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+        <RollingFile name="ewsTrace" fileName="${log.dir}/ews/mink.ews.log"
+                    filePattern="$${log.dir}/ews/mink.ews-%d{yyyyMMdd}.log.gz">
+            <PatternLayout>
+                <Pattern>%m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" /> <!-- 매일 백업파일 생성 -->
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${log.dir}/ews" maxDepth="1">
+                    <IfFileName glob="mink.ews-*.log.gz" />
+                    <IfLastModified age="30d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+		<RollingFile name="dupreqfilter" fileName="${log.dir}/dupreqfilter/mink.dupreqfilter.log"
+					filePattern="$${log.dir}/dupreqfilter/mink.dupreqfilter-%d{yyyyMMdd}.log.gz">
+			<PatternLayout>
+				<Pattern>[%d{yyyy-MM-dd HH:mm:ss:SSS}][%-5p][%C:%M:%L] %n%m [%X{sessionId}][%X{deviceId}][%X{userNo}:%X{grpId}:%X{userId}][%X{targetUrl}]%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="${log.dir}/dupreqfilter" maxDepth="1">
+					<IfFileName glob="mink.dupreqfilter-*.log.gz" />
+					<IfLastModified age="30d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<!-- SQL logger -->
+		<Logger name="com.ibatis" level="debug">
+			<AppenderRef ref="console"/>
+		</Logger>
+		<Logger name="java.sql" level="debug">
+			<AppenderRef ref="sql"/>
+			<AppenderRef ref="console"/>
+		</Logger>
+		<!-- device log: level must be info -->
+		<Logger name="deviceLog" level="info" additivity="false">
+			<AppenderRef ref="device"/>
+		</Logger>
+		<Logger name="deviceLogDb" level="info" additivity="false">
+			<AppenderRef ref="deviceDb"/>
+		</Logger>
+		<!-- protocol log: level must be info -->
+		<Logger name="protocolLog" level="info" additivity="false">
+			<AppenderRef ref="protocol"/>
+		</Logger>
+		<!-- javamail debug log: level must be info, valid if mail.debug property is set to true. -->
+		<Logger name="javamailLog" level="info" additivity="false">
+			<AppenderRef ref="javamail"/>
+		</Logger>
+		<!-- distributor log -->
+		<Logger name="distributorLog" level="trace" additivity="false">
+			<AppenderRef ref="distributor"/>
+			<AppenderRef ref="console"/>
+		</Logger>
+		<!-- duplicated request filter log -->
+		<Logger name="com.thinkm.mink.commons.web.DuplicatedRequestFilter" level="trace" additivity="false">
+			<AppenderRef ref="dupreqfilter"/>
+		</Logger>
+		<!-- mink service log -->
+		<Logger name="com.thinkm" level="trace" additivity="false">
+			<AppenderRef ref="service"/>
+			<AppenderRef ref="console"/>
+		</Logger>
+		<Logger name="com.mink" level="trace" additivity="false">
+			<AppenderRef ref="service"/>
+			<AppenderRef ref="console"/>
+		</Logger>
+		<Logger name="MailServerWatchdog" level="trace" additivity="false">
+			<AppenderRef ref="MailServerWatchdog"/>
+		</Logger>
+		<!-- EWS Service Trace Log -->
+        <Logger name="ewsTraceLog" level="trace" additivity="false">
+            <AppenderRef ref="ewsTrace"/>
+        </Logger>
+		<!-- 3rd party library log -->
+		<Logger name="java" level="warn" additivity="false">
+			<AppenderRef ref="service"/>
+		</Logger>
+		<Logger name="net" level="warn" additivity="false">
+			<AppenderRef ref="service"/>
+		</Logger>
+		<Logger name="com" level="warn" additivity="false">
+			<AppenderRef ref="service"/>
+		</Logger>
+		<Logger name="org" level="warn" additivity="false">
+			<AppenderRef ref="service"/>
+		</Logger>
+		<Root level="warn">
+			<AppenderRef ref="console"/>
+		</Root>
+	</Loggers>
+</Configuration>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+					http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+>
+	<bean id="httpclient" class="com.thinkm.mink.commons.util.MinkConfig" factory-method="getConfig">
+		<property name="configProperties">
+			<props>
+				<prop key="httpclient.maxPoolSize">1000</prop>
+				<prop key="httpclient.poolsPerRoute">50</prop>
+				<prop key="httpclient.keepAliveTimeout">15000</prop>
+				<prop key="httpclient.redirectStrategy.classname"></prop>
+				<!-- 
+				<prop key="httpclient.redirectStrategy.classname">org.apache.http.impl.client.DefaultRedirectStrategy</prop>
+				<prop key="httpclient.redirectStrategy.classname">org.apache.http.impl.client.LaxRedirectStrategy</prop>
+				-->
+				<prop key="httpclient.connectionTimeout">15000</prop> <!-- timeout to connect -->
+				<prop key="httpclient.socketTimeout">60000</prop> <!-- timeout to receive data -->
+			</props>
+		</property>
+	</bean>
+
+</beans>

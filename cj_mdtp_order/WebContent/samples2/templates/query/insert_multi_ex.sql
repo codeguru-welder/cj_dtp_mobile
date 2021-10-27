@@ -1,0 +1,1 @@
+["INSERT INTO miaps_user (user_no, user_id, user_nm) VALUES (1, 'listerine1', '세균억제구강청결1')","INSERT INTO miaps_user (user_no, user_id, user_nm) VALUES (2, 'listerine2', '세균억제구강청결2')"]

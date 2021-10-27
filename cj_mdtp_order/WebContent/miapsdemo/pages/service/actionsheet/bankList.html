@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta
+		content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+		name="viewport"/>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<title>BankList Test</title>
+	<link href="../../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Miaps Calendar CSS는 miaps.css에 들어가 있음 -->
+	<link href="../../../vendor/miaps/css/miaps.css" rel="stylesheet">
+	<link href="../../../resource/css/action_sheet.css" rel="stylesheet">
+	<link href="../../../resource/css/reset.css" rel="stylesheet" />
+	<link href="../../../resource/css/style_add.css" rel="stylesheet" />
+	
+	<!-- Dependency Modules -->
+	<script src="../../../vendor/jquery/jquery.min.js" type="text/javascript"></script>
+	<script src="../../../vendor/miaps/js/miaps_hybrid.js" type="text/javascript"></script>
+	<script src="../../../vendor/miaps/js/miaps_page.js" type="text/javascript"></script>
+	<script src="../../../vendor/template7/template7.js" type="text/javascript"></script>
+	<script src="../../../vendor/TweenMax.js" type="text/javascript"></script>
+	<script src="../../../resource/js/action_sheet.js" type="text/javascript"></script>
+	
+	<!-- Javascript Source -->
+	<script src="miaps_bankList.js"></script>
+	<script>
+	jQuery(function ($) {
+		var bankListAct = miaps_bankList.showActionsheet();
+		
+		$('#btnBankList').on('click', function () {
+			// actionsheet 보여주기
+	      	bankListAct.show();
+		});
+		
+		$(".back_btn").on("click", function (e) {
+			e.preventDefault();
+		    // 네이티브 기능 페이지 이동
+			miapsPage.back();
+		});
+			
+		$(".home_btn").on("click", function (e) {
+			e.preventDefault();
+			// 메인 페이지 이동
+			miapsPage.goTopPage();
+		});
+	});
+	</script>
+</head>
+<body class="bg_gray">
+	<!-- action sheet 적용 영역 (class="mh-container" 필수) -->
+  	<div class="mh-container">
+		<!-- header-->
+	    <header>
+	      <button type="button" class="back_btn"></button>
+	      <span class="page_title">BankList</span>
+	      <button type="button" class="home_btn"></button>
+	    </header>
+	    <br/>
+	    <!--// header-->
+	    <button class="btn btn-block btn-default" id="btnBankList">은행 목록</button>	
+	</div>
+</body>
+</html>

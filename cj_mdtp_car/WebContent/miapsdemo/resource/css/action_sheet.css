@@ -1,0 +1,584 @@
+@charset "utf-8";
+
+/*
+ * Common CSS
+ */
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: 1px dotted #fefefe;
+}
+
+*:not(input):not(textarea) {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+ul, ul li {
+  list-style: none;
+}
+
+input, select, button {
+  font: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-border-radius: 0;
+} 
+
+a *, label {
+  cursor: pointer
+}
+
+button, [role="button"] {
+  font: inherit;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  border: none;
+  z-index: -1;
+  left: 12px;
+  top: 50%;
+}
+
+/* common ===================================== */
+.sr-only {
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px 0 0 -1px;
+}
+
+.pd-h15 {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+strong, .border {
+  font-weight: 800;
+}
+
+.fsz20 {
+  font-size: 20px !important;
+}
+
+.align-center {
+  text-align: center !important;
+}
+
+[class^="btn-"] {
+  display: inline-block;
+  text-align: center;
+  border-radius: 5px;
+  vertical-align: middle;
+}
+
+[class^="btn-"][class*="-lg"] {
+  height: 57px;
+  font-size: 20px;
+}
+
+[class^="btn-"][class*="-md"] {
+  min-width: 167px;
+  height: 45px;
+  font-size: 17px;
+}
+
+/**
+button color
+ */
+[class^="btn-"][class*="-primary"] {
+  color: #fff;
+  background: #000;
+}
+
+[class^="btn-"][class*="-primary"]:active {
+  color: #fff;
+  background: #333;
+}
+
+[class^="btn-"][class*="-secondary"] {
+  color: #000;
+  background: #f7f7f7;
+}
+
+.neg [class^="btn-"][class*="-secondary"] {
+  color: #fff;
+  background: #aaa;
+}
+
+[class^="btn-"][class*="-line"] {
+  border: 1px solid #aaa;
+  background: #fff;
+}
+
+[class^="btn-"][class*="-line"]:active {
+  color: #cfcfcf;
+  background: #aaa;
+}
+
+/* 페이지 하단 버튼 set */
+.bottom-btn-set {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  z-index: 2;
+}
+
+.bottom-btn-set > * {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.bottom-btn-set > * [class^="btn-"] {
+  width: 100%;
+  border-radius: 0;
+}
+
+.bottom-btn-set .neg {
+  width: calc(100% / 3);
+}
+
+/* icon */
+[class^="ico-"] {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: 300px;
+  vertical-align: middle;
+}
+
+/* css 아이콘 */
+
+[class*="ico-close"] {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  background: none;
+}
+
+[class*="ico-close"]:before,
+[class*="ico-close"]:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #000;
+  border-radius: 1px;
+}
+
+[class*="ico-close"]:before {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+[class*="ico-close"]:after {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.ico-close-s {
+  width: 18px;
+  height: 18px;
+}
+
+.ico-close-s:before,
+.ico-close-s:after {
+  height: 1px;
+}
+
+.form-group {
+  position: relative;
+}
+
+/* .form-group + .form-group, .tbl_dl.dd-right.bd0 + .form-group, .form-group + .tbl_dl.dd-right.bd0 {margin-top: 30px;} */
+.form-group,
+.form-group > label,
+.form-group > .label,
+.form .label {
+  display: block;
+  margin: 0 0 5px;
+  line-height: 20px;
+  font-weight: 300;
+}
+
+/* input / select */
+.form-control {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+}
+
+.form-control:before {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  z-index: 1;
+  width: 0;
+  height: 1px;
+  background: #d71820;
+  transition: .8s
+}
+
+.form-control input,
+.form-control select,
+.form-control.search > button:not(.btn-del) {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 35px; /* padding:0 32px 0 10px; */
+  padding: 0 0 0 10px;
+  border: 0;
+  font-size: 16px;
+  background: transparent;
+}
+
+.form-control select {
+  padding: 10px 30px 0 7px;
+}
+
+.form-control.select:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  margin-top: -6px;
+  border-bottom: 1px solid #777;
+  border-right: 1px solid #777;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.form-control.select > button {
+  width: 100%;
+  min-height: 39px;
+  padding: 7px 30px 8px 10px;
+  text-align: left;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+/* designed radio/checkbox */
+.form-check {
+  position: relative;
+  display: inline-block;
+}
+
+.form-check > input {
+  position: absolute;
+  z-index: -1;
+}
+
+.form-check > label {
+  position: relative;
+  display: inline-block;
+  min-height: 24px;
+  padding: 0 0 0 34px;
+  background: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5em;
+  vertical-align: middle;
+}
+
+.form-check > label:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 25px;
+  height: 24px; /* background:#ddd; */
+  background-repeat: no-repeat;
+  -webkit-background-size: 300px auto;
+  background-size: 300px auto;
+  background-position: -102px -100px;
+  vertical-align: middle;
+  border-radius: 5px; /* transition:.5s; */
+}
+
+/* 선택 UI */
+.select-list {
+  overflow-y: auto;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #ddd;
+}
+
+.layer-contents .select-list {
+  margin-top: 10px;
+  border-top: none;
+  border-bottom: none;
+}
+
+.select-list li {
+  border-top: 1px solid #ddd;
+}
+
+.select-list li:first-child {
+  border-top: none;
+}
+
+.select-list .form-check {
+  display: block;
+}
+
+.select-list .form-check > label {
+  display: block;
+  position: relative;
+  height: auto;
+  padding: 16px 40px 16px 10px;
+  font-weight: 300;
+  line-height: 1.45;
+}
+
+.select-list .form-check > label:before {
+  display: none;
+}
+
+.select-list .select-name {
+  display: block;
+}
+
+.select-list .form-check > label:after {
+  content: '';
+  border: 0;
+  position: absolute;
+  top: 50%;
+  left: calc(100% - 31px);
+  width: 10px;
+  height: 19px;
+  margin-top: 0;
+}
+
+.select-list .form-check > input:checked + label {
+  font-weight: 700;
+}
+
+.select-list .form-check > input:checked + label:after {
+  width: 17px;
+  height: 13px;
+  border: 0;
+  margin-top: -6px;
+  -webkit-background-size: 300px 300px;
+  background-size: 300px 300px;
+  -webkit-animation: check 400ms ease-in-out;
+  animation: check 400ms ease-in-out;
+  -webkit-transform: scaleX(1) rotate(0deg);
+  transform: scaleX(1) rotate(0deg);
+}
+
+/* layer */
+/**
+dimmed css
+ */
+.dimmed {
+  position: fixed;
+  top: 0;
+  left: 0; /* right:0; bottom:0; */
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+}
+
+.dimmed.white {
+  background: transparent;
+  z-index: 1002;
+}
+
+.layer {
+  overflow: hidden;
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+  display: none; /* padding:50px 0 0 */;
+  background: #fff;
+  border-radius: 5px;
+}
+
+.layer-header { /* position:absolute; top:0; left:0; z-index: 1; width: 100%;  */
+  padding: 11px 0;
+  background: #fff;
+  font-size: 19px;
+  line-height: 1.45em;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.layer.has_bottom_btn {
+  padding-bottom: 57px;
+}
+
+.layer.has_bottom_btn .bottom-sheet-inner {
+  bottom: 57px; /* height: 91%; */
+  z-index: 1002;
+}
+
+.layer-header h1 {
+  font-weight: 700;
+}
+
+.pop-handle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 45px;
+  width: 100%;
+  z-index: 1;
+}
+
+.layer .btn-close {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  width: 22px;
+  height: 22px;
+  margin-top: -12px;
+}
+
+.layer-contents {
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+  position: relative;
+  height: calc(100% - 50px);
+  z-index: 1;
+  background-color: #fff;
+}
+
+.layer .bottom-btn-set {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1002;
+}
+
+.popup .btn-close [class*="ico-"],
+.layer .btn-close [class*="ico-"] {
+  vertical-align: top;
+}
+
+/* bottom sheet */
+.layer.bottom-sheet {
+  top: auto !important;
+  border-radius: 0;
+  background-color: transparent; /* height: 71%; */
+  overflow: visible;
+  height: 100%; /* display: block; visibility: hidden; */
+}
+
+/* .layer.bottom-sheet[data-name="data-picker"], .layer.bottom-sheet[data-name="data-picker"] .bottom-sheet-inner{height: auto;} */
+.bottom-sheet-inner {
+  position: fixed;
+  width: 100%;
+  bottom: 0; /* height: calc(75% + 55px); */
+  touch-action: none;
+  border-radius: 5px 5px 0 0;
+  background-color: #fff;
+  overflow: hidden; /* height: 100%;position: relative; */
+}
+
+.bottom-sheet {
+  overflow: hidden;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-top: 0;
+  border-radius: 5px 5px 0 0;
+}
+
+.bottom-sheet .layer-header {
+  height: 45px;
+  padding: 0 25px;
+  border: none;
+  border-radius: 5px 5px 0 0;
+  background: #f7f7f7;
+}
+
+.bottom-sheet .layer-header:before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  min-height: 45px;
+  margin-left: -1px;
+  vertical-align: middle;
+}
+
+.bottom-sheet .layer-header h1 {
+  display: inline-block;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.bottom-sheet .btn-close {
+  width: 30px;
+  height: 30px;
+  top: 7px;
+  right: 5px;
+  margin-top: 0;
+  z-index: 2;
+}
+
+.bottom-sheet .btn-close .ico-close-s {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  margin-left: -6px;
+}
+
+.bottom-sheet .layer-header + .layer-contents { /* padding-top: 45px; */
+  height: calc(100% - 45px);
+  overflow: auto;
+}
+
+.bottom-sheet .layer-header .btn-search {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.layer.depth2 {
+  overflow: initial;
+}
+
+.layer.depth2::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+}
+

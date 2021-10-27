@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ProjectUser">
+    <!-- 테스트용 테이블
+    CREATE TABLE project_user (
+	user_id VARCHAR(20) NOT NULL,
+	user_pw VARCHAR(20) NULL,
+	user_nm VARCHAR(20) NULL,
+	PRIMARY KEY (user_id));
+	insert into project_user (user_id, user_pw, user_nm) values ('miaps', 'miaps', 'miaps_nm');
+     -->
+    <select id="selectUser" resultClass="HashMap" parameterClass="Map">
+        select user_id AS userId, user_nm AS userNm
+        from project_user
+        where user_id = #id#
+        and user_pw = #pw#
+    </select>
+     
+    <select id="getSpeedTestList" parameterClass="Integer" resultClass="HashMap">
+		<![CDATA[
+	    select 
+			seq, value0, value1, value2, value3, value4, value5, value6, value7, value8, value9 
+		from speed_test
+		where rownum >= 1 and rownum <= ${limit}
+		]]> 
+	</select>
+</sqlMap> 

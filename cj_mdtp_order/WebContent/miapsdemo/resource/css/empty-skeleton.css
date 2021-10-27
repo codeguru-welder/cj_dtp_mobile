@@ -1,0 +1,137 @@
+@charset "utf-8";
+.skeleton-screen:empty {
+  margin: auto;
+  width: 162.5px;
+  height: 180px;
+  background-image:
+  
+    /*linear-gradient( 80deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 80% ), // highlight */
+    /*radial-gradient( circle 23px at 23px 23px, lightgray 100%, transparent 0 ),*/
+    
+    /* 선의 갯수만큼 추가해주면 됨*/ linear-gradient(
+      rgb(240, 238, 238) 50px,
+      transparent 0
+    ),
+    linear-gradient(rgb(240, 238, 238) 50px, transparent 0),
+    linear-gradient(rgb(240, 238, 238) 50px, transparent 0),
+    linear-gradient(rgb(240, 238, 238) 20px, transparent 0);
+
+  background-image:
+    /*-webkit-linear-gradient( 80deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 80% ),*/
+    /* 원 크기,  모양, 색 */
+    /*-webkit-radial-gradient( 23px 23px, circle cover, lightgray 23px, transparent 0 ),*/
+     /* 첫번째 직사각형 폭 크기 */ -webkit-linear-gradient(
+      rgb(240, 238, 238) 30px,
+      transparent 0
+    ),
+    -webkit-linear-gradient(rgb(240, 238, 238) 60px, transparent 0),
+    -webkit-linear-gradient(rgb(240, 238, 238) 12px, transparent 0),
+    -webkit-linear-gradient(rgb(240, 238, 238) 12px, transparent 0);
+
+  /* hidght 값에 따라 y축 반복여부 */
+  /*background-repeat: repeat-y;*/
+
+  background-size: 30px 10px, /* highlight */ 120px 70px, 55px 50px, 120px 50px;
+
+  /* x, y축 위치  */
+  background-position: 10px 3px, /* highlight */ 10px 17px, 10px 130px,
+    10px 144px;
+
+  /*animation: shine 1s infinite;*/
+}
+
+/* 복지상세  - 타이틀*/
+.skeleton_detail_title:empty {
+  margin: auto;
+  width: 320px;
+  height: 80px; /* change height to see repeat-y behavior */
+
+  background-image: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    linear-gradient(rgb(240, 238, 238) 14px, transparent 0),
+    linear-gradient(rgb(240, 238, 238) 20px, transparent 0);
+
+  background-repeat: repeat-y;
+
+  background-size: 50px 80px, /* highlight */ 100px 80px, 320px 80px;
+
+  background-position: 0 0, /* highlight */ 270px 3px, 0px 40px;
+
+  animation: detail_title 1s infinite;
+}
+
+@keyframes detail_title {
+  to {
+    background-position: 100% 0, /* move highlight to right */ 270px 3px,
+      0px 40px;
+  }
+}
+
+/* 복지상세  - 콘텐츠*/
+.skeleton_detail_content:empty {
+  margin: auto;
+  width: 320px;
+  height: 600px; /* change height to see repeat-y behavior */
+
+  background-image: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    linear-gradient(rgb(240, 238, 238) 18px, transparent 0),
+    linear-gradient(rgb(240, 238, 238) 44px, transparent 0),
+    linear-gradient(rgb(240, 238, 238) 1px, transparent 0);
+
+  background-repeat: repeat-y;
+
+  background-size: 50px 80px, /* highlight */ 100px 100px, 320px 100px,
+    320px 100px;
+
+  background-position: 0 0, /* highlight */ 0px 3px, 0px 25px, 0px 80px;
+
+  animation: detail_content 1s infinite;
+}
+
+@keyframes detail_content {
+  to {
+    background-position: 100% 0, /* move highlight to right */ 0px 3px, 0px 25px,
+      0px 80px;
+  }
+}
+
+/* 신청 내역 */
+.req_empty_list:empty {
+  margin: auto;
+  width: 288px;
+  height: 73px; /* change height to see repeat-y behavior */
+
+  background-image: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 80%
+    ),
+    linear-gradient(rgb(240, 238, 238) 40px, transparent 0),
+    linear-gradient(rgb(240, 238, 238) 23px, transparent 0),
+    linear-gradient(rgb(240, 238, 238) 23px, transparent 0);
+
+  background-repeat: repeat-y;
+
+  background-size: 20px 73px, /* highlight */ 288px 73px, 150px 73px, 80px 73px;
+
+  background-position: 0 0, /* highlight */ 0 0, 0px 50px, 240px 50px;
+
+  animation: shine 1s infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 100% 0, /* move highlight to right */ 0 0, 0px 50px,
+      240px 50px;
+  }
+}

@@ -1,0 +1,11 @@
+{
+"common" : {
+	"serverurl" : "http://miaps.thinkm.co.kr/miaps6beta",
+	"packagenm" : "kr.co.miaps.hybrid.miapsdemo",
+	"timeout" : 2000,
+	"toolbar" : false,
+	"usepush" : true,
+	"starturl" : "miapsdemo/index.html",
+	"runmode" : "dev"
+	}
+} 

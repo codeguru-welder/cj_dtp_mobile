@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Global Search</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../vendor/miaps/css/miaps.css">
+
+<script src="../resource/js/config.js"></script>
+<script data-main="pages/thirdparty.js" src="../vendor/require/require.js"></script>
+
+
+</head>
+<body>
+	<div class="container">
+		<h4 style="margin-top: 10px; margin-bottom: 15px;">Native Features</h4>
+		<div class="list-group">
+			<!--
+			<a id="espider-driver-license" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-user"></span>&nbsp;운전면허 진위확인</h4>
+		      <p class="list-group-item-text">espider운전면허 진위확인</p>
+		    </a>
+		
+		    <a id="espider-driver-license-wp" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-user"></span>&nbsp;운전면허 진위확인-wp</h4>
+		      <p class="list-group-item-text">miaps Wrapper를 이용한 espider운전면허 진위확인</p>
+			</a>
+			-->
+
+			<!-- 한국기업데이터 웹페이지 표시 2020.12.15 -->
+			<a id="ked-show" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-globe"></span>&nbsp;외부 페이지 호출</h4>
+		      <p class="list-group-item-text">한국기업데이터 복지앱 - 외부 페이지 호출 테스트</p>
+			</a>
+
+
+			<!--nfilter-->
+			<a id="nfilter-full-str" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon  glyphicon-lock"></span>&nbsp;보안키패드(Full-String)</h4>
+		      <p class="list-group-item-text">nFilter키패드 String(nfilter)</p>
+			</a>
+			
+			<a id="nfilter-half-str" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-lock"></span>&nbsp;보안키패드(Half-String)</h4>
+		      <p class="list-group-item-text">nFilter키패드 String(nfilter)</p>
+			</a>
+			
+			<a id="nfilter-full-num" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-lock"></span>&nbsp;보안키패드(Full-Number)</h4>
+		      <p class="list-group-item-text">nFilter키패드 Number(nfilter)</p>
+			</a>
+			
+			<a id="nfilter-half-num" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-lock"></span>&nbsp;보안키패드(Half-Number)</h4>
+		      <p class="list-group-item-text">nFilter키패드 Number(nfilter)</p>
+			</a>
+			
+			<!--eight byte-->
+			<a id="eightbyte-set-token" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;PIN등록</h4>
+		      <p class="list-group-item-text">최초 토큰 저장 & 생성 : PIN번호로 등록과 동시에 sign데이터까지 전달(eightbyte)</p>
+			</a>
+			
+			<a id="eightbyte-del-token" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;PIN삭제</h4>
+		      <p class="list-group-item-text">토큰 제거(eightbyte)</p>
+			</a>
+			
+			<a id="eightbyte-get-pin-signdata" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>&nbsp;PIN전자서명 생성</h4>
+		      <p class="list-group-item-text">PIN 기반 전자서명 데이터 생성(eightbyte)</p>
+			</a>
+			
+			<a id="eightbyte-set-bio-authdata" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;생체정보 등록</h4>
+		      <p class="list-group-item-text">생체정보 등록(eightbyte)</p>
+			</a>
+			
+			<a id="eightbyte-del-bio-authdata" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;생체정보 삭제</h4>
+		      <p class="list-group-item-text">생체정보 삭제(eightbyte)</p>
+			</a>
+			
+			<a id="eightbyte-get-bio-signdata" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>&nbsp;생체 전자서명 생성</h4>
+		      <p class="list-group-item-text">생체정보 기반 전자서명 데이터 생성(eightbyte)</p>
+			</a>
+			
+			<a id="eightbyte-set-pattern-authdata" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;패턴 정보 등록</h4>
+		      <p class="list-group-item-text">패턴 정보 등록(eightbyte)</p>
+			</a>
+
+			<a id="eightbyte-chg-pattern-authdata" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;패턴 정보 변경</h4>
+		      <p class="list-group-item-text">패턴 정보 변경(eightbyte)</p>
+			</a>
+
+			<a id="eightbyte-del-pattern-authdata" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;패턴 정보 삭제</h4>
+		      <p class="list-group-item-text">패턴 정보 삭제(eightbyte)</p>
+			</a>
+
+			<a id="eightbyte-get-pattern-authdata" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>&nbsp;패턴 전자서명 생성</h4>
+		      <p class="list-group-item-text">패턴정보 기반 전자서명 데이터 생성(eightbyte)</p>
+			</a>
+
+			<a id="eightbyte-set-otp-token" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;OTP정보 등록</h4>
+		      <p class="list-group-item-text">OTP정보 등록(eightbyte)</p>
+			</a>
+
+			<a id="eightbyte-del-otp-token" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;OTP정보 삭제</h4>
+		      <p class="list-group-item-text">OTP정보 삭제(eightbyte)</p>
+			</a>
+
+			<a id="eightbyte-get-otp-signdata" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>&nbsp;OTP Sign데이터 전달</h4>
+		      <p class="list-group-item-text">OTP Sign데이터 전달(eightbyte)</p>
+			</a>
+
+			<a id="eightbyte-get-otp-numdata" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>&nbsp;OTP정보 추출</h4>
+		      <p class="list-group-item-text">OTP정보 추출(eightbyte)</p>
+			</a>
+
+			<a id="eightbyte-get-qr-signdata" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-qrcode"></span>&nbsp;QR 검증</h4>
+		      <p class="list-group-item-text">QR 검증(eightbyte)</p>
+			</a>
+
+			<a id="inzi-get-ocr-imagedata" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-camera"></span>&nbsp;신분증 촬영</h4>
+		      <p class="list-group-item-text">신분증 촬영(inzisoft)</p>
+			</a>
+
+			<a id="mpush-init" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-camera"></span>&nbsp;푸시 사용자 등록</h4>
+		      <p class="list-group-item-text">푸시 사용자 등록(mpush)</p>
+			</a>
+
+			<a id="inca-get-deviceinfo" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-phone"></span>&nbsp;기기 정보 가져오기</h4>
+		      <p class="list-group-item-text">기기 정보 가져오기(inca)</p>
+			</a>
+
+		    
+		</div>
+		<br/>
+		<div style="text-align: center; margin-bottom: 10px;"><button id="btnBack" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;Back</button></div>
+	</div>
+</body>
+</html>

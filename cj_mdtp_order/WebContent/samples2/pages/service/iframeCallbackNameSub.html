@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+ iframe callback 테스트 (sub) 
+ -->
+<html>
+<head>
+<title>MiAPS Hybrid iframe Callback Sample</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+
+
+<script type="text/javascript" src="../../vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../../vendor/miaps/js/miaps_hybrid.js"></script>
+<script type="text/javascript" src="../../vendor/miaps/js/miaps_wp.js"></script>
+
+ 
+<script type="text/javascript">
+	
+	window.callbackGeo = function(data) {
+		var obj = miaps.parse(data); 
+		
+		if (typeof obj == 'object') {
+			alert(JSON.stringify(obj).replace(/,"/g, ',\n"'));
+		} else if (typeof obj == 'string') {
+			alert(obj);
+		}
+	}
+	
+	
+	
+	/*var config = {
+			type : 'VERSION',
+			param : '',
+			callback: 'document.getElementsByName("iframeName")[0].contentWindow.callbackGeo'
+	}
+	miaps.mobile(config, callbackGeo);
+	*/
+	
+	var config = {
+		type : 'GEOLOCATION',
+		param : {
+			"start": true,
+			"onetime": true,
+			"type": "navigate"
+		},
+		callback : 'document.getElementsByName("iframeName")[0].contentWindow.callbackGeo'
+	}
+	miaps.mobile(config, callbackGeo);
+	
+</script>
+</head>
+<body>
+	iframe Name callback sub page
+</body>
+</html>
+
+
+

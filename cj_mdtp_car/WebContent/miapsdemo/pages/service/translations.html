@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * Device Info
+	 * 
+	 * @author chlee
+	 * @since 2016.11.16
+	 */
+-->
+<html>
+  <head>
+    <title>MiAPS Hybrid Translations</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+	/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- css load -->
+    <link href="../../resource/css/reset.css" rel="stylesheet" />
+    <link href="../../resource/css/style_add.css" rel="stylesheet" />
+    <link 
+    	rel="stylesheet" 
+    	href="../../vendor/bootstrap/css/bootstrap.min.css"
+    />
+	<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+	<!-- //css load -->
+	
+    <script src="../../resource/js/config.js"></script>
+	<script
+		data-main="pages/service/translations.js"
+		src="../../vendor/require/require.js"
+	></script>
+  	
+  </head>
+  <body>
+    <!-- header-->
+    <header>
+      <button type="button" class="back_btn"></button>
+      <span class="page_title">Translations 다국어</span>
+      <button type="button" class="home_btn"></button>
+    </header>
+    <div class="contents_wrap bg_gray">
+	    <div class="translations-wrap">
+	    	<!-- contents -->
+			<main id="container">
+				<div class="contents" id="contents">
+					<div class="nation_btn_wrap">
+						<button type="button" data-lang="ko">
+							<img src="/miapsdemo/resource/img/logo/nation_kr.png" alt="" />
+							<span class="btn_name">한국어</span>
+						</button>
+						<button type="button" data-lang="en">
+							<img src="/miapsdemo/resource/img/logo/nation_us.png" alt="" />
+							<span class="btn_name">English</span>
+						</button>
+						<button type="button" data-lang="zh">
+							<img src="/miapsdemo/resource/img/logo/nation_cn.png" alt="" />
+							<span class="btn_name">简体中文</span>
+						</button>
+						<button type="button" data-lang="vi">
+							<img src="/miapsdemo/resource/img/logo/nation_vn.png" alt="" />
+							<span class="btn_name">Tiếng Việt</span>
+						</button>
+						<button type="button" data-lang="km">
+							<img src="/miapsdemo/resource/img/logo/nation_kh.png" alt="" />
+							<span class="btn_name">ភាសាខ្មែរ</span>
+						</button>
+					</div>
+					<hr>
+					<h2 data-miaps-i18n="COMT000001"></h2>
+					<ul>
+						<li data-miaps-i18n="COMT000002"></li>
+						<li data-miaps-i18n="COMT000003"></li>
+					</ul>
+					<button type="button" data-miaps-i18n="COMB000001" class="btn"></button><br/>
+					<input type="text" data-miaps-i18n="placeholder:COMT000004" class="textBox">
+				</div>
+			</main>
+			<!-- contents -->
+		  </div>
+	  </div>
+  </body>
+</html>

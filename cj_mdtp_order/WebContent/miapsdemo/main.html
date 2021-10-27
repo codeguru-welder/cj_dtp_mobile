@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+      name="viewport"
+    />
+    <title>main</title>
+
+    <!-- css load -->
+    <link href="resource/css/reset.css" rel="stylesheet" />
+    <link href="resource/css/style_add.css" rel="stylesheet" />
+    <link href="vendor/miaps/css/miaps.css" rel="stylesheet" />
+    <!-- //css load -->
+  </head>
+
+  <body>
+    <!--  메인 전용 헤더 -->
+    <div class="main_header">
+      <img src="resource/img/main_bi.png" alt="" />
+    </div>
+
+    <!-- content -->
+    <div class="contents_wrap" style="height: calc(100vh - 84px)">
+      <div class="shortcut_btn_wrap">
+        <!-- 네이티브 기능 바로가기 버튼-->
+        <button type="button" id="go_native">
+          <img src="resource/img/main_button01.png" alt="" />
+        </button>
+
+        <!-- 기업데이터 복지신청 바로가기 버튼-->
+        <button type="button" id="go_welfare">
+          <img src="resource/img/main_button02.png" alt="" />
+        </button>
+
+        <!-- APP 호출-->
+        <button type="button" id="go_schedule">
+          <img src="resource/img/main_button03.png" alt="" />
+        </button>
+      </div>
+    </div>
+    <!--// content -->
+    <!--<div><button type="button" id="backtest">back test</button></div>-->
+  </body>
+
+  <!-- js load -->
+  <script src="resource/js/config.js"></script>
+  <script data-main="main.js" src="vendor/require/require.js"></script>
+  <!--// js load -->
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * Device Info
+	 * 
+	 * @author chlee
+	 * @since 2016.11.16
+	 */
+-->
+<html>
+  <head>
+    <title>MiAPS Hybrid Device Info</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- css load -->
+    <link href="../../resource/css/reset.css" rel="stylesheet" />
+    <link href="../../resource/css/style_add.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="../../vendor/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../vendor/miaps/css/miaps.css" />
+    <!-- //css load -->
+
+    <script src="../../resource/js/long-press-event.min.js"></script>
+    <script src="../../resource/js/config.js"></script>
+    <script
+      data-main="pages/service/deviceInfo.js"
+      src="../../vendor/require/require.js"
+    ></script>
+  </head>
+  <body>
+    <!-- header-->
+    <header>
+      <button type="button" class="back_btn"></button>
+      <span class="page_title">Device Info</span>
+      <button type="button" class="home_btn"></button>
+    </header>
+    <!--// header-->
+    <div class="contents_wrap bg_gray">
+      <br />
+      <div class="list-group" id="contents">
+        <script type="text/x-handlebars-template" id="display-template">
+          {{#result}}
+            <a class="list-group-item">
+              <h5 class="list-group-item-heading">
+                {{type}}
+              </h5>
+              <p class="list-group-item-text">
+                {{res}}
+              </p>
+            </a>
+          {{/result}}
+        </script>
+      </div>
+      <br />
+      <textarea
+        id="js_user_agent"
+        style="width: 100%; overflow: visible"
+        readonly
+      ></textarea>
+      <br />
+      <br />
+      <br />
+      <div style="text-align: center">
+        <button id="long_press" class="btn btn-block btn-default">
+          <span class="glyphicon glyphicon-hand-down"></span> Long-Press
+        </button>
+      </div>
+      <br />
+      <br />
+      <br />
+    </div>
+  </body>
+</html>

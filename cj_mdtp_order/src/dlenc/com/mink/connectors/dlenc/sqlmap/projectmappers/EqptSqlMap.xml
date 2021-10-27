@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mink.connectors.dlenc.mapper.EqptMapper">
+ <!-- 현장 선택 -->
+  <select
+    id="selectSiteCode"
+    parameterType="java.util.Map"
+    resultType="java.util.LinkedHashMap"
+  >
+    SELECT NM_CD AS NM_SITE
+    , CD AS CD_SITE
+    , UPER_CD AS TY_SITE
+    FROM DHEDT_COMN_CD
+    WHERE YN_USE = 'Y' 
+    AND CD_GR = 'CD_SITE'
+    ORDER BY ODER ASC
+  </select>
+ <!-- 장비 선택 -->
+  <select
+    id="selectEqptType"
+    parameterType="java.util.Map"
+    resultType="java.util.LinkedHashMap"
+  >
+    SELECT NM_CD AS NM_TY_EQPT
+    , CD AS TY_EQPT
+    FROM DHEDT_COMN_CD
+    WHERE YN_USE = 'Y' 
+    AND CD_GR = 'TY_EQPT'
+    <if test="TY_SITE != null and TY_SITE != ''">
+	    AND UPER_CD = #{TY_SITE}
+    </if>
+    ORDER BY ODER ASC
+  </select>
+ <!-- 규격 선택 -->
+  <select
+    id="selectEqptStd"
+    parameterType="java.util.Map"
+    resultType="java.util.LinkedHashMap"
+  >
+    SELECT NM_CD AS NM_ST_EQPT
+    , CD AS ST_EQPT
+    FROM DHEDT_COMN_CD
+    WHERE YN_USE = 'Y' 
+    AND CD_GR = 'ST_EQPT'
+    <if test="TY_EQPT != null and TY_EQPT != ''">
+	    AND UPER_CD = #{TY_EQPT}
+    </if>
+    ORDER BY ODER ASC 
+  </select>
+ <!-- 장비 계획 선택 -->
+  <select
+    id="selectEqptPlan"
+    parameterType="java.util.Map"
+    resultType="java.util.LinkedHashMap"
+  >
+    SELECT NM_CD AS NM_EQPT_PLN
+    , CD AS CD_EQPT_PLN
+    , VLU_ATRB1 AS NM_UNIT
+    FROM DHEDT_COMN_CD
+    WHERE YN_USE = 'Y' 
+    AND CD_GR = 'CD_EQPT_PLN'
+    <if test="TY_EQPT != null and TY_EQPT != ''">
+	    AND UPER_CD = #{TY_EQPT}
+    </if>
+    ORDER BY ODER ASC
+  </select>
+  <!-- 현장 작업 정보 -->
+  <select
+    id="selectSiteWork"
+    parameterType="java.util.Map"
+    resultType="java.util.LinkedHashMap"
+  >
+    SELECT 
+    SEQ_SITE_EQPT
+    , CD_SITE
+    , NM_WRK_PRSN
+    , NO_CAR
+    , DT_WRK
+    , TY_EQPT
+    , ST_EQPT
+    , TIME_REST
+    , LTTD
+    , LNTD
+    FROM DHEDT_SITE_EQPT
+    WHERE 1=1
+      <if test="CD_SITE != null and CD_SITE != ''">
+      AND CD_SITE = #{CD_SITE}
+      </if>
+      <if test="NM_WRK_PRSN != null and NM_WRK_PRSN != ''">
+      AND NM_WRK_PRSN = #{NM_WRK_PRSN}
+      </if>
+      <if test="NO_CAR != null and NO_CAR != ''">
+      AND NO_CAR = #{NO_CAR}
+      </if>
+      <if test="DT_WRK != null and DT_WRK != ''">
+      AND DT_WRK = #{DT_WRK}
+      </if>
+  </select>
+  <!-- 현장 작업 정보 상세 -->
+  <select
+    id="selectSiteWorkInfo"
+    parameterType="java.util.Map"
+    resultType="java.util.LinkedHashMap"
+  >
+    SELECT 
+    CD_EQPT_PLN
+    , QT_WRK
+    , TIME_WRK
+    FROM DHEDT_WRK_INFO
+    WHERE SEQ_SITE_EQPT = #{SEQ_SITE_EQPT}
+  </select>
+
+  <insert
+    id="insertSiteWork"
+    parameterType="java.util.Map"
+  >
+    <selectKey keyProperty="SEQ" resultType="String" order="BEFORE">
+			SELECT CONCAT (#{CD_SITE}, RIGHT(CONCAT('000000', IFNULL(MAX(NVL(CAST(RIGHT(SEQ_SITE_EQPT,2) AS INT), 0)) + 1, 1)),7)) AS SEQ
+        	FROM DHEDT_SITE_EQPT
+        	WHERE CD_SITE = #{CD_SITE}
+	</selectKey>
+
+    INSERT INTO DHEDT_SITE_EQPT
+    (
+     SEQ_SITE_EQPT
+     ,CD_SITE
+     ,DT_WRK
+     ,NM_WRK_PRSN
+     ,NO_CAR
+     ,TY_EQPT
+     ,ST_EQPT
+     ,TIME_REST
+     ,LTTD
+     ,LNTD
+     ,DNT_IPUT
+     ,DNT_CHG
+     )
+    VALUES (
+    <choose>
+    	<when test="SEQ_SITE_EQPT != null and SEQ_SITE_EQPT != ''">
+    	#{SEQ_SITE_EQPT}
+    	</when>
+    	<otherwise>
+    	#{SEQ}
+    	</otherwise>
+    </choose>
+     ,#{CD_SITE}
+     ,#{DT_WRK}
+     ,#{NM_WRK_PRSN}
+     ,#{NO_CAR}
+     ,#{TY_EQPT}
+     ,#{ST_EQPT}
+     ,#{TIME_REST}
+     ,NULL
+     ,NULL
+     ,SYSDATE()
+     ,NULL
+     )
+    ON DUPLICATE KEY UPDATE TY_EQPT = #{TY_EQPT},
+                            ST_EQPT = #{ST_EQPT},
+                            TIME_REST = #{TIME_REST},
+                            DNT_CHG = SYSDATE()
+  </insert>
+
+  <delete
+    id="deleteSiteWorkInfo"
+    parameterType="java.util.Map"
+  >
+    DELETE
+    FROM DHEDT_WRK_INFO
+    WHERE SEQ_SITE_EQPT = #{SEQ_SITE_EQPT}
+  </delete>
+
+  <insert
+    id="insertSiteWorkInfo"
+    parameterType="java.util.Map"
+  >
+    INSERT INTO DHEDT_WRK_INFO (
+    SEQ_SITE_EQPT
+    , CD_EQPT_PLN
+    , QT_WRK
+    , TIME_WRK
+    , DNT_IPUT
+    ) values
+      <foreach
+        collection="insertList"
+        item="item"
+        separator=","
+      > (
+          #{item.SEQ_SITE_EQPT,jdbcType=VARCHAR}
+          , #{item.CD_EQPT_PLN,jdbcType=VARCHAR}
+          , #{item.QT_WRK,jdbcType=DECIMAL}
+          , #{item.TIME_WRK,jdbcType=DECIMAL}
+          , SYSDATE()
+        )
+      </foreach>
+  </insert>
+</mapper>

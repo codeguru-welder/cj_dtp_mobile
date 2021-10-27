@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+    
+    <typeAlias alias="Us7Ascii" type="com.thinkm.mink.commons.db.StringTypeHandler"/>
+    <typeHandler jdbcType="varchar" javaType="java.lang.String" callback="Us7Ascii"/>
+    
+    <sqlMap resource="com/thinkm/mink/dao/ibatis/maps/oracleus/UserInfo.xml"/>
+	<sqlMap resource="com/thinkm/mink/dao/ibatis/maps/oracleus/UserInfo_oracle.xml"/>
+	<sqlMap resource="com/thinkm/mink/dao/ibatis/maps/oracleus/DeviceInfo.xml"/>
+	<sqlMap resource="com/thinkm/mink/dao/ibatis/maps/oracleus/App.xml"/>
+	<sqlMap resource="com/thinkm/mink/dao/ibatis/maps/oracleus/App_oracle.xml"/>
+	<sqlMap resource="com/thinkm/mink/dao/ibatis/maps/oracleus/Distribution.xml"/>
+	<sqlMap resource="com/thinkm/mink/dao/ibatis/maps/DeviceLog.xml"/>
+	<sqlMap resource="com/thinkm/mink/miaps/connector/maps/ConnectorFramework.xml"/>
+</sqlMapConfig>

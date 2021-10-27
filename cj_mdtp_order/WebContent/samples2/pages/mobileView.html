@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Global Search</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../vendor/miaps/css/miaps.css">
+
+<script src="../resource/js/config.js"></script>
+<script data-main="pages/mobileView.js" src="../vendor/require/require.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<h4 style="margin-top: 10px; margin-bottom: 15px;">Native Features</h4>
+		<div class="list-group">
+			<a href="mobile/fileUploadOfList.html" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-upload"></span>&nbsp;파일 업로드 예제 - 파일목록</h4>
+		      <p class="list-group-item-text">앱에서 업로드, base64 이미지데이터 업로드</p>
+		    </a>
+		
+			<!-- doc view -->
+		    <a href="mobile/docView.html" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>&nbsp;Documents Viewer 예제</h4>
+		      <p class="list-group-item-text">문서변환 서버 예제</p>
+		    </a>
+		
+			<!-- 외부 라이브러리 연동 -->
+			<a href="mobile/extlib.html" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-link"></span>&nbsp;외부라이브러리 연동 - 입력</h4>
+		      <p class="list-group-item-text">외부 라이브러리 직접 입력</p>
+		    </a>
+		    
+		    <!-- 외부 라이브러리 연동 새 페이지, 새페이지 내에서 리스트 추가 해서 테스트 -->
+			<a href="mobile/extLibView.html" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-link"></span>&nbsp;외부라이브러리 연동 - 리스트</h4>
+		      <p class="list-group-item-text">외부 라이브러리 리스트에서 선택</p>
+		    </a>
+		    
+		    <!-- bar, QR code -->
+		    <a href="mobile/codeReader.html" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-qrcode"></span>&nbsp;Bar,QR code</h4>
+		      <p class="list-group-item-text">Bar,QR Code리더</p>
+		    </a>
+		    
+		    <a id="finger" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-hand-up"></span>&nbsp;지문 인식</h4>
+		      <p class="list-group-item-text">Android-지문, iOS-TouchID,FaceID 인식 테스트</p>
+		    </a>
+		    
+		    <a id="finger-checkdevice" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-hand-up"></span>&nbsp;지문 지원체크</h4>
+		      <p class="list-group-item-text">Android-지문, iOS-TouchID,FaceID 지원 여부</p>
+		    </a>
+		    
+		    <a id="finger-checkreg" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-hand-up"></span>&nbsp;지문 등록여부</h4>
+		      <p class="list-group-item-text">Android-지문, iOS-TouchID,FaceID 등록 여부</p>
+			</a>
+			
+			<a id="ios-id" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-hand-up glyphicon-eye-open"></span>&nbsp;TouchID&nbsp;<span class="glyphicon glyphicon-user"></span>&nbsp;FaceID 구분</h4>
+		      <p class="list-group-item-text">iOS일 경우 장치가 TouchID인지 FaceID인지 구분</p>
+		    </a>
+	
+		    <a id="devicemodel" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-phone"></span>&nbsp;장치 모델 정보</h4>
+		      <p class="list-group-item-text">devicemodel</p>
+		    </a>
+		
+		    <a id="deviceid" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-phone"></span>&nbsp;장치 ID 정보</h4>
+		      <p class="list-group-item-text">deviceid</p>
+		    </a>
+		    
+		     <a id="istablet" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-phone"></span>&nbsp;테블릿 확인</h4>
+		      <p class="list-group-item-text">istablet</p>
+		    </a>
+		
+		    <a id="language" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-font"></span>&nbsp;장치 언어</h4>
+		      <p class="list-group-item-text">language</p>
+		    </a>
+	
+		    <a id="platform" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-cog"></span>&nbsp;플랫폼</h4>
+		      <p class="list-group-item-text">platform (OS)</p>
+		    </a>
+		    
+		    <a id="platformversion" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-cog"></span>&nbsp;플랫폼 버전</h4>
+		      <p class="list-group-item-text">platformversion (OS 버전을 취득)</p>
+		    </a>
+		
+		    <a id="appid" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-cog"></span>&nbsp;앱 ID</h4>
+		      <p class="list-group-item-text">appid (어드민센터의 패키지명)</p>
+		    </a>
+		    
+		    <a id="bundleid" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-cog"></span>&nbsp;Bundle ID</h4>
+		      <p class="list-group-item-text">bundleid (iOS:bundleId, Android:package name)</p>
+		    </a>
+		
+		    <a id="version" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-cog"></span>&nbsp;앱 버전 정보</h4>
+		      <p class="list-group-item-text">version</p>
+		    </a>
+		
+		    <a id="savevalue" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-save"></span>&nbsp;SAVE VALUE</h4>
+		      <p class="list-group-item-text">savevalue</p>
+		    </a>
+	
+		    <a id="loadvalue" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-open"></span>&nbsp;LOAD VALUE</h4>
+		      <p class="list-group-item-text">loadvalue</p>
+		    </a>
+		    
+		    <a id="clearallvalue" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-trash"></span>&nbsp;CLEAR ALL VALUE</h4>
+		      <p class="list-group-item-text">clearallvalue</p>
+		    </a>
+		
+		    <a id="timezone" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-time"></span>&nbsp;Time Zone</h4>
+		      <p class="list-group-item-text">timezone</p>
+		    </a>
+		    
+		    <a id="geo" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;위치정보 취득</h4>
+		      <p class="list-group-item-text">geolocation</p>
+		    </a>
+		    
+		    <a class="list-group-item">
+		      <div class="pull-right center-block btn-group">
+				  <button id="statuscolor_red" type="button" class="btn btn-danger">빨강</button>
+				  <button id="statuscolor_blue" type="button" class="btn btn-primary">파랑</button>
+				  <button id="statuscolor_yellow" type="button" class="btn btn-warning">노랑</button>
+				</div>
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-text-background"></span>&nbsp;상태바 색상</h4>
+		      <p class="list-group-item-text">상태바 색을 변경 합니다.</p>
+		    </a>
+		    
+		   <a class="list-group-item">
+		    	<div class="pull-right center-block btn-group">
+				  <button id="watermark_on" type="button" class="btn btn-default">On</button>
+				  <button id="watermark_off" type="button" class="btn btn-default">Off</button>
+				</div>
+		      	<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-tint"></span>&nbsp;WaterMark</h4>
+				<p class="list-group-item-text">watermark를 표시합니다.</p>		      
+		    </a>
+		    
+		    <a id="filelist" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-time"></span>&nbsp;로컬 파일 목록</h4>
+		      <p class="list-group-item-text">지정경로의 파일 목록을 가져옵니다.(C:\Users\thinkm\Pictures\movecut)</p>
+		    </a>
+		    
+		    <a id="filecontents" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-time"></span>&nbsp;로컬 파일 내용</h4>
+		      <p class="list-group-item-text">지정한 파일의 내용을 가져옵니다.(C:\Users\thinkm\Pictures\movecut\xxx.txt)</p>
+		    </a>
+		    
+		    <a id="toasts" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-comment"></span>&nbsp;Toast 테스트</h4>
+		      <p class="list-group-item-text">Toast메시지 테스트입니다.</p>
+		    </a>
+		    
+		     <a id="newbrowser" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-new-window"></span>&nbsp;New Browser Open</h4>
+		      <p class="list-group-item-text">외부 웹브라우저 열기 테스트 입니다.</p>
+		    </a>
+		   
+		   	<a id="multicall" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-cog"></span>&nbsp;mobile동시호출</h4>
+		      <p class="list-group-item-text" style="overflow:hidden; word-wrap:break-word; word-break:break-all;">deviceid,platform,devicemodel,platformversion,version</p>
+		    </a>
+		    
+		    <a id="ori_portrait" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-new-window"></span>&nbsp;회전(Portrait)</h4>
+		      <p class="list-group-item-text">회전(Portrait)</p>
+		    </a>
+			<a id="ori_landscape" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-new-window"></span>&nbsp;회전(Landscape)</h4>
+		      <p class="list-group-item-text">회전(Landscape)</p>
+		    </a>
+			<a id="ori_all" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-new-window"></span>&nbsp;회전(Orientation)</h4>
+		      <p class="list-group-item-text">회전(Orientation)</p>
+		    </a>
+		   
+		    
+		    <a id="btnBackEnable" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-new-window"></span>&nbsp;Enable Back Button</h4>
+		      <p class="list-group-item-text">백버튼 사용</p>
+		    </a>
+		    <a id="btnBackDisable" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-new-window"></span>&nbsp;Disable Back Button</h4>
+		      <p class="list-group-item-text">백버튼 사용안함</p>
+		    </a>
+		    
+		    <a id="btnEncrypt" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-compressed"></span>&nbsp;AES128 Encrypt</h4>
+		      <p class="list-group-item-text">1234암호화(AES128)</p>
+		    </a>
+		    <a id="btnDecrypt" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-compressed"></span>&nbsp;AES128 Decrypt</h4>
+		      <p class="list-group-item-text">복호화(AES128)</p>
+		    </a>
+		    
+		    <!-- 외부 앱 -->
+			<a href="mobile/extapp.html" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-link"></span>&nbsp;외부 앱 연동(web)</h4>
+		      <p class="list-group-item-text">앱 설치 확인 및 실행 (웹 소스로만 구현)</p>
+		    </a>
+		    
+		     <!-- 앱 설치 확인, 앱 실행 (콜백) -->
+		    <a href="mobile/extappHybrid.html" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-link"></span>&nbsp;외부 앱 연동(hybrid)</h4>
+		      <p class="list-group-item-text">앱 설치 확인(hybrid이용) 및 실행</p>
+		    </a>
+		    
+		    <!-- SMS : 안드=sms:번호?body=text, ios8까지=sms:번호;body=text, ios9이상=sms:번호&body=text
+			<a class="list-group-item">
+		      <div class="pull-right center-block btn-group">
+				  <a href="sms:0412345678&body=testing">send sms</a>
+    			  <button onclick="window.location.href = 'sms:0412345678&body=testing'">send sms</button>
+				</div>
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-text-background"></span>&nbsp;SMS</h4>
+		      <p class="list-group-item-text">SMS연동</p>
+		    </a>
+		    -->
+		    
+		    <!-- script 사용가능확인 -->
+		    <a href="mobile/scriptTest.html" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;javascrip 동작확인</h4>
+		      <p class="list-group-item-text">javascrip 동작 확인</p>
+		    </a>
+		    
+		    <!-- 연락처 저장 -->
+		    <a href="mobile/saveContact.html" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-user"></span>&nbsp;연락처 저장</h4>
+		      <p class="list-group-item-text">연락처에 저장하기 테스트</p>
+		    </a>
+		    
+		    <!-- 다국어 테스트 -->
+		    <a href="i18n/i18nRequirejsView.html" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-font"></span>&nbsp;다국어 테스트</h4>
+		      <p class="list-group-item-text">다국어 표시 테스트</p>
+		    </a>
+		    
+		    <!-- IP취득 -->
+		    <a id="getIp" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-signal"></span>&nbsp;IP취득 테스트</h4>
+		      <p class="list-group-item-text">IP취득 테스트입니다.</p>
+		    </a>
+		    
+		    <!-- Network 확인 -->
+		    <a id="checkNetwork" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-signal"></span>&nbsp;Network 확인</h4>
+		      <p class="list-group-item-text">Network확인 (mobile,wifi,none)</p>
+		    </a>
+		    
+		    <!-- miapsWP 사용예제 -->
+		    <a id="devicemodel-wp" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-phone"></span>&nbsp;장치 모델 정보 wp</h4>
+		      <p class="list-group-item-text">miaps Wrapper를 이용한 nativeCall예제</p>
+		    </a>
+		    
+		    <a id="applicationinfo" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-phone"></span>&nbsp;application.json정보</h4>
+		      <p class="list-group-item-text">application.json정보</p>
+		    </a>
+			
+			<a id="camera" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-camera"></span>&nbsp;camera</h4>
+		      <p class="list-group-item-text">사진을 촬영하고 임시저장 후 경로를  리턴합니다.</p>
+		    </a>
+			
+			<a id="gallery" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-picture"></span>&nbsp;gallery</h4>
+		      <p class="list-group-item-text">이미지를 선택하면 임시저장 후 경로를 리턴합니다.</p>
+			</a>
+			
+			<a id="filedelete" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-trash"></span>&nbsp;로컬 파일 삭제</h4>
+		      <p class="list-group-item-text">지정한 파일을 삭제합니다.</p>
+			</a>
+			
+			<a id="filedeleteall" class="list-group-item">
+		      <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-trash"></span>&nbsp;로컬 폴더 전체 파일 삭제</h4>
+		      <p class="list-group-item-text">지정한 폴더 내 파일 전체를 삭제합니다.</p>
+		    </a>
+			<a id="nativetest" class="list-group-item">
+				<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-phone"></span>&nbsp;Native 함수 테스트 페이지</h4>
+				<p class="list-group-item-text">Mobile Native 함수를 테스트할 수 있는 페이지입니다.</p>
+			</a>
+		</div>
+		<br/>
+		<div style="text-align: center; margin-bottom: 10px;"><button id="btnBack" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;Back</button></div>
+	</div>
+
+<script type="text/javascript">
+	window.onpopstate = function(event) {
+		alert('location: ${document.location}, state: ${JSON.stringify(event.state)}');
+	}
+
+	/*history.pushState({page: 1}, "title 1", "?page=1")
+	history.pushState({page: 2}, "title 2", "?page=2")
+	history.replaceState({page: 3}, "title 3", "?page=3")
+	history.back() // alerts "location: http://example.com/example.html?page=1, state: {"page":1}"
+	history.back() // alerts "location: http://example.com/example.html, state: null"
+	history.go(2)  // alerts "location: http://example.com/example.html?page=3, state: {"page":3}"
+	*/
+</script>
+</body>
+</html>

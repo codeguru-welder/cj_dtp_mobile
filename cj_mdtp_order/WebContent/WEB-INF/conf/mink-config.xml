@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<import resource="miaps.core.framework.xml" />
+
+	<import resource="miaps.config.default.xml" />
+	<import resource="miaps.config.email.xml" />
+	<import resource="miaps.config.upload_rule.xml" />
+	<import resource="miaps.config.httpclient.xml" />
+
+	<import resource="miaps.core.database.xml" />
+<!--
+	<import resource="miaps.server.data-access.xml" />
+-->
+	<import resource="miaps.web.miapsadmin.xml" />
+
+	<import resource="miaps.config.distributor.xml" />
+	<import resource="miaps.config.agent.xml" />
+
+	<!-- additional configurations can be imported below. -->
+	<import resource="miaps.config.site.xml" />
+	<!--
+		system property required: 
+			-Dspring.profiles.active=miaps 
+			-Dmink.profile=[added_configuration_file_suffix]
+	-->
+	<beans profile="miaps">
+		<import resource="classpath*:com/mink/connectors/spring/mink-config.${mink.profile}.xml" />
+	</beans>
+	<beans profile="miaps-with-runmode">
+		<import resource="classpath*:com/mink/connectors/spring/mink-config.${mink.profile}.${mink.runmode}.xml" />
+	</beans>
+	<beans profile="default">
+		<import resource="classpath*:com/mink/connectors/spring/mink-config*.xml" />
+	</beans>
+</beans>

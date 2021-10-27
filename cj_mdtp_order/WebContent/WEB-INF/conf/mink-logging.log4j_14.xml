@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//LOGGER" "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Appenders -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<!-- param name="Encoding" value="euc-kr" / -->
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}][%-5p][%C:%M:%L] %n%m [%X{sessionId}][%X{deviceId}][%X{userNo}:%X{grpId}:%X{userId}][%X{targetUrl}]%n" />
+		</layout>
+	</appender>
+
+	<appender name="file" class="org.apache.log4j.RollingFileAppender">
+		<param name="file" value="${mink.home}/logs/mink.service.log" />
+		<param name="maximumFileSize" value="1048576" />
+		<param name="maxBackupIndex" value="10" />
+		<param name="append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}][%-5p][%C:%M:%L] %n%m [%X{sessionId}][%X{deviceId}][%X{userNo}:%X{grpId}:%X{userId}][%X{targetUrl}]%n" />
+		</layout>
+	</appender>
+
+	<appender name="daily" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${mink.home}/logs/daily/mink.service.log" />
+		<param name="DatePattern" value="'.'yyyyMMdd" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}][%-5p][%C:%M:%L] %n%m [%X{sessionId}][%X{deviceId}][%X{userNo}:%X{grpId}:%X{userId}][%X{targetUrl}]%n" />
+		</layout>
+	</appender>
+	<!-- 
+		* DailyRollingAppender를 사용하면서 최대 유지 개수를 지정할 수 있게 함
+	<appender name="daily" class="com.thinkm.mink.commons.logging.MinkDailyRollingFileAppender">
+		<param name="file" value="${mink.home}/logs/daily/mink.service.log" />
+		<param name="maxBackupIndex" value="48" />
+		<param name="DatePattern" value="'.'yyyyMMddHH" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}][%-5p][%C:%M:%L] %n%m [%X{sessionId}][%X{deviceId}][%X{userNo}:%X{grpId}:%X{userId}][%X{targetUrl}]%n" />
+		</layout>
+	</appender>
+	 -->
+
+	<!-- daily appender for device log -->
+	<appender name="deviceDaily" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${mink.home}/logs/device/mink.device.log" />
+		<param name="DatePattern" value="'.'yyyyMMdd" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [deviceId:%X{deviceId}] [targetUrl:%X{targetUrl}] [%X{startTm} ~ %X{endTm}] [intervals:%X{intervals}] [user: %X{userNo}:%X{grpId}:%X{userId}] [result: %X{resultCd}] %m%n" />
+		</layout>
+	</appender>
+
+	<!-- DB appender for device log -->
+	<appender name="deviceDb" class="com.thinkm.mink.commons.logging.MinkDbAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="insert into miaps_device_log
+					(log_tm, log_tp, device_id, target_url, start_tm, end_tm, intervals, result_cd, user_no, error_dtl, requests, responses, log_year, log_month, log_date, package_nm, platform_cd, version_nm)
+					values
+					('%X{logTm}', '%X{logTp}', '%X{deviceId}', '%X{targetUrl}', '%X{startTm}', '%X{endTm}', '%X{intervals}', '%X{resultCd}', %X{userNo}, '%m', '%X{requests}', '%X{responses}', '%X{logYear}', '%X{logMonth}', '%X{logDate}', '%X{packageNm}', '%X{platformCd}', '%X{versionNm}')" 
+            />
+		</layout>
+	</appender>
+
+	<!-- daily appender for protocol log -->
+	<appender name="protocolDaily" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${mink.home}/logs/protocol/mink.protocol.log" />
+		<param name="DatePattern" value="'.'yyyyMMdd" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="=====%n%m%n" />
+		</layout>
+	</appender>
+
+	<!-- daily appender for javamail debug log -->
+	<appender name="javamailDaily" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${mink.home}/logs/javamail/mink.javamail.log" />
+		<param name="DatePattern" value="'.'yyyyMMdd" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}][%X{sessionId}][%X{deviceId}][%X{userNo}:%X{grpId}:%X{userId}][%X{targetUrl}] &gt;&gt; %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- SQL log -->
+	<appender name="sql" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d [%t] %-5p %c{1} - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.StringMatchFilter"> 
+			<param name="StringToMatch" value="Result" /> 
+			<param name="AcceptOnMatch" value="false" /> 
+		</filter> 
+	</appender>
+
+	<!-- daily appender for DistributionService log -->
+	<appender name="distributorDaily" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${mink.home}/logs/distributor/mink.distributor.log" />
+		<param name="DatePattern" value="'.'yyyyMMdd" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}][%X{sessionId}] %m [%X{userId}]%n" />
+		</layout>
+	</appender>
+
+	<!-- SQL logger -->
+	<category name="com.ibatis">
+		<priority value="DEBUG" />
+	</category>
+	<category name="java.sql">
+		<priority value="DEBUG" />
+		<appender-ref ref="sql" />
+	</category>
+	
+	<!-- device log: level must be info -->
+	<category name="deviceLog" additivity="false">
+		<priority value="info" />
+		<appender-ref ref="deviceDaily" />
+	</category>
+	<category name="deviceLogDb" additivity="false">
+		<priority value="info" />
+		<appender-ref ref="deviceDb" />
+	</category>
+
+	<!-- protocol log: level must be info -->
+	<category name="protocolLog" additivity="false">
+		<priority value="info" />
+		<appender-ref ref="protocolDaily" />
+	</category>
+
+	<!-- javamail debug log: level must be info, valid if mail.debug property is set to true. -->
+	<category name="javamailLog" additivity="false">
+		<priority value="info" />
+		<appender-ref ref="javamailDaily" />
+	</category>
+
+	<!-- distributor log -->
+	<category name="distributorLog" additivity="false">
+		<priority value="trace" />
+		<appender-ref ref="distributorDaily" />
+		<appender-ref ref="console" />
+	</category>
+
+	<!-- 3rdparty Loggers -->
+	<category name="com.thinkm" additivity="false">
+		<priority value="trace" />
+		<appender-ref ref="file" />
+		<appender-ref ref="daily" />
+		<appender-ref ref="console" />
+	</category>
+
+	<category name="com.mink" additivity="false">
+		<priority value="trace" />
+		<appender-ref ref="file" />
+		<appender-ref ref="daily" />
+		<appender-ref ref="console" />
+	</category>
+
+	<category name="java" additivity="false">
+		<priority value="warn" />
+		<appender-ref ref="file" />
+		<appender-ref ref="daily" />
+	</category>
+
+	<category name="net" additivity="false">
+		<priority value="warn" />
+		<appender-ref ref="file" />
+		<appender-ref ref="daily" />
+	</category>
+
+	<category name="com" additivity="false">
+		<priority value="warn" />
+		<appender-ref ref="file" />
+		<appender-ref ref="daily" />
+	</category>
+
+	<category name="org" additivity="false">
+		<priority value="warn" />
+		<appender-ref ref="file" />
+		<appender-ref ref="daily" />
+	</category>
+
+	<!-- Root Logger -->
+	<root>
+		<priority value="warn" />
+		<appender-ref ref="console" />
+	</root>
+
+</log4j:configuration>

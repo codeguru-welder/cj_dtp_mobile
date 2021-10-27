@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mink.connectors.dlenc.mapper.DataMapper">
+
+  <update
+    id="updateDataList"
+    parameterType="java.util.Map"
+  >
+    <foreach
+      collection="updateList"
+      index="index"
+      item="item"
+      separator=";"
+      open=""
+      close=";"
+    >
+      update dlenc_bigdata_seq
+      set loc_cd = #{item.loc_cd}
+      ,loc_nm = #{item.loc_nm}
+      ,dong = #{item.dong}
+      ,ho = #{item.ho}
+      where seq = #{item.seq}
+    </foreach>
+  </update>
+
+  <select
+    id="selectDataList"
+    parameterType="java.util.Map"
+    resultType="java.util.LinkedHashMap"
+  >
+    SELECT *
+    FROM dlenc_bigdata_seq
+    <if test="limit > 0">
+      limit #{limit}
+    </if>
+  </select>
+</mapper>

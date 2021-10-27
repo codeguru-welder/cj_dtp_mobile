@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mink.connectors.mdtpcar.mapper.GetUserMapper">
+   
+   <select id="selectGetUser" resultType="egovMap" parameterType="Map">
+        select user_id AS userId, user_nm AS userNm
+        from miaps_user
+   </select>
+    
+   <select id="selectUserList" resultType="egovMap" parameterType="Map">
+        select user_id AS userId, user_nm AS userNm
+        from miaps_user
+   </select>
+</mapper>

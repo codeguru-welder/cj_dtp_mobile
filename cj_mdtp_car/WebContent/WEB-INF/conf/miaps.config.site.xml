@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 
+		Template for each site.
+		reference - miaps.config.default.xml, miaps.config.distributor.xml, miaps.core.database.xml
+	-->
+	<!--
+	<bean id="mink.site.config" class="com.thinkm.mink.commons.util.MinkConfig" factory-method="getConfig">
+		<property name="configProperties">
+			<props>
+				<prop key="document.server.domain">127.0.0.1</prop>
+				<prop key="document.server.port">8088</prop>
+				<prop key="document.server.timeout">180</prop>
+
+				<prop key="miaps.factory.initial.connection">false</prop>
+
+				<prop key="mink.server.url">https://m.server.com/miaps/</prop>
+				<prop key="mink.server.url.ios">https://m.server.com/miaps/app/</prop>
+				<prop key="mink.server.url.android">https://m.server.com/miaps/app/</prop>
+
+				<prop key="miaps.distributor.demo.user">miaps</prop>
+				<prop key="miaps.distributor.demo.password">miaps</prop>
+				<prop key="miaps.distributor.demo.mode">file</prop>
+
+			</props>
+		</property>
+	</bean>
+
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="properties">
+			<props>
+				<prop key="dbType">mysql</prop>
+				<prop key="dbVersion"></prop>
+				<prop key="dbTypeSuffix"></prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="mink.db.default" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="org.gjt.mm.mysql.Driver" />
+		<property name="username" value="miaps" />
+		<property name="password" value="miaps" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/miaps?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true" />
+		<property name="defaultQueryTimeout" value="5" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+	-->
+
+
+	<!-- for IBK Credit -->
+	<!-- 
+	<bean id="ibkcreditProtocolEncryptor" class="com.mink.connectors.ibkcredit.encrypt.IbkEncryptor" scope="prototype" />
+	<bean class="com.thinkm.mink.commons.util.MinkConfig" factory-method="getConfig">
+		<property name="protocolEncryptor" value="ibkcreditProtocolEncryptor" />
+	</bean>
+	-->
+
+	<!-- for Korea Enterprise Data -->
+	<!-- 
+	<bean class="com.thinkm.mink.commons.util.MinkConfig" factory-method="getConfig">
+		<property name="configProperties">
+			<props>
+				<prop key="admin.project.type">KED</prop>
+			</props>
+		</property>
+	</bean>
+	-->
+
+	<!-- for LG Fashion -->
+	<!-- 
+	<bean class="com.thinkm.mink.commons.util.MinkConfig" factory-method="getConfig">
+		<property name="configProperties">
+			<props>
+				<prop key="admin.project.type">LGF</prop>
+			</props>
+		</property>
+	</bean>
+	-->
+
+	<!-- for Daesang -->
+	<!--
+	<bean id="daesangLoginProcessor" class="com.thinkm.mink.commons.login.DaesangLoginImpl">
+		<property name="dataSource" ref="mink.db.default"/>
+		<property name="sqlMapClient" ref="admincenter.sqlMapClient"/>
+	</bean>
+	<bean class="com.thinkm.mink.commons.util.MinkConfig" factory-method="getConfig">
+		<property name="configProperties">
+			<props>
+				<prop key="document.server.domain">127.0.0.1</prop>
+				<prop key="document.server.port">8088</prop>
+				<prop key="document.server.timeout">180</prop>
+
+				<prop key="mink.server.url">https://192.168.7.77</prop>
+				<prop key="mink.server.url.ios">https://192.168.7.77/miaps/app/</prop>
+				<prop key="mink.server.url.android">http://192.168.7.77/miaps/app/</prop>
+
+				<prop key="interface.login.processor">daesangLoginProcessor</prop>
+			</props>
+		</property>
+	</bean>
+	-->
+
+</beans>

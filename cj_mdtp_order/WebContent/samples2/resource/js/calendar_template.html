@@ -1,0 +1,49 @@
+<div class="layer bottom-sheet on" id="data_picker">
+  <div class="bottom-sheet-inner">
+    <div class="layer-header">
+      <h1>날짜선택</h1>
+      <div class="btn-set-head-left">
+        <button class="btn-xs-line round" type="button">오늘</button>
+      </div>
+      <button class="btn-close" type="button"><i class="ico-close-s"></i><span class="sr-only">{레이어명}닫기</span></button>
+    </div>
+    <div class="layer-contents">
+      <div class="calendar-wrap">
+        <div class="calendar-head">
+          <!-- 년/월 선택 -->
+          <div class="calendar-year-month">
+            <div class="calendar-year">
+              <button class="btn-prev" type="button"><<span class="sr-only">이전 년도 이동</span></button>
+              <strong class="txt-current" data-value="{{year}}">{{year}}년</strong>
+              <button class="btn-next" type="button">><span class="sr-only">다음 년도 이동</span></button>
+            </div>
+            <div class="calendar-month">
+              <button class="btn-prev" type="button"><<span class="sr-only">이전 년도 이동</span></button>
+              <strong class="txt-current" data-value="{{month}}">{{month}}월</strong>
+              <button class="btn-next" type="button">><span class="sr-only">다음 년도 이동</span></button>
+            </div>
+          </div>
+          <!-- //년/월 선택 -->
+        </div>
+        <div class="calendar-body">
+          <table role="grid" tabindex="0">
+            <caption>날짜선택 달력</caption>
+            <thead>
+            <tr>
+              <th scope="col"><abbr title="Sunday">Sun</abbr></th>
+              <th scope="col"><abbr title="Monday">Mon</abbr></th>
+              <th scope="col"><abbr title="Tuesday">Tue</abbr></th>
+              <th scope="col"><abbr title="Wednesday">Wed</abbr></th>
+              <th scope="col"><abbr title="Thursday">Thu</abbr></th>
+              <th scope="col"><abbr title="Friday">Fri</abbr></th>
+              <th scope="col"><abbr title="Saturday">Sat</abbr></th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+ iframe callback 테스트 (sub) 
+ -->
+<html>
+<head>
+<title>MiAPS Hybrid iframe Callback Sample</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+
+
+<script type="text/javascript" src="../../vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../../vendor/miaps/js/miaps_hybrid.js"></script>
+<script type="text/javascript" src="../../vendor/miaps/js/miaps_wp.js"></script>
+
+ 
+<script type="text/javascript">
+	var param = {};
+	param.id = $("#userId").val();
+	param.pw = $("#userPw").val();
+	
+	// param1키명으로 json string 전달 -- PC에서는 콜백이 오는데, 단말에서는 오지 않는다.
+	/*miapsWp.callService('com.mink.connectors.hybridtest.receivedata.ReceiveDataMan',
+			'receiveData',
+			'param1=' + JSON.stringify(param)
+		//).then(function(result) {
+		, function(result) {
+			alert("callback sub page!!!");
+			console.log(result);
+		});
+	*/
+	
+	miaps.miapsSvcSp('com.mink.connectors.hybridtest.receivedata.ReceiveDataMan',
+			'receiveData',
+			'param1=' + JSON.stringify(param),			
+			function(result) {
+				alert("callback sub page!!!");
+				console.log(result);
+			},
+			'iframeId');
+	
+	var callback = {	
+		mobileTest : function(data) {
+			var obj = miaps.parse(data); 
+			
+			if (typeof obj == 'object') {
+				alert(JSON.stringify(obj).replace(/,"/g, ',\n"'));
+			} else if (typeof obj == 'string') {
+				alert(obj);
+			}
+		}
+	};
+	window._ifr = callback;	
+	
+	/*
+	var config = {
+			type : 'VERSION',
+			param : '',
+			//callback : '_ifr.mobileTest'
+			callback: 'document.getElementById("iframeId").contentWindow._ifr.mobileTest'
+	}
+	miaps.mobile(config, _ifr.mobileTest);
+	*/
+	
+	var config = {
+			type : 'VERSION',
+			param : '',
+			iframeid: 'iframeId'
+	}
+	miaps.mobile(config, function(data) {
+		var obj = miaps.parse(data); 
+		
+		if (typeof obj == 'object') {
+			alert(JSON.stringify(obj).replace(/,"/g, ',\n"'));
+		} else if (typeof obj == 'string') {
+			alert(obj);
+		}
+	});
+</script>
+</head>
+<body>
+	iframe callback sub page
+</body>
+</html>
+
+
+

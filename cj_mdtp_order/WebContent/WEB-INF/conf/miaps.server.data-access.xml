@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="server.sqlMapClient" class="egovframework.rte.psl.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="file:///${mink.home}/conf/sql-map/server.${dbType}${dbTypeSuffix}.xml"/>
+		<property name="dataSource" ref="mink.db.default"/>
+	</bean>
+
+	<bean id="server.userInfoDao" class="com.thinkm.mink.dao.ibatis.UserInfoDaoImpl">
+		<property name="dataSource" ref="mink.db.default"/>
+		<property name="sqlMapClient" ref="server.sqlMapClient"/>
+	</bean>
+
+	<bean id="server.deviceInfoDao" class="com.thinkm.mink.dao.ibatis.DeviceInfoDaoImpl">
+		<property name="dataSource" ref="mink.db.default"/>
+		<property name="sqlMapClient" ref="server.sqlMapClient"/>
+	</bean>
+
+	<bean id="server.appcenterDao" class="com.thinkm.mink.dao.ibatis.AppcenterDaoImpl">
+		<property name="dataSource" ref="mink.db.default"/>
+		<property name="sqlMapClient" ref="server.sqlMapClient"/>
+	</bean>
+	
+	<bean id="server.boardDao" class="com.thinkm.mink.dao.ibatis.BoardDaoImpl">
+		<property name="dataSource" ref="mink.db.default"/>
+		<property name="sqlMapClient" ref="server.sqlMapClient"/>
+	</bean>
+
+	<bean id="server.distributionDao" class="com.thinkm.mink.dao.ibatis.DistributionDaoImpl">
+		<property name="dataSource" ref="mink.db.default"/>
+		<property name="sqlMapClient" ref="server.sqlMapClient"/>
+	</bean>
+
+	<bean id="server.miapsConnectorDao" class="com.thinkm.mink.miaps.connector.base.MiapsConnectorDaoImpl">
+		<property name="dataSource" ref="mink.db.default"/>
+		<property name="sqlMapClient" ref="server.sqlMapClient"/>
+	</bean>
+
+	<bean id="server.userInfoMgr" class="com.thinkm.mink.dao.UserInfoMgr">
+		<property name="userInfoDao" ref="server.userInfoDao"/>
+	</bean>
+	
+	<bean id="server.deviceInfoMgr" class="com.thinkm.mink.dao.DeviceInfoMgr">
+		<property name="deviceInfoDao" ref="server.deviceInfoDao"/>
+	</bean>
+
+	<bean id="server.appcenterMgr" class="com.thinkm.mink.dao.AppcenterMgr">
+		<property name="appcenterDao" ref="server.appcenterDao"/>
+	</bean>
+
+	<bean id="server.distributionMgr" class="com.thinkm.mink.dao.DistributionMgr">
+		<property name="distributionDao" ref="server.distributionDao"/>
+	</bean>
+	
+	<bean id="server.boardMgr" class="com.thinkm.mink.dao.BoardMgr">
+		<property name="boardDao" ref="server.boardDao"/>
+	</bean>
+
+	<bean id="server.miapsConnectorService" class="com.thinkm.mink.miaps.connector.base.MiapsConnectorService">
+		<property name="dao" ref="server.miapsConnectorDao"/>
+	</bean>
+
+
+</beans>

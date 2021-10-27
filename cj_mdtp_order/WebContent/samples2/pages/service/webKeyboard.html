@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MiAPS Hybrid Web Default Keyboard sample</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+</head>
+
+<body>
+<div class="container">
+  <div id="headerPosition"></div>
+  <h2>Web Keyboard Sample</h2>
+  <hr>
+  form 사용안함
+  <div class="form-group">
+      <label for="id-text1"><span class="glyphicon glyphicon-comment"></span>&nbsp;Text:(Not include action tag in form)</label>
+      <input type="text" class="form-control" id="id-text1" name="id-text1" placeholder="input type 'text'">
+	</div>
+	<div class="form-group">
+      <label for="id-search1"><span class="glyphicon glyphicon-search"></span>&nbsp;Search:(Not include action tag in form)</label>
+      <input type="search" class="form-control" id="id-search1" name="id-search1" placeholder="input type 'search'">
+	</div>
+	<br>	
+  form1<br>
+  <form id="dummy" name="dummy" method="post" onSubmit="return false;">
+	<div class="form-group">
+      <label for="id-text1"><span class="glyphicon glyphicon-comment"></span>&nbsp;Text:(Not include action tag in form)</label>
+      <input type="text" class="form-control" id="id-text1" name="id-text1" placeholder="input type 'text'">
+	</div>
+	<div class="form-group">
+      <label for="id-search1"><span class="glyphicon glyphicon-search"></span>&nbsp;Search:(Not include action tag in form)</label>
+      <input type="search" class="form-control" id="id-search1" name="id-search1" placeholder="input type 'search'">
+	</div>
+  </form>
+  <br>
+   form2<br>
+  <form id="dummy" name="dummy" method="post" action="." onSubmit="return false;">  
+	<div class="form-group">
+      <label for="id-text2"><span class="glyphicon glyphicon-comment"></span>&nbsp;Text:(Include action tag in form)</label>
+      <input type="text" class="form-control" id="id-text2" name="id-text2" placeholder="input type 'text'">
+	</div>
+	<div class="form-group">
+      <label for="id-search2"><span class="glyphicon glyphicon-search"></span>&nbsp;Search:(Include action tag in form)</label>
+      <input type="search" class="form-control" id="id-search2" name="id-search2" placeholder="input type 'search'">
+	</div>
+	<div class="form-group">
+      <label for="id-tel"><span class="glyphicon glyphicon-earphone"></span>&nbsp;Tel:</label>
+      <input type="tel" class="form-control" id="id-tel" name="id-tel" placeholder="input type 'tel'">
+	</div>
+	<div class="form-group">
+      <label for="id-url"><span class="glyphicon glyphicon-globe"></span>&nbsp;Url:</label>
+      <input type="url" class="form-control" id="id-url" name="id-url" placeholder="input type 'url'">
+	</div>
+	<div class="form-group">
+      <label for="id-email"><span class="glyphicon glyphicon-envelope"></span>&nbsp;E-mail:</label>
+      <input type="email" class="form-control" id="id-email" name="id-email" placeholder="input type 'email'">
+	</div>
+	<div class="form-group">
+      <label for="id-password"><span class="glyphicon glyphicon-asterisk"></span>&nbsp;Password:</label>
+      <input type="password" class="form-control" id="id-password" name="id-password" placeholder="input type 'password'">
+	</div>
+	<div class="form-group">
+      <label for="id-number"><span class="glyphicon glyphicon-asterisk"></span>&nbsp;Number:</label>
+      <input type="number" class="form-control" id="id-number" name="id-number" placeholder="input type 'number'">
+    </div>
+  </form>
+  <br/><div style="text-align: center;"><button id="btnBack" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;Back</button></div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../../vendor/miaps/js/miaps_hybrid.js"></script>
+</html>
+
+
+

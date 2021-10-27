@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+	<meta charset="utf-8" />
+	<meta content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+		name="viewport" />
+	<title>infinite scroll</title>
+
+	<!-- css load -->
+	<link href="../../../resource/css/jquery-ui.css" rel="stylesheet" />
+	<link href="../../../resource/css/common.css" rel="stylesheet" />
+	<link href="../../../resource/css/style.css" rel="stylesheet" />
+	<link href="../../../vendor/miaps/css/miaps.css" rel="stylesheet" />
+	<link href="../../../resource/css/empty-skeleton.css" rel="stylesheet" />
+	<!-- //css load -->
+
+	<style type="text/css">
+		#container_action {
+			width: 100%;
+			height: auto;
+			overflow: auto;
+			-webkit-overflow-scrolling: touch;
+		}
+		
+		.detector {
+			text-align : center;
+		}
+	</style>
+
+
+</head>
+
+<body>
+
+	<!-- 헤더-->
+	<div class="header">
+		<a class="back_btn" id="go_back"><i class="fas fa-arrow-left"></i></a><span class="h_title">infinite
+			scroll</span>
+	</div>
+	<div class="detector">
+		<p style=>scrollH: <span class="number1"></span> / scrollTop: <span class="number2"></span></p>
+		<p> Height: <span class="number3"></span> / page: <span class="number4"></span></p>
+	</div>
+
+	<!-- content-->
+	<div id="container_action">
+		<div class="content_wrap bg_gray">
+			<!--       검색 결과가 있을 때 -  리스트
+      검색 결과가 없을 때 - 검색결과가 없습니다. -->
+			<div class="req_list_wrap" id="reg_list">
+
+				<div class="round_box">
+					<div class="req_empty_list"></div>
+				</div>
+				<div class="round_box">
+					<div class="req_empty_list"></div>
+				</div>
+				<div class="round_box">
+					<div class="req_empty_list"></div>
+				</div>
+				<div class="round_box">
+					<div class="req_empty_list"></div>
+				</div>
+				<div class="round_box">
+					<div class="req_empty_list"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">
+		<a class="back_btn2"><i class="fas fa-arrow-left"></i></a><span class="h_title">infinite scroll</span>
+		<a class="back_btn3"><i class="fas fa-arrow-left"></i></a><span class="h_title">infinite scroll</span>
+	</div>
+
+	<script id="req_list-template" type="text/x-handlebars-template">
+      {{#datas}}
+        <div class="round_box">
+          <p class="req_title">
+            No.{{seq}} : {{reqtitle}}
+          </p>
+          <div class="req_dt_wrap">
+            <span class="req_dt">
+              신청일 {{reqdt reqdate}}
+            </span>
+            <span class="{{status reqstatus}}">
+              {{reqstatus}}
+            </span>
+          </div>
+        </div>
+      {{/datas}}
+    </script>
+
+	<!-- js load -->
+	<script src="../../../resource/js/jquery-3.3.1.min.js"></script>
+	<script src="../../../resource/js/jquery-ui.js"></script>
+	<script src="../../../resource/js/all.min.js"></script>
+	<script src="../../../resource/js/common.js"></script>
+
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" type="text/javascript"></script>
+
+	<script src="../../../vendor/handlebars/handlebars-4.0.11.js" type="text/javascript"></script>
+	<script type="text/javascript" src="../../../vendor/miaps/js/miaps_hybrid.js"></script>
+	<script type="text/javascript" src="../../../vendor/miaps/js/miaps_page.js"></script>
+
+	<!-- 	<script src="../../../resource/js/config.js"></script> -->
+	<!-- 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+	<!--     <script src="https://code.jquery.com/jquery-2.1.3.min.js" type="text/javascript"></script> -->
+
+	<script src="../../../resource/js/infiniteScroll.js"></script>
+
+
+	<!--// js load -->
+	<script>
+		$(function ($) {
+
+			console.log("=== onload ===");
+
+			// throttle(쓰로틀) 지원 함수
+			function throttle(fn, threshhold, scope) {
+				threshhold || (threshhold = 250);
+				var last,
+					deferTimer;
+				return function () {
+					var context = scope || this;
+
+					var now = +new Date,
+						args = arguments;
+					if (last && now < last + threshhold) {
+						// hold on to it
+						clearTimeout(deferTimer);
+						deferTimer = setTimeout(function () {
+							last = now;
+							fn.apply(context, args);
+						}, threshhold);
+					} else {
+						last = now;
+						fn.apply(context, args);
+					}
+				};
+			}
+			
+			_addMode = false;
+			_pos = 1;
+			_partial = 10;
+
+			//Javascript
+			_count = 1;
+			_pageCount = 1;
+			
+			$(".number4").text(_pageCount);
+			
+			var source = $("#req_list-template").html();
+			//핸들바 템플릿 컴파일
+			_template = Handlebars.compile(source);
+
+			$("#go_back").on("click", function (e) {
+				e.preventDefault();
+				miapsPage.back();
+			});
+
+			// 스크롤 위치 구함 (? Throttle 추가)
+/* 			$('#reg_list').on('scroll', throttle(function (e) { */
+			$('#reg_list').scroll(function() {	
+
+/* 				console.log("reg_list : innerHeight = " + $('#reg_list').innerHeight());
+				console.log("reg_list height = " + $('#reg_list').height());
+				console.log(" reg_list scrollTop = " + $('#reg_list').scrollTop());
+				console.log(" reg_list scrollHeight = " + $('#reg_list').prop('scrollHeight'));   // <- @@TODO   이거 말고 다른거 찾는 방법을 ... 
+				console.log("window innerHeight = " + $(window).innerHeight());
+				console.log("window height = " + $(window).height());
+				console.log("window winscroTop = " + $(window).scrollTop());
+				console.log("document docTop = " + $(document).scrollTop());
+				console.log("document docH = " + $(document).height());
+				console.log("document innerHeight = " + $(document).innerHeight()); */
+				
+				//컨텐츠 스크롤 값 비교
+				//getScrollTop() < getDocumentHeight() - window.innerHeight,
+			/* 	if (($('#reg_list').scrollTop() + $('#reg_list').height() >= $(window).innerHeight())) { */
+				var scrollHeight = $('#reg_list').prop('scrollHeight');		// 해당 리스트의 스크롤 영역 크기 
+				var scrollTop = $('#reg_list').scrollTop();					// 현재 스크롤 TOP 크기
+				var elHeight = $('#reg_list').innerHeight();				// 보여지는 창의 크기
+				
+				$(".number1").text(scrollHeight);
+				$(".number2").text(scrollTop);
+				$(".number3").text(elHeight);
+				if (scrollHeight <= scrollTop + elHeight) {				// <- @@TODO 이 수식이 딱 맞지 않을 수 있으므로 확인 필요
+					_pageCount++;		// 페이징 번호
+					console.log("--- more ---" + _pageCount + " page");
+					$(".number4").text(_pageCount);
+					getSvcData();
+				}
+			});
+			// }, 50)); 
+			
+
+			// /* 무한스크롤 추가 */   => 현재 지원하지 않음
+			// infiniteScroll({
+			// 	container: "#reg_list",
+			// 	item: ".round_box",
+			// 	prev: ".back_btn2",
+			// 	next: ".back_btn3",
+			// 	nextCallback: function() {
+			// 		console.log("next callback==");
+			// 		uiRefresh();	
+			// 	},
+			// 	prevCallback: function() {
+			// 		console.log("prev callback==");
+			// 	}
+			// });
+
+			getSvcData();
+		});
+
+
+		// 데이터 로딩 및 추가
+		function getSvcData() {
+
+			console.log("==== call getSvcData and ui refresh ====");
+
+			miaps.cursor(null, "wait", true);
+
+			//신청내역 호출
+			miaps.miapsSvcSp(
+				"com.mink.connectors.hybridtest.login.LoginMan",
+				"welfare_req_List",
+				{ id: "user01" },
+				"/minkSvc",
+				function (data) {
+					var obj = miaps.parse(data);
+					// 순번 지정
+
+					for (var i = 0; i < obj.res.length; i++) {
+						_count = _count + 1
+						obj.res[i].seq = _count;
+					}
+
+					if (obj.code != "200") {
+						/* console.log(obj.msg); */
+						// pos = pos + partial;
+					} else {
+						//핸들바 템플릿에 데이터를 바인딩해서 HTML 생성
+						var resobjdata = {
+							datas : obj.res
+						};
+
+						Handlebars
+								.registerHelper("reqdt",
+										function(reqdate) {
+											return (reqdate.substr(2, 2)
+													+ "."
+													+ reqdate.substr(4, 2)
+													+ "." + reqdate.substr(
+													6, 2));
+										});
+
+						Handlebars.registerHelper("status", function(
+								reqstatus) {
+							if (reqstatus == "진행중") {
+								return "req_status green";
+							} else if (reqstatus == "신청완료") {
+								return "req_status gray";
+							} else {
+								return "req_status red";
+							}
+						});
+
+						var html = _template(resobjdata);
+						//생성된 HTML을 DOM에 주입
+						if (_addMode === false) {
+							$("#reg_list").html("");
+							$("#reg_list").prepend(html);
+							_addMode = true;
+						} else {
+							$("#reg_list").append(html);
+						}
+					}
+
+					miaps.cursor(null, "default");
+				});
+		}
+	</script>
+
+</body>
+
+</html>

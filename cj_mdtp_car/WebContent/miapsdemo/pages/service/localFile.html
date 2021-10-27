@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * Local File
+	 * 
+	 * @author chlee
+	 * @since 2016.11.16
+	 */
+-->
+<html>
+  <head>
+    <title>MiAPS Hybrid Local File</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+	/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- css load -->
+    <link href="../../resource/css/reset.css" rel="stylesheet" />
+    <link href="../../resource/css/style_add.css" rel="stylesheet" />
+    <link 
+    	rel="stylesheet" 
+    	href="../../vendor/bootstrap/css/bootstrap.min.css"
+    />
+	<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+	<!-- //css load -->
+	
+    <script src="../../resource/js/config.js"></script>
+	<script
+		data-main="pages/service/localFile.js"
+		src="../../vendor/require/require.js"
+	></script>
+  	
+  </head>
+  <body>
+    <!-- header-->
+    <header>
+      <button type="button" class="back_btn"></button>
+      <span class="page_title">Local File</span>
+      <button type="button" class="home_btn"></button>
+    </header>
+    <!--// header-->
+    <div class="contents_wrap bg_gray">
+  		<div id="contents-list" class="localfile-wrap">
+    		<script type="text/x-handlebars-template" id="display-template">
+				<p>전체 경로</p>
+				<p class="fullpath">{{fullpath}}</p>
+				<div class="scroll-wrap">
+					{{#res}}
+					<div class="fileItem"> 
+						<img src="{{imgsrc}}" class="fileImg">
+						<div class="fileDetail" onclick="localFile.filecontents('{{isdir}}','{{fullpath}}')">
+  							<p class="filename">{{filename}}</p>
+  							<div class="fileInfo">
+  								<div class="filedate">{{date}}</div>
+  								<div class="filesize">{{size}}</div>
+  							</div>
+  						</div>
+					</div>
+					{{#if @last}}
+					{{else}}
+						<hr/>
+					{{/if}}
+					{{/res}}
+				</div>
+			</script>
+		</div>
+    </div>
+  </body>
+</html>

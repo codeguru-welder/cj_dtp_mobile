@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * MiapsHybrid 버전체크, SetDeviceInfo, 커넥터class호출 예제
+	 * 
+	 * @author chlee
+	 * @since 2017.02.22
+	 */
+-->
+<html>
+<head>
+<title>MiAPS Hybrid RequireJS i18n Plugin Sample</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+
+<script src="../../resource/js/config.js"></script>
+<script data-main="pages/i18n/i18nRequirejsView.js" src="../../vendor/require/require.js"></script>
+
+</head>
+
+<body>
+<div class="container">
+  <h2>RequireJS i18n Sample</h2>
+  <form id="loginFrm" name="loginFrm" method="post" onSubmit="return false;">
+  	<div class="btn-group">
+  		<button id="i18nKR" type="button" class="btn btn-primary">한국어</button>
+  		<button id="i18nUS" type="button" class="btn btn-primary">English</button>
+  	</div>
+  	<br/><br/>
+    <div class="form-group">
+      <label for="userId"><span class="glyphicon glyphicon-user"></span>&nbsp;<span id="txtId"></span></label>
+      <input type="text" class="form-control" id="userId" name="userId" placeholder="Enter ID">
+    </div>
+    <div class="form-group">
+      <label for="userPw"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span id="txtPw"></span></label>
+      <input type="password" class="form-control" id="userPw" name="userPw" placeholder="Enter password" autocomplete="off" >
+    </div>
+    <div align="center"><button id="btnLogin" class="btn btn-default"><span class="glyphicon glyphicon-log-in"></span>&nbsp;<span id="txtLogin"></span></button></div>
+  </form>
+</div>
+<br/><div style="text-align: center;"><button id="btnBack" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;<span id="txtBack"></span></button></div>
+<br/>
+<div><span class="label label-info">사용설정</span></div>
+<div class="well well-sm">
+js/lib/i18n.js<br/>
+js/nls/resources.js<br/>
+js/nls/en/resources.js<br/>
+js/nls/en-us/resources.js<br/>
+js/nls/ko/resources.js<br/>
+js/nls/ko-kr/resources.js<br/>
+</div>
+</body>
+</html>
+
+
+

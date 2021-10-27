@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MiAPS Hybrid File Download Sample</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+
+<script src="../../resource/js/config.js"></script>
+<script data-main="pages/service/fileDownload.js" src="../../vendor/require/require.js"></script>
+
+</head>
+<body>
+<div class="container">
+	<h2>FileDownlaod Sample</h2>
+	<hr>
+	다운로드에 성공하면 로컬(단말)에 임시저장한 경로를 리턴합니다.
+	<br/><br/>
+	<div><span id="show-image"></span><div style='clear: both;'></div></div>
+	<br/><br/>
+	* file protocol
+	<br/>
+	<div align="center"><button id="btnDownloadConnectorUrlFileProtocol" class="btn btn-default"> <span class="glyphicon glyphicon-download-alt"></span>Download URL(file://)<br>Use Connector(miaps:true)</button></div>
+	(이미지는 filecontent를 사용해 표시)	
+	<br/>
+	* http protocol
+	<br/>
+	<div align="center"><button id="btnDownloadConnectorUrlPath" class="btn btn-default"> <span class="glyphicon glyphicon-download-alt"></span>Download URL(http://miaps.thinkm.co.kr/miaps6beta/asvc/images/zip-48.png)<br>Use Connector(miaps:true)</button></div>
+	(이미지는 filecontent를 사용해 표시)	
+	<br/><br/>
+	<div align="center"><button id="btnDownloadConnectorUrlPathPdf" class="btn btn-default"> <span class="glyphicon glyphicon-download-alt"></span>Download URL(http://miaps.thinkm.co.kr/miaps6beta/asvc/MiAPS_Push-Quick_Insert.pdf)<br>Use Connector(miaps:true)</button></div>
+	(iOS경우 공유기능 사용, 안드로이드는 newbrowser사용, iOS도 newbrowser사용가능)
+	<br/><br/>
+	<div align="center"><button id="btnDownloadConnectorUrlPathCsv" class="btn btn-default"> <span class="glyphicon glyphicon-download-alt"></span>Download URL(http://miaps.thinkm.co.kr/miaps6beta/asvc/PushSample.csv)<br>Use Connector(miaps:true)</button></div>
+	(iOS경우 공유기능 사용, 안드로이드는 newbrowser사용, iOS도 newbrowser사용가능)
+	<br/><br/>
+	<div align="center"><button id="btnDownloadConnectorUrlPathXlsx" class="btn btn-default"> <span class="glyphicon glyphicon-download-alt"></span>Download URL(/asvc/PushSample.xlsx)<br>Use Connector(miaps:true)</button></div>
+	* mink.server.url에 설정된 url을 사용합니다.(iOS경우 공유기능 사용, 안드로이드는 newbrowser사용, iOS도 newbrowser사용가능)
+	<br/><br/>
+	<hr>
+	<strong>a href" 태크를 사용하여 다운로드</strong> 
+	<br/><br/>
+	<div align="center">
+		<a href="http://miaps.thinkm.co.kr/miaps5/minkSvc?command=filedownload&VIEW_MODE=webview&DOWN_FILE_PATH=D%3A%5CMiAPS_Server%5CMiAPS5%5Capache-tomcat-8.5.11%5Cwebapps%5Cmiaps5%5Cwebapp%5Csamples%5Cfiles%5Cyotsuba.jpg">
+		Download(image/jpeg)-VIEW_MODE=webview</a>
+	</div>
+	<br/>
+	(VIEW_MODE=webview이면 다운로드하여 바로 웹화면에 표시합니다. 위와 같이 링크로 사용하면 안드로이드에서 뒤로가기 안되므로, img src태그에 직접 사용하기를 권장합니다.)
+	<hr>
+	<div align="center">
+		<a href="http://miaps.thinkm.co.kr/miaps5/minkSvc?command=filedownload&VIEW_MODE=webview&DOWN_FILE_PATH=D%3A%5CMiAPS_Server%5CMiAPS5%5Capache-tomcat-8.5.11%5Cwebapps%5Cmiaps5%5Cwebapp%5Csamples%5Cfiles%5CyotsubaXXX.jpg">
+		Download(image/jpeg)-VIEW_MODE=webview Error Test</a>
+		</div>
+	<hr>
+	<div align="center"><a href="http://miaps.thinkm.co.kr/miaps5/minkSvc?command=filedownload&DOWN_FILE_PATH=D%3A%5CMiAPS_Server%5CMiAPS5%5Capache-tomcat-8.5.11%5Cwebapps%5Cmiaps5%5Cwebapp%5Csamples%5Cfiles%5Capache.pdf">
+		Download PDF(application/octet-stream)</a></div>
+	<div align="center"><a href="http://miaps.thinkm.co.kr/miaps5/minkSvc?command=filedownload&DOWN_FILE_PATH=D%3A%5CMiAPS_Server%5CMiAPS5%5Capache-tomcat-8.5.11%5Cwebapps%5Cmiaps5%5Cwebapp%5Csamples%5Cfiles%5Cyotsuba.jpg&f=thinkm&e=jpg">
+		Download JPG(application/octet-stream) - f=thinkm&e=jpg</a></div>
+	<br/>
+	(VIEW_MODE=webview이외에 다른 값 (예:VIEW_MODE=N)으로 하거나 사용하지 않으면 파일을 다운로드 받습니다.)
+	<hr>	
+	<br/><div style="text-align: center;"><button id="btnBack" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</button></div>
+</div>
+
+<script type="text/x-handlebars-template" id="display-template">
+<div id="_upload_display" class="upload-display" style="float:left; margin: 10px 5px 0 0;">
+	<div class="upload-thumb-wrap">
+		base64:<br/>
+		<img src="{{src}}" class="img-thumbnail" width="304" height="236" id="_preview">
+	</div>
+</div>
+<div id='desc' style='margin-top: 10px;'>
+	<strong>Name:</strong>{{name}}<br/> 
+	<strong>Size:</strong>{{size}}bytes<br/> 
+	<strong>Type:</strong>{{type}}
+</div>
+</script>
+
+</body>
+</html>

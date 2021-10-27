@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <bean id="antPathMater" class="org.springframework.util.AntPathMatcher" />
+    
+    <!-- iBatis setting -->
+    <!--  
+	<bean id="project.sqlMapClient" class="egovframework.rte.psl.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocations">
+			<list>
+				<value>classpath*:com/mink/connectors/cjlogistics/sqlmap/sqlMapConfig.xml</value>
+			</list>
+		</property>
+		<property name="mappingLocations">
+			<list>
+				<value>classpath*:com/mink/connectors/cjlogistics/sqlmap/project/*SqlMap.xml</value>
+			</list>
+		</property>	
+		<property name="dataSource" ref="project.db.${mink.runmode}"/>
+	</bean>
+	-->
+	
+	<!-- MyBatis setting, datasource가 한개 일 경우는 egovframework.rte.psl.dataaccess.mapper.MapperConfigurer 설정시 bean id및 sqlSessionFactoryBeanName property가 필요없다. -->
+	<!-- SqlSession setup for MyBatis Database Layer -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="project.db.${mink.runmode}" />
+		<property name="configLocation" value="classpath:/com/mink/connectors/cjlogistics/sqlmap/sql-mapper-config.xml" />
+		<property name="mapperLocations" value="classpath:/com/mink/connectors/cjlogistics/sqlmap/projectmappers/**/*.xml" />		    
+	</bean>
+	<!-- MapperConfigurer setup for MyBatis Database Layer with @Mapper("deptMapper") in DeptMapper Interface -->
+	<bean class="egovframework.rte.psl.dataaccess.mapper.MapperConfigurer">
+		<property name="basePackage" value="com.mink.connectors.cjlogistics.mapper" />
+	</bean>
+	
+ 	<!-- MyBatis 다중 datasource 사용하기 
+ 	<bean id="sqlSession-1" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="project.db.${mink.runmode}" />
+		<property name="configLocation" value="classpath:/com/mink/connectors/cjlogistics/sqlmap/sql-mapper-config.xml" />
+		<property name="mapperLocations" value="classpath:/com/mink/connectors/cjlogistics/sqlmap/projectmappers/**/*.xml" />		    
+	</bean>
+	
+ 	<bean id="ds1scanner" class="egovframework.rte.psl.dataaccess.mapper.MapperConfigurer">
+		<property name="basePackage" value="com.mink.connectors.cjlogistics.mapper" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSession-1" />
+	</bean>
+	
+	<bean id="sqlSession-2" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="project.db.portal.${mink.runmode}" />
+		<property name="configLocation" value="classpath:/com/mink/connectors/cjlogistics/sqlmap/sql-mapper-config.xml" />
+		<property name="mapperLocations" value="classpath:/com/mink/connectors/cjlogistics/sqlmap/remotemappers/**/*.xml" />		    
+	</bean>
+	
+ 	<bean id="ds2scanner" class="egovframework.rte.psl.dataaccess.mapper.MapperConfigurer">
+		<property name="basePackage" value="com.mink.connectors.cjlogistics.mapper" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSession-2" />
+	</bean>
+	-->
+ 	
+	
+	
+	<!-- Transaction, http://docs.spring.io/spring/docs/3.2.8.RELEASE/spring-framework-reference/html/transaction.html -->
+	<bean id="project.txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="project.db.${mink.runmode}"/>
+	</bean>
+	   
+	<bean id="miaps.sqlMapClient" class="egovframework.rte.psl.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocations">
+			<list>
+				<value>classpath*:com/mink/connectors/hybridtest/sqlmap/sqlMapConfig.xml</value>
+			</list>
+		</property>
+		<property name="mappingLocations">
+			<list>
+				<value>classpath*:com/mink/connectors/hybridtest/sqlmap/miaps/*SqlMap.xml</value>
+			</list>
+		</property>	
+		<property name="dataSource" ref="mink.db.default"/>
+	</bean>
+	
+	<bean id="miaps.txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="mink.db.default"/>
+	</bean>
+  
+</beans>

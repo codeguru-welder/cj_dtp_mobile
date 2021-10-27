@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+      name="viewport"
+    />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>NOTIFICATION</title>
+    <!-- css load -->
+    <link href="../../css/common.css" rel="stylesheet" />
+    <link href="../../css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../vendor/miaps/css/miaps.css" />
+    <!-- //css load -->
+    <!-- js load -->
+    <script src="../../js/config.js"></script>
+    <script
+      data-main="pages/service/notification.js"
+      src="../../vendor/require/require.js"
+    ></script>
+  </head>
+  <body id="dataBody">
+    <section class="container white_bg">
+      <!-- side menu -->
+      <div class="main_menu" id="main_menu"></div>
+      <!-- //side menu -->
+      <!-- header-->
+      <header class="bg_white main_header shadow">
+        <a class="main_menu_btn" id="menu_open"></a>
+        <h2>NOTIFICATION</h2>
+        <!-- delete button-->
+        <div class="edit_btn_box">
+          <a class="all_btn" data-value="noti_list_wrap"
+            ><img src="../../images/icon/icon_sel.svg" alt="icon_sel" />Select
+            All</a
+          >
+          <a class="del_btn"
+            ><img
+              src="../../images/icon/icon_delete_b.svg"
+              alt="icon_delete"
+            />Delete</a
+          >
+        </div>
+      </header>
+      <!-- contents -->
+      <div class="contents" id="contents">
+        <ul class="noti_list_wrap"></ul>
+        <script
+          type="text/x-handlebars-template"
+          id="notification-list-template"
+        >
+          {{#hbfn_isNotEmpty notificationList}}
+            {{#notificationList}}
+              <li>
+                <span class="chkbox">
+                  <input type="checkbox" id="{{id}}" />
+                  <label for="{{id}}"></label>
+                </span>
+                <img src="../../images/icon/icon_noti.svg" alt="icon_noti" />
+                <div>
+                  <p>
+                    {{title}}
+                  </p>
+                </div>
+                <span class="date">
+                  {{date}}
+                </span>
+                <img
+                  src="../../images/common/btn_more.svg"
+                  alt=""
+                  class="more_icon"
+                />
+              </li>
+              <li>
+                <p>
+                  {{value}}
+                </p>
+              </li>
+            {{/notificationList}}
+          {{else}}
+            <li style="justify-content: center;">
+              {{@root.resource.msg_common_noDataResult}}
+            </li>
+          {{/hbfn_isNotEmpty}}
+        </script>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+DELETE FROM miaps_user

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+      name="viewport"
+    />
+    <title>PUSH LIST</title>
+
+    <!-- css load -->
+    <link href="../../resource/css/reset.css" rel="stylesheet" />
+    <link href="../../resource/css/style_add.css" rel="stylesheet" />
+    <!-- //css load -->
+  </head>
+
+  <body class="bg_gray">
+    <!-- header-->
+    <header>
+      <button type="button" class="back_btn"></button>
+      <span class="page_title">PUSH LIST</span>
+      <button type="button" class="home_btn"></button>
+    </header>
+    <!--// header-->
+
+    <!-- content -->
+    <div class="contents_wrap">
+      <div class="push_list_wrap">
+        <script
+          type="text/x-handlebars-template"
+          id="notification-list-template"
+        >
+          {{#notificationList}}
+            <!-- 푸시 일시-->
+            <div class="p_date">
+              {{date}}
+            </div>
+            <!-- 푸시리스트-->
+            <div class="p_list">
+              <p class="p_title">
+                {{title}}
+              </p>
+              <p class="p_detail">
+                {{value}}
+              </p>
+              <p class="p_time">
+                {{time}}
+              </p>
+              <img
+                class="arrow"
+                src="../../resource/img/hybrid_arrow.png"
+                alt=""
+              />
+            </div>
+          {{/notificationList}}
+        </script>
+      </div>
+    </div>
+    <!--// content -->
+
+    <!-- js load -->
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../resource/js/common.js"></script>
+    <script src="../../resource/js/utils.js"></script>
+
+    <script
+      src="../../vendor/handlebars/handlebars-4.0.11.js"
+      type="text/javascript"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../vendor/miaps/js/miaps_hybrid.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../vendor/miaps/js/miaps_wp.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../vendor/miaps/js/miaps_page.js"
+    ></script>
+
+    <!--// js load -->
+
+    <script>
+      $(function ($) {
+        var push_db_file_nm = "sqlite." + "MIAPS_CM.sqlit";
+        // 푸시 리스트
+        var query_select = "SELECT * FROM MIAPS_CM ORDER BY col4 DESC";
+        miaps.querySvc(
+          "select",
+          push_db_file_nm,
+          query_select,
+          "_cb.cbSelectPushList",
+          _cb.cbSelectPushList
+        );
+      });
+
+      var callback = {
+        cbSelectPushList: function (data) {
+          var json = miaps.parse(data);
+
+          if (window._debug) {
+            console.log(" ** cbSelectPushList ** ");
+            console.log(json);
+          }
+
+          if (json != null && json.code == "200") {
+            var pushList = json.res;
+
+            if (pushList.length === 0) {
+              var push_db_file_nm = "sqlite." + "MIAPS_CM.sqlit";
+              var pushdummy = {
+                bdg: "0",
+                clk: "",
+                clr: "",
+                ctg: "",
+                frm: "",
+                icn: "",
+                img: "",
+                msg: "데모앱 푸시테스트입니다.11111",
+                mtp: "Text",
+                pid: "891",
+                snd: "default",
+                tag: "",
+                ttl: "공지사항 테스트",
+                url: "",
+              };
+
+              var insertArray =
+                "insert into MIAPS_CM (col4,col7,col8) values ('20210208151617','891','" +
+                JSON.stringify(pushdummy) +
+                "')";
+              miaps.querySvc("execute", push_db_file_nm, insertArray, "", "");
+            } else {
+              var temp = [];
+              for (var idx in pushList) {
+                var key = pushList[idx].col4;
+                var key2 = pushList[idx].col7;
+                var pushItem = miaps.parse(pushList[idx].col8);
+                var push_date =
+                  key.substring(4, 6).replace(/^0*/, "") +
+                  "월" +
+                  " " +
+                  key.substring(6, 8) +
+                  "일";
+                var hours = parseInt(key.substring(8, 10));
+                var minutes = key.substring(10, 12);
+                var ampm = hours >= 12 ? "pm" : "am";
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+                var push_time = ampm + " " + hours + ":" + minutes;
+
+                //IOS 이면 col8 사용 안함
+                if (
+                  miaps.MobilePlatform.iPhone() ||
+                  miaps.MobilePlatform.iPad()
+                ) {
+                  temp.push({
+                    id: key + "|" + key2,
+                    title: "알림",
+                    value: pushList[idx].col2,
+                    date: push_date,
+                    time: push_time,
+                  });
+                } else {
+                  //title 없을경우 기본 값 사용
+                  if (pushItem.ttl == "") {
+                    pushItem.ttl = "알림";
+                  }
+                  temp.push({
+                    id: key + "|" + key2,
+                    title: pushItem.ttl,
+                    value: pushItem.msg,
+                    date: push_date,
+                    time: push_time,
+                  });
+                }
+              }
+            }
+          } else {
+            msgbox_toast("알림이 존재하지않습니다.");
+            miapsPage.back();
+          }
+
+          var dataObj = { notificationList: temp };
+          //   dataObj.resource = {
+          //     msg_common_noDataResult: resource.msg_common_noDataResult,
+          //   };
+          //핸들바 탬플릿을 가져온다.
+          var source = $("#notification-list-template").html();
+          //핸들바 템플릿을 pre컴파일한다.
+          var template = Handlebars.compile(source);
+          //핸들바 템플릿에 데이터를 바인딩해서 HTML을 생성한다.
+          var appendHtml = template(dataObj);
+          //생성된 HTML을 DOM에 주입
+          $(".push_list_wrap").html(appendHtml);
+
+          //   setEvent();
+
+          // 데이터 조회 후 miaps.cursor(null, 'default'); 수행
+        }, //cbSelectPushList
+        cbDeletePushList: function (data) {
+          var json = miaps.parse(data);
+
+          if (window._debug) {
+            console.log(" ** cbDeletePushList ** ");
+            console.log(json);
+          }
+
+          if (json == null || !json.hasOwnProperty("code")) {
+            utils.alertToastMsg(
+              resource.t("msg_common_deleteFail", "title_notification")
+            );
+          } else {
+            if (json.code == "200") {
+              getPushList();
+            } else {
+              utils.alertToastMsg(
+                resource.t("msg_common_deleteFail", "title_notification")
+              );
+            }
+          }
+        },
+      };
+
+      window._cb = callback;
+
+      function setEvent() {
+        //notification - list accordion
+        $(".noti_list_wrap .title_box").bind("click", function () {
+          var flg = $(this).next("div.detail").is(":visible");
+          if (flg) {
+            $(this).children(".btn_acod").removeClass("open");
+            $(this).next("div.detail").slideUp("fast");
+          } else {
+            $(this).children(".btn_acod").addClass("open");
+            $(this).next("div.detail").slideDown("fast");
+          }
+        });
+
+        //notification - all check
+        var all_flg = false;
+        $(".edit_btn_box .all_btn").unbind();
+        $(".edit_btn_box .all_btn").bind("click", function () {
+          var target = $(this).data("value");
+          if (!all_flg) {
+            $("." + target + " .chkbox")
+              .children("input:checkbox")
+              .prop("checked", true);
+            all_flg = true;
+          } else {
+            $("." + target + " .chkbox")
+              .children("input:checkbox")
+              .prop("checked", false);
+            all_flg = false;
+          }
+        });
+
+        //삭제 클릭
+        $(".del_btn").unbind();
+        $(".del_btn").on("click", function () {
+          var param = [];
+          var param2 = [];
+
+          $("input:checkbox").each(function () {
+            var timeId = "";
+            var pid = "";
+            if (this.checked) {
+              var id = $(this).attr("id").split("|");
+              param.push(id[0]);
+              param2.push(id[1]);
+            }
+          }); //each
+
+          param = param.map(function (s) {
+            return "'" + s + "'";
+          });
+          param2 = param2.map(function (s) {
+            return "'" + s + "'";
+          });
+
+          var query =
+            "DELETE FROM MIAPS_CM WHERE col4 in (" +
+            param.toString() +
+            ") AND col7 in (" +
+            param2.toString() +
+            ")";
+          miaps.querySvc(
+            "execute",
+            "sqlite.MIAPS_CM.sqlit",
+            query,
+            "_cb.cbDeletePushList",
+            _cb.cbDeletePushList
+          );
+        });
+
+        //service info page  - meal info accordion
+        $("li .more_icon").unbind();
+        $("li .more_icon").click(function () {
+          var target = $(this).parent().next("li");
+          if ($(target).is(":visible")) {
+            $(this).removeClass("open");
+            $(target).slideUp("fast");
+          } else {
+            $(this).addClass("open");
+            $(target).slideDown("fast");
+          }
+        });
+      }
+
+      $(".back_btn").on("click", function (e) {
+        e.preventDefault();
+        // 네이티브 기능 페이지 이동
+        miapsPage.back();
+      });
+      $(".home_btn").on("click", function (e) {
+        e.preventDefault();
+        // 메인 페이지 이동
+        miapsPage.goTopPage();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * miapsPage goPage
+	 * 
+	 * @author 
+	 * @since 2020.02.
+	 */
+-->
+<html>
+  <head>
+    <title>MiAPS Hybrid miapsPage</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- css load -->
+    <link href="../../resource/css/reset.css" rel="stylesheet" />
+    <link href="../../resource/css/style_add.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="../../vendor/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../vendor/miaps/css/miaps.css" />
+    <!-- //css load -->
+
+    <script src="../../resource/js/config.js"></script>
+    <script
+      data-main="pages/service/pageNavigoPage.js"
+      src="../../vendor/require/require.js"
+    ></script>
+    <style>
+      .topbar {
+        width: 100%;
+        height: 40px;
+        background-color: rgb(232, 232, 238);
+        display: flex;
+        align-items: center;
+      }
+      .topbar-img {
+        padding-left: 20px;
+        font-size: 1.2em;
+        color: rgb(0, 90, 171);
+        display: flex;
+        align-items: center;
+      }
+      .topbar-img img {
+        height: 16px;
+        margin: 4px 6px;
+      }
+      .p_list {
+        width: 100%;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 4px 16px -4px rgb(0 0 0 / 10%);
+        padding: 18px 20px;
+        margin: 25px 0;
+        text-align: left;
+        align-items: center;
+      }
+      .p_list button {
+        display: block;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- header-->
+    <header>
+      <button type="button" class="back_btn"></button>
+      <span class="page_title">miapsPage 예제</span>
+      <!-- <button type="button" class="home_btn"></button> -->
+    </header>
+    <!--// header-->
+
+    <div class="topbar">
+      <div class="topbar-img">
+        <img src="../../resource/img/img_home_bl.png" alt="" />GoPage
+      </div>
+    </div>
+
+    <div class="contents_wrap bg_gray">
+      <div class="p_list">
+        <p>이전 페이지로 이동합니다.</p>
+        <button id="backPage" class="btn btn-default">
+          <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;back
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

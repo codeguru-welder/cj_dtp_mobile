@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+      name="viewport"
+    />
+    <title>로그인</title>
+
+    <!-- css load -->
+    <link href="../../resource/css/common.css" rel="stylesheet" />
+    <link href="../../resource/css/style.css" rel="stylesheet" />
+    <link href="../../vendor/miaps/css/miaps.css" rel="stylesheet" />
+    <!-- //css load -->
+  </head>
+  <body
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    "
+  >
+    <!-- 상단 이미지-->
+    <div class="head_img">
+      <img
+        src="../../resource/images/login_slogan.png"
+        alt="새로운 경기, 공정한 세상"
+      />
+    </div>
+
+    <!-- 타이틀 이미지-->
+    <div class="main_img">
+      <img src="../../resource/images/login_logo.png" alt="경기복지서비스" />
+    </div>
+
+    <!-- content-->
+    <div class="login_box">
+      <!-- 이메일 -->
+      <div class="title">이메일</div>
+      <div class="email_wrap">
+        <input id="ename" type="text" />
+        <i class="fas fa-at"></i>
+        <input id="edomain" type="text" placeholder="직접입력" />
+        <span class="email_combo"></span
+        ><!-- 클릭시 이메일 콤보 호출-->
+      </div>
+      <br />
+
+      <!-- 비밀번호-->
+      <div class="title">비밀번호</div>
+      <div class="pass_wrap">
+        <input id="pw" type="password" />
+      </div>
+
+      <!-- 자동로그인 -->
+      <div class="auto_login_wrap">
+        <input type="checkbox" id="auto_login" /><label for="auto_login"
+          >자동로그인</label
+        >
+      </div>
+
+      <!-- 로그인버튼 -->
+      <button id="login" type="submit" class="login_btn">로그인</button>
+
+      <!-- 아이디/비밀번호 찾기-->
+      <div class="find_wrap">
+        <a id="search-id">아이디찾기 <i class="fas fa-chevron-right"></i></a>
+        <a id="search-pw">비밀번호찾기 <i class="fas fa-chevron-right"></i></a>
+      </div>
+
+      <!-- 가입버튼 -->
+      <button id="reg-member" type="submit" class="join_btn">회원가입</button>
+    </div>
+
+    <!-- js load -->
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../resource/js/common.js"></script>
+    <script src="../../resource/js/utils.js"></script>
+    <script
+      type="text/javascript"
+      src="../../vendor/polyfill/polyfill.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../vendor/miaps/js/miaps_hybrid.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../vendor/miaps/js/miaps_wp.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../vendor/miaps/js/miaps_page.js"
+    ></script>
+    <!--// js load -->
+
+    <script type="text/javascript">
+      // miaps Page 및 Popup History Array를 비웁니다.
+      // miapsPage.clear();
+
+      $(function ($) {
+        init();
+      });
+
+      function init() {
+        miaps.mobile(
+          {
+            type: "savevalue",
+            param: { main_pageNo: "1" }, // 메인화면 페이지 처리용
+          },
+          function (data) {}
+        );
+        // 저장된 아이디,비밀번호, 자동로그인 확인
+        miaps.mobile(
+          {
+            type: "loadvalue",
+            param: ["id", "pw", "auto_loginYN"],
+          },
+          function (data) {
+            var obj = miaps.parse(data);
+            var _save_id = obj.res.id;
+            var _save_pw = obj.res.pw;
+
+            if (
+              _save_id != null &&
+              _save_id != "" &&
+              _save_pw != null &&
+              _save_id != ""
+            ) {
+              var _ids = _save_id.split("@");
+              $("#ename").val(_ids[0]);
+              $("#edomain").val(_ids[1]);
+              $("#pw").val(_save_pw);
+              $("#auto_login").prop("checked", true);
+            }
+          }
+        );
+      }
+
+      $("#login").on("click", function (e) {
+        e.preventDefault();
+        var ename = $("#ename").val();
+        var id = ename + "@" + $("#edomain").val();
+        var pw = $("#pw").val();
+
+        /* test
+        if (ename === "") {
+          // (btn_cnt, title, content)
+          showModal(1, "로그인", "이메일을 입력 해 주세요.");
+          return;
+        }
+
+        if (pw === "") {
+          // (btn_cnt, title, content)
+          showModal(1, "로그인", "비밀번호를 입력 해 주세요.");
+          return;
+        }
+        */
+
+        if ($("#auto_login").is(":checked") === true) {
+          miaps.mobile(
+            {
+              type: "savevalue",
+              param: { id: id, pw: pw, auto_loginYN: "true" },
+            },
+            function (data) {
+              console.log(data);
+            }
+          );
+        } else {
+          miaps.mobile(
+            {
+              type: "savevalue",
+              param: { id: "", pw: "", auto_loginYN: "" },
+            },
+            function (data) {
+              console.log(data);
+            }
+          );
+        }
+        // 메인화면 이동
+        miapsPage.go("view/MA/MA050.html");
+      });
+
+      $("#reg-member").on("click", function (e) {
+        e.preventDefault();
+        // 회원가입 이동
+        miapsPage.go("view/LN/LN090.html");
+      });
+
+      $("#search-id").on("click", function (e) {
+        e.preventDefault();
+        msgbox_toast("준비중입니다.");
+      });
+
+      $("#search-pw").on("click", function (e) {
+        e.preventDefault();
+        msgbox_toast("준비중입니다.");
+      });
+    </script>
+  </body>
+</html>

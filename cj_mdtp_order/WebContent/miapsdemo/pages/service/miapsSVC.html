@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * miapsSvc, miapsSvcSp, miapsWp
+	 * 
+	 * @author 
+	 * @since 2020.02.
+	 */
+-->
+<html>
+  <head>
+    <title>MiAPS Hybrid miapsSvc</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- css load -->
+    <link href="../../resource/css/reset.css" rel="stylesheet" />
+    <link href="../../resource/css/style_add.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="../../vendor/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../vendor/miaps/css/miaps.css" />
+    <!-- //css load -->
+
+    <script src="../../resource/js/config.js"></script>
+    <script
+      data-main="pages/service/miapsSVC.js"
+      src="../../vendor/require/require.js"
+    ></script>
+    <style>
+      /* -----------------------------------  WF030 맞춤 복지 전체목록 ------------------------------------- */
+      .content_wrap {
+        width: 100%;
+        padding: 10px 20px;
+        position: relative;
+        overflow: scroll;
+      }
+      .srch_cnt_wrap {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+      }
+      .srch_cnt_wrap .srch_cnt {
+        font-size: 16px;
+        color: #000;
+        font-weight: 600;
+      }
+      .srch_cnt_wrap .wel_set_btn {
+        font-size: 16px;
+        color: #000;
+        margin-left: auto;
+        color: #8c8c8c;
+        background-color: #f0eeee;
+        border-radius: 5px;
+        border: solid 1px #d7d7d7;
+        padding: 5px;
+      }
+      .wel_box_wrap {
+        display: grid;
+        grid-template-columns: repeat(2, calc(50% - 5px));
+        gap: 10px;
+        height: calc(100vh - 240px);
+        margin-top: 5px;
+        padding: 10px 0;
+        overflow: scroll;
+        grid-auto-rows: max-content;
+      }
+      .wel_box {
+        border: solid 1px #9db1ce;
+        background-color: #fff;
+        height: 180px;
+        border-radius: 5px;
+        padding: 12px;
+        position: relative;
+      }
+      .wel_tag {
+        font-size: 14px;
+        color: #005aab;
+        font-weight: 600;
+        width: 70%;
+        display: block;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .wel_title {
+        font-size: 20px;
+        color: #000;
+        max-height: 112px;
+        overflow: hidden;
+        line-height: 1;
+        font-weight: 600;
+      }
+      .wel_box .wel_period {
+        position: absolute;
+        bottom: 12px;
+        left: 12px;
+        font-size: 14px;
+        color: #78889d;
+        line-height: 1;
+      }
+      .wel_box.new {
+        background-color: #e2ebf8;
+      }
+      .wel_box.new::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 38px;
+        height: 14px;
+        background: url(../../resource/images/icon_new.png) no-repeat center /
+          100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- header-->
+    <header>
+      <button type="button" class="back_btn"></button>
+      <span class="page_title">miapsSvc 통신</span>
+      <button type="button" class="home_btn"></button>
+    </header>
+    <!--// header-->
+
+    <div class="content_wrap">
+      <div class="btn-group btn-group-justified" role="group">
+        <div class="btn-group" role="group">
+          <button id="miapsSvc" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-refresh"></span>&nbsp;miapsSvc
+          </button>
+        </div>
+        <div class="btn-group" role="group">
+          <button id="miapsSvcSp" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-refresh"></span>&nbsp;miapsSvcSp
+          </button>
+        </div>
+        <div class="btn-group" role="group">
+          <button id="miapswp" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-refresh"></span>&nbsp;miapswp
+          </button>
+        </div>
+      </div>
+      <br />
+      <div class="mb-3">
+        <label class="form-label">커넥터 호출 스크립트</label>
+        <textarea class="form-control" id="scriptarea" rows="10"> </textarea>
+      </div>
+      <br />
+      <div>
+        <button
+          id="proc_btn"
+          type="button"
+          class="btn btn-primary btn-lg btn-block"
+        >
+          실 행
+        </button>
+      </div>
+
+      <hr />
+      <div class="wel_box_wrap" id="handle"></div>
+      <script id="entry-template" type="text/x-handlebars-template">
+        <!-- 복지 박스 -->
+        {{#datas}}
+          <div class="{{box write}}" onclick="goDetail({{id}})">
+            <span class="wel_tag">
+              {{hashtag}}
+            </span>
+            <p class="wel_title">
+              {{name}}
+            </p>
+            <div class="wel_period">
+              신청기간
+              <br />{{welDate}}
+            </div>
+          </div>
+        {{/datas}}
+      </script>
+
+      <!-- <div>
+        <div id="listUl"></div>
+      </div> -->
+    </div>
+  </body>
+</html>

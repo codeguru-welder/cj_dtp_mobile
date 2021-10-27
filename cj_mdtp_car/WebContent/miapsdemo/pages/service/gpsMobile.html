@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * File Upload html
+	 * 
+	 * @author chlee
+	 * @since 2016.11.16
+	 */
+-->
+<html>
+  <head>
+    <title>MiAPS Hybrid FileUpload Sample</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- css load -->
+    <link href="../../resource/css/reset.css" rel="stylesheet" />
+    <link href="../../resource/css/style_add.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="../../vendor/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../vendor/miaps/css/miaps.css" />
+    <!-- //css load -->
+
+    <script src="../../resource/js/config.js"></script>
+    <script
+      data-main="pages/service/gpsMobile.js"
+      src="../../vendor/require/require.js"
+    ></script>
+  </head>
+  <body>
+    <!-- header-->
+    <header>
+      <button type="button" class="back_btn"></button>
+      <span class="page_title">GPS</span>
+      <button type="button" class="home_btn"></button>
+    </header>
+    <!--// header-->
+
+    <!-- content -->
+    <div class="contents_wrap bg_gray">
+      <!-- <div class="container"> -->
+      <div>
+        <span id="show-image"></span>
+        <div style="clear: both"></div>
+      </div>
+      <br />
+      <div id="map" style="width: 100%; height: 82%"></div>
+      <br />
+      <div style="text-align: center">
+        <button id="btngpscall" class="btn btn-block btn-default">
+          <span class="glyphicon glyphicon-map-marker"></span> 현재위치
+        </button>
+      </div>
+      <!-- <br />
+      <div style="text-align: center">
+        <button id="btnBack" class="btn btn-block btn-primary">
+          <span class="glyphicon glyphicon-circle-arrow-left"></span> Back
+        </button>
+      </div> -->
+      <br />
+      <!-- </div> -->
+    </div>
+
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6fc9971406cd373d88552353b40c3bae"
+    ></script>
+    <!-- <script>
+      var mapContainer = document.getElementById("map"), // 지도를 표시할 div
+        mapOption = {
+          center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+          level: 3, // 지도의 확대 레벨
+        };
+
+      var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+      // 마커가 표시될 위치입니다
+      var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+
+      // 마커를 생성합니다
+      var marker = new kakao.maps.Marker({
+        position: markerPosition,
+      });
+
+      // 마커가 지도 위에 표시되도록 설정합니다
+      marker.setMap(map);
+
+      // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+      // marker.setMap(null);
+    </script> -->
+  </body>
+</html>

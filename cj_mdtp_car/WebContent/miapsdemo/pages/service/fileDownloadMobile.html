@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * File Download html
+	 * 
+	 */
+-->
+<html>
+  <head>
+    <title>MiAPS Hybrid FileDownload Sample</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- css load -->
+    <link href="../../resource/css/reset.css" rel="stylesheet" />
+    <link href="../../resource/css/style_add.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="../../vendor/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../vendor/miaps/css/miaps.css" />
+    <!-- //css load -->
+
+    <script src="../../resource/js/config.js"></script>
+    <script
+      data-main="pages/service/fileDownloadMobile.js"
+      src="../../vendor/require/require.js"
+    ></script>
+  </head>
+  <body>
+    <!-- header-->
+    <header>
+      <button type="button" class="back_btn"></button>
+      <span class="page_title">FILE DOWNLOAD</span>
+      <button type="button" class="home_btn"></button>
+    </header>
+    <!--// header-->
+
+    <div class="contents_wrap bg_gray">
+      <br /><span class="glyphicon glyphicon-minus"></span>&nbsp; 다운로드에
+      성공하면 로컬(단말)에 임시저장한 경로를 리턴합니다.
+      <br />
+
+      <div>
+        <div id="show-image"></div>
+        <div style="clear: both"></div>
+      </div>
+      <br />
+      <div class="form-group">
+        <label for="mode"
+          ><span class="glyphicon glyphicon-download-alt"></span>&nbsp; file
+          protocol</label
+        >
+      </div>
+
+      <div align="center">
+        <button
+          id="btnDownloadConnectorUrlFileProtocol"
+          class="btn btn-default"
+          style="width: 100%"
+        >
+          <span class="glyphicon glyphicon-picture"></span>&nbsp; Image
+        </button>
+      </div>
+      (이미지는 filecontent를 사용해 표시)
+      <br />
+      <br />
+      <br />
+      <br />
+      <div class="form-group">
+        <label for="mode"
+          ><span class="glyphicon glyphicon-transfer"></span>&nbsp; http
+          protocol</label
+        >
+      </div>
+
+      <div align="center">
+        <button
+          id="btnDownloadConnectorUrlPath"
+          class="btn btn-default"
+          style="width: 100%"
+        >
+          <span class="glyphicon glyphicon-picture"></span>&nbsp; Image
+        </button>
+      </div>
+      (이미지는 filecontent를 사용해 표시)
+      <br /><br />
+      <div align="center">
+        <button
+          id="btnDownloadConnectorUrlPathPdf"
+          class="btn btn-default"
+          style="width: 100%"
+        >
+          <span class="glyphicon glyphicon-file"></span>&nbsp; pdf
+        </button>
+      </div>
+      (iOS경우 공유기능 사용, 안드로이드는 newbrowser사용, iOS도
+      newbrowser사용가능)
+      <br /><br />
+      <div align="center">
+        <button
+          id="btnDownloadConnectorUrlPathCsv"
+          class="btn btn-default"
+          style="width: 100%"
+        >
+          <span class="glyphicon glyphicon-list-alt"></span>&nbsp; cvs
+        </button>
+      </div>
+      (iOS경우 공유기능 사용, 안드로이드는 newbrowser사용, iOS도
+      newbrowser사용가능)
+      <br />
+      <br />
+    </div>
+
+    <script type="text/x-handlebars-template" id="display-template">
+      <div
+        id="_upload_display"
+        class="upload-display"
+        style="float:left; margin: 0 auto;"
+      >
+        <div class="upload-thumb-wrap">
+          local image:
+          <br />
+          <img
+            src="{{src}}"
+            class="img-thumbnail"
+            width="304"
+            *height="236"
+            *
+            id="_preview"
+          />
+        </div>
+      </div>
+      <div id="desc" style="margin-top: 10px;">
+        <strong>
+          Name:
+        </strong>{{name}}<br />
+        <strong>
+          Size:
+        </strong>{{size}}bytes
+        <br />
+        <strong>
+          Type:
+        </strong>{{type}}
+      </div>
+    </script>
+  </body>
+</html>

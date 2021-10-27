@@ -1,0 +1,11 @@
+{
+"common" : {
+	"serverurl" : "http://192.168.0.34:8080",
+	"packagenm" : "kr.co.miaps.hybrid.testsample",
+	"readtimeout" : 20000, 
+	"toolbar" : false,
+	"usepush" : true,
+	"starturl" : "http://testserver.ip/index.jspl",
+	"runmode" : "dev"
+	}
+} 

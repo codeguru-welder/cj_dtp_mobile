@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * File Upload html
+	 * 
+	 * @author chlee
+	 * @since 2016.11.16
+	 */
+-->
+<html>
+<head>
+<title>MiAPS Hybrid FileUpload Sample</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+
+<script src="../../resource/js/config.js"></script>
+<script data-main="pages/mobile/fileUploadOfList.js" src="../../vendor/require/require.js"></script>
+
+</head>
+<body>
+<div class="container">
+	<h2>FileUpload Sample</h2>
+	<hr>
+	<form id="frmFile" name="frmFile" method="post" enctype="multipart/form-data" onSubmit="return false;">
+		<!-- --> 
+		<div class="filebox bs3-primary preview-image">
+			<input id="data" type="file" class="upload-hidden">
+		</div>
+		<span id="show-image"></span>
+		<br/>
+		<div align="center"><button id="btnUpload" class="btn btn-default"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</button></div>
+		<br/>
+		<div align="center"><button id="btnBase64Upload" class="btn btn-default"><span class="glyphicon glyphicon-cloud-upload"></span>base64 Upload</button></div>
+		
+		<!-- 
+		<div><input type="file" id="data" name="data" size="100%" /></div>
+		<div align="center"><button id="btnUpload" class="btn btn-default"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</button></div>
+		 -->
+	</form>
+	<hr>
+	<h4>List Sample</h4>
+	<ul id="listUl" class="list-group"></ul>
+	
+	<br/><div style="text-align: center;"><button id="btnBack" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</button></div>
+</div>
+
+<script type="text/x-handlebars-template" id="filelist-template">
+	<li id='sc_{{paste_id}}' class='list-group-item justify-content-between'>
+	<a style='text-decoration: none;' href='javascript:_cb.changeFile("{{fullpath}}","{{filename}}")'>{{filename}}</a><span class='badge badge-default badge-pill'>{{date}}</span>
+	</li>
+</script>
+
+<script type="text/x-handlebars-template" id="preview-template">
+<div id="_upload_display" class="upload-display" style="float:left; margin: 10px 5px 0 0;">
+	<div class="upload-thumb-wrap"><img src="{{src}}" class="img-thumbnail" width="304" height="236" id="_preview" data-src="{{src}}"></div>
+</div>
+<div id='desc' style='margin-top: 10px;'>
+	<strong>Name:</strong>{{name}}<br/> 
+	<strong>Size:</strong>{{size}}bytes<br/> 
+	<strong>Type:</strong>{{type}}
+</div>
+<div style='clear: both;'></div>
+</script>
+
+</body>
+</html>

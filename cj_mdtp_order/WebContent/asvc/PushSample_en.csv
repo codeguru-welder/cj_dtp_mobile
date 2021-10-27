@@ -1,0 +1,7 @@
+Push Message,Reservation date,Task ID,Target,Target ID,Sub-inclusive YN
+Send to user number immediately,,1,UN,21,
+Send to User ID,,2,UD,miaps,
+Send to specific device,,1,DD,asdf-1234-lkjh,
+Send to users who belong to the group,,2,UG,100000001,
+Send to users who belong to the group, including subgroups,,1,UG,100000005,Y
+Sending to a specific user ID at the scheduled date,20140520123000 ,2,UD,miaps,

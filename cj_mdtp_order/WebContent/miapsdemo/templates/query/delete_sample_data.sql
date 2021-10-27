@@ -1,0 +1,1 @@
+delete from miaps_sample where 1 = 1;

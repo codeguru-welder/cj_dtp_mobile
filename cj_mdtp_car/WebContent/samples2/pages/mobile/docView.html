@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * Scan html
+	 * 
+	 * @author chlee
+	 * @since 2016.12.14
+	 */
+-->
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+
+<script src="../../resource/js/config.js"></script>
+<script data-main="pages/mobile/docView.js" src="../../vendor/require/require.js"></script>
+
+</head>
+<body>
+<div class="container">
+	<h2>Documents Viewer</h2>
+	<hr>
+	<form id="frmDocView" name="frmDocView" method="post" onSubmit="return false;">
+		<div class="form-group">
+	      <label for="msurl"><span class="glyphicon glyphicon-globe"></span> MiAPS Server URL:</label>
+	      <input type="text" class="form-control" id="msurl" name="msurl" value="http://miaps.thinkm.co.kr/miaps5/minkSvc" placeholder="http://miaps.thinkm.co.kr/miaps5/minkSvc">
+	    </div>
+	    <div class="form-group">
+	      <label for="docurl"><span class="glyphicon glyphicon-globe"></span> Documents URL:</label>
+	      <input type="text" class="form-control" id="docurl" name="docurl" value="http://miaps.thinkm.co.kr/dv_test.docx" placeholder="http://miaps.thinkm.co.kr/t.docx">
+	    </div>
+	    <div class="help-block">Documents Viewer 예제 입니다. 단말에서만 테스트 가능합니다.</div>
+	    <br/>
+	    <div align="center"><button id="btnRunDocView" class="btn btn-default"><span class="glyphicon glyphicon-expand"></span> DocView실행</button></div>	
+	</form>	
+	<br/>
+	<div style="text-align: center;"><button id="btnBack" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</button></div>
+</div>
+
+</body>
+</html>

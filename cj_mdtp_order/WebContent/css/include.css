@@ -1,0 +1,459 @@
+@CHARSET "UTF-8";
+/* userList */
+
+#userLeftMenuDiv { 
+ background-color:white;
+ border:1px solid gray;
+ border-collapse:collapse;
+ color:#fff;
+ font:normal 15px verdana, arial, helvetica, sans-serif;
+}
+
+#deviceLeftMenuDiv { 
+ background-color:white;
+ border:1px solid gray;
+ border-collapse:collapse;
+ color:#fff;
+ font:normal 15px verdana, arial, helvetica, sans-serif;
+}
+
+#appLeftMenuDiv { 
+ background-color:white;
+ border:1px solid gray;
+ border-collapse:collapse;
+ color:#fff;
+ font:normal 15px verdana, arial, helvetica, sans-serif;
+}
+
+#pushLeftMenuDiv { 
+ background-color:white;
+ border:1px solid gray;
+ border-collapse:collapse;
+ color:#fff;
+ font:normal 15px verdana, arial, helvetica, sans-serif;
+}
+
+#boardLeftMenuDiv { 
+ background-color:white;
+ border:1px solid gray;
+ border-collapse:collapse;
+ color:#fff;
+ font:normal 15px verdana, arial, helvetica, sans-serif;
+}
+
+#serviceLeftMenuDiv { 
+ background-color:white;
+ border:1px solid gray;
+ border-collapse:collapse;
+ color:#fff;
+ font:normal 15px verdana, arial, helvetica, sans-serif;
+}
+
+.loginUserLink {
+	text-decoration: none;
+	font-family:맑은 고딕, HYHeadLine, 돋움, verdana, arial, helvetica, sans-serif;
+    font-size:15px;
+    color: #fff;
+}
+
+.leftTopUserInfo {
+	background-color: #166fe7;	
+	/*padding: 10px;
+	line-height: 70px;*/
+	height: 70px;
+	vertical-align:middle;
+	width: 240px;
+	float: left;
+}
+
+/* Accordion Specific */
+/* Base Styles */
+#leftMenu,
+#leftMenu ul,
+#leftMenu li,
+#leftMenu a {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  font-weight: normal;
+  text-decoration: none;
+  line-height: 1;
+  /*font-family: 'Open Sans', sans-serif;*/
+  font-family: 맑은 고딕, HYHeadLine, 돋움, verdana, arial, helvetica, sans-serif;
+  font-size: 16px;
+  position: relative;
+}
+
+#leftMenu a {
+  line-height: 1.3;
+}
+
+#leftMenu > ul > li {
+  /*background: #dce6f4;
+  background: -moz-linear-gradient(#dce6f4 0%, #becfe6 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #dce6f4), color-stop(100%, #becfe6));
+  background: -webkit-linear-gradient(#dce6f4 0%, #becfe6 100%);
+  background: linear-gradient(#dce6f4 0%, #becfe6 100%);*/
+  background: #3e4962;
+}
+#leftMenu > ul > li:hover {
+  background: #303b52;
+}
+#leftMenu > ul > li > a {
+  font-size: 16px;
+  display: block;
+  color: #8b939d;
+  border-top: none;
+}
+#leftMenu > ul > li > a > span {
+  display: block;
+  padding: 15px 10px;
+  color: #8b939d;
+}
+/* jsp/include/left.jsp에서 a 태그에 class에 "icon_메뉴경로(/asvc/user/xxxx 중에 user)" 를 추가 하도록 하고 여기서 각 클래스를 찾아 아이콘을 설정한다. */
+#leftMenu > ul > li:nth-child(1) > a span:before {		/* home */
+  content: url("../asvc/images/admin_icon_home_n.png");
+  margin: 0 10px 0 5px; /* 상우하좌 */
+  vertical-align: middle;
+}
+#leftMenu > ul > li:nth-child(1) > a:hover > span:before {		/* home */
+  content: url("../asvc/images/admin_icon_home_p.png");
+  margin: 0 10px 0 5px; /* 상우하좌 */
+  vertical-align: middle;
+}
+/* 사용자관리 */
+#leftMenu > ul > li > a > .icon_user:before {
+  content: url("../asvc/images/admin_icon_user_n.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li > a:hover > .icon_user:before {
+  content: url("../asvc/images/admin_icon_user_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li.active > a > .icon_user:before {
+  content: url("../asvc/images/admin_icon_user_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+/* 장치관리 */
+#leftMenu > ul > li > a > .icon_device:before {
+  content: url("../asvc/images/admin_icon_device_n.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li > a:hover > .icon_device:before {
+  content: url("../asvc/images/admin_icon_device_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li.active > a > .icon_device:before {
+  content: url("../asvc/images/admin_icon_device_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+/* 앱 관리 */
+#leftMenu > ul > li > a > .icon_app:before {
+  content: url("../asvc/images/admin_icon_app_n.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li > a:hover > .icon_app:before {
+  content: url("../asvc/images/admin_icon_app_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li.active > a > .icon_app:before {
+  content: url("../asvc/images/admin_icon_app_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+/* 푸시 관리 */
+#leftMenu > ul > li > a > .icon_push:before {
+  content: url("../asvc/images/admin_icon_push_n.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li > a:hover > .icon_push:before {
+  content: url("../asvc/images/admin_icon_push_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li.active > a > .icon_push:before {
+  content: url("../asvc/images/admin_icon_push_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+/* 권한 관리 */
+#leftMenu > ul > li > a > .icon_role:before {
+  content: url("../asvc/images/admin_icon_role_n.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li > a:hover > .icon_role:before {
+  content: url("../asvc/images/admin_icon_role_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li.active > a > .icon_role:before {
+  content: url("../asvc/images/admin_icon_role_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+/* 게시판 관리 */
+#leftMenu > ul > li > a > .icon_board:before {
+  content: url("../asvc/images/admin_icon_board_n.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li > a:hover > .icon_board:before {
+  content: url("../asvc/images/admin_icon_board_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li.active > a > .icon_board:before {
+  content: url("../asvc/images/admin_icon_board_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+/* 메일서버 관리 */
+#leftMenu > ul > li > a > .icon_mail:before {
+  content: url("../asvc/images/admin_icon_mail_n.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li > a:hover > .icon_mail:before {
+  content: url("../asvc/images/admin_icon_mail_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li.active > a > .icon_mail:before {
+  content: url("../asvc/images/admin_icon_mail_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+/* 모니터링 */
+#leftMenu > ul > li > a > .icon_monitoring:before {
+  content: url("../asvc/images/admin_icon_monitoring_n.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li > a:hover > .icon_monitoring:before {
+  content: url("../asvc/images/admin_icon_monitoring_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li.active > a > .icon_monitoring:before {
+  content: url("../asvc/images/admin_icon_monitoring_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+/* 설정 */
+#leftMenu > ul > li > a > .icon_setting:before {
+  content: url("../asvc/images/admin_icon_setting_n.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li > a:hover > .icon_setting:before {
+  content: url("../asvc/images/admin_icon_setting_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li.active > a > .icon_setting:before {
+  content: url("../asvc/images/admin_icon_setting_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+/* 서비스 관리 */
+#leftMenu > ul > li > a > .icon_service:before {
+  content: url("../asvc/images/admin_icon_service_n.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li > a:hover > .icon_service:before {
+  content: url("../asvc/images/admin_icon_service_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+#leftMenu > ul > li.active > a > .icon_service:before {
+  content: url("../asvc/images/admin_icon_service_p.png");
+  margin: 0 10px 0 5px;
+  vertical-align: middle;
+}
+/* 왼쪽 메뉴 아이콘 끝 */
+
+
+#leftMenu > ul > li > a:hover {
+  text-decoration: none;
+  color: #ffffff;
+}
+#leftMenu > ul > li.active {
+  border-bottom: none;
+  color: #ffffff;  
+}
+#leftMenu > ul > li.has-sub.active {
+  background: #303b52;
+}
+#leftMenu > ul > li > a:hover span {
+  color: #ffffff;
+}
+
+#leftMenu > ul > li.has-sub > a span {
+  background: url(../asvc/images/admin_arrow_n.png) 96% center no-repeat;
+}
+#leftMenu > ul > li.has-sub.active > a span {
+  background: url(../asvc/images/admin_arrow_p.png) 96% center no-repeat;
+  color: #ffffff;
+  /*text-shadow: 1 1px 1px #0C4C7D;*/
+}
+/* Sub menu */
+#leftMenu ul ul {
+  display: none;
+  background: #f6f6f6;
+}
+#leftMenu ul ul li {
+  padding: 0;
+  border-bottom: 1px solid #b1b1b1;
+  border-top: none;
+  background: #f6f6f6;
+}
+#leftMenu ul ul li:last-child {
+  border-bottom: none;
+}
+#leftMenu ul ul a:nth-child(1) {
+    color: #676767;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: normal;
+    padding: 10px 10px 10px 25px;
+    text-decoration: none;
+    /*width: 100px;*/
+}
+#leftMenu ul ul a:nth-child(2) {
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+    text-decoration: none;
+    top: 25%;
+}
+
+/* 왼쪽 메뉴 새탭 */
+/* 왼쪽 메뉴 새탭 */
+.leftTab:BEFORE {
+	content: "" !important;
+}
+
+#leftMenu ul ul a:before {
+  /*content: '»';*/
+  /*position: absolute;*/
+  left: 10px;
+  color: #000000;
+}
+#leftMenu ul ul a:hover {
+  color: #000000;
+}
+
+/* topContent */
+.topContent { 
+	height: 70px;
+}
+.logoContent { 
+	padding-top: 15px;
+}
+.logoContent img {
+	vertical-align: middle;
+	padding-left: 30px;
+}
+
+.menuTitle { 
+	 vertical-align: middle;
+	 text-align: right;	 
+	 float: right;
+	 font: bold 13px 맑은 고딕, HYHeadLine, 돋움, verdana, arial, helvetica, sans-serif;
+	 color: #8b939d;
+	 padding-right: 10px;
+}
+
+/* topContentTbl */
+.topContentTbl { 
+	 position:relative;
+	 clear:both;
+}
+
+/* topContentBtn */
+.topContentBtn { 
+	 position:relative;
+	 left: 135px; 
+	 bottom: 10px;
+}
+
+/* 로딩바 : 화면을 투명하게 하면서 로딩바를 돌려야 하므로 z-index값을 크게 준다*/
+#loading {
+	height: 100%;
+	left: 0px;
+	/*position: fixed;*/
+	position:absolute; 
+	top: 0px;
+	width: 100%;
+	filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	opacity : 0.5;
+	z-index: 9999; /* jquery-ui dialog의 z-index가 100이므로 그 값보다 크기한다. */
+}
+.loading {
+	background-color: white;
+	z-index: 9999;
+}
+#loading_img{
+	width:50px;
+	position:fixed;
+	top:50%;
+	left:55%;
+	height:50px;
+	margin-top:-75px;
+	margin-left:-75px;	
+	z-index: 9999;
+}
+
+#rotate_btn:HOVER {
+	cursor: pointer;
+}
+
+#loginUserDetailDialogOpener:HOVER {
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.rotate_img {
+	position: absolute;
+	top: 15px;
+	left: 216px;
+}
+
+img.roate_stop {
+  webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out; 
+  -o-transition: all 0.3s ease-in-out; 
+  -ms-transition: all 0.3s ease-in-out; 
+  transition: all 0.3s ease-in-out; 
+}
+
+/* 시계 방향 180도 */
+img.rotate_90 {
+ /*-webkit-transform: rotate(90deg);
+ -moz-transform: rotate(90deg);
+ -o-transform: rotate(90deg);
+ filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1, mirror=0, invert=0, xray=0, grayscale=0, opacity=1.00);
+ */
+  -webkit-transform: rotate(90deg); 
+  -moz-transform: rotate(90deg); 
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+
+
+		

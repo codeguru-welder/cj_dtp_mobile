@@ -1,0 +1,123 @@
+@CHARSET "UTF-8";
+
+#miaps-container {
+	border: 0px dashed #bcbcbc;
+}
+#miaps-header {
+	border: 0px solid #bcbcbc;
+	height: 70px;
+	background-color: #eef1f5;
+	vertical-align: middle;
+	
+	position: fixed;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	z-index: 200;
+	min-width: 1024px;
+}
+#miaps-top-buttons {
+	width: 87%;
+	margin-bottom: 10px;	
+	padding: 6px 12px 6px 12px;
+	border: 0px;
+	border-bottom: 1px solid #bcbcbc;	
+	position: fixed;
+	left: 240px;
+	top: 70px;
+	background-color: #fff;
+	/*height: 30px;*/
+	z-index: 90; /* jquery-ui dialog z-index가 100이므로  그 값보다 작은 값을 줘야 modal:true일 경우 버튼이 눌리지 않는다.*/
+}
+
+#miaps-in-top-buttons-left {
+	width: 31%;
+	z-index: 90; /* jquery-ui dialog z-index가 100이므로  그 값보다 작은 값을 줘야 modal:true일 경우 버튼이 눌리지 않는다.*/
+	float: left;
+}
+
+#miaps-in-top-buttons-right {
+	width: 68%;
+	z-index: 90; /* jquery-ui dialog z-index가 100이므로  그 값보다 작은 값을 줘야 modal:true일 경우 버튼이 눌리지 않는다.*/
+	float: right;
+}
+
+#miaps-content {
+	width: 87%;
+	margin-bottom: 20px;
+	border: 0px solid #bcbcbc;
+	position: relative;
+	left: 245px;
+	/*top: 105px;*/
+}
+#miaps-sidebar {
+	display: none;
+	width: 240px;
+	height: 100%;
+	margin-bottom: 20px;
+	border: 0px solid #bcbcbc;
+	background-color: #3e4962;
+	left: 0;
+	top: 70px;
+	position: fixed;
+	z-index: 200;
+}
+#leftMenu {
+	position: fixed;
+	top: 70px;
+	bottom: 0px;
+	width: 240px;
+	height: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+#miaps-in-content-left { /* miaps-content내부에 사용 */
+	width: 30%;
+	float: left;
+	border: 1px solid #bcbcbc;
+}
+#miaps-in-content-right { /* miaps-content내부에 사용 */
+	width: 69%;
+	float: right;
+	border: 0px;
+	border-left: 1px dotted #bcbcbc;
+}
+#miaps-footer {
+	clear: both;
+	border: 0px solid #bcbcbc;
+	/*border-top: 1px solid #bcbcbc;*/
+	left: 0px;			
+}
+
+#miaps-popup-content {
+	width: 49%;
+	margin-bottom: 20px;
+	float: right;
+	border: 0px solid #bcbcbc;
+}
+#miaps-popup-sidebar {
+	width: 49.5%;
+	margin-bottom: 20px;
+	float: left;
+	border: 0px solid #bcbcbc;	
+}
+
+.miaps-popup-top-buttons {
+	width: 100%;
+	margin-bottom: 10px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	border: 0px;
+	border-top: 1px solid #bcbcbc;
+	border-bottom: 1px solid #bcbcbc;
+}
+
+.miaps-popup-top-buttons-in-tap {
+	width: 100%;
+	margin-bottom: 10px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	border: 0px;
+	border-bottom: 1px solid #bcbcbc;
+}

@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="com.miaps.server" version="2.5">
+
+	<display-name>MiAPS Enterprise Server 5.0.0</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!--
+	  - if mink.home is set in context-param
+	  - change contextConfigLocation path of AdminAppCenter servlet
+	-->
+	<!--
+	<context-param>
+		<param-name>mink.home</param-name>
+		<param-value>d:/MiAPS/mink-home</param-value>
+	</context-param>
+	<context-param>
+		<param-name>mink.runmode</param-name>
+		<param-value></param-value>
+	</context-param>
+	-->
+ 
+	<listener>
+		<listener-class>com.thinkm.mink.commons.util.MinkServletContextListener</listener-class>
+	</listener>
+	
+<!-- 외부 프로젝트에서 "어드민센터"를 외부에서 접속 하지 못하도록 설정하는 부분 -->  
+	<!-- 방법1. 필터사용 :어드민센터를 사용하지 않도록 필터를 사용한다면 이 주석을 제거한다. 필터는 src/test/com/mink/connectors/test/AdminFilter.java를 자신의 커넥터소스로 복사 후 아래 설정을 변경 해 사용
+	<filter>
+		<filter-name>AdminFilter</filter-name>
+		<filter-class>com.mink.connectors.test.AdminFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AdminFilter</filter-name>
+		<url-pattern>/asvc/*</url-pattern>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AdminFilter</filter-name>
+		<url-pattern>/app/*</url-pattern>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+    -->
+    
+    <!-- 방법2. 톰켓 필터 사용. 어드민센터 외부접속불가 / 앱센터 외부접속가능    
+	<filter>
+		<filter-name>Remote Address Filter</filter-name>
+		<filter-class>org.apache.catalina.filters.RemoteAddrFilter</filter-class>
+		<init-param>
+			<param-name>allow</param-name>
+			<param-value>127.0.0.1</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Remote Address Filter</filter-name>
+		<url-pattern>/asvc/*</url-pattern>
+	</filter-mapping>
+	 -->
+	 
+	<!-- 방법3. 아파치 설정의 mod_jk연동설정 부분에 JkUnmount 사용
+		:해당 url 패턴으로 톰캣서버를 호출하지 못하도록 한다
+		 예) JkUnmount /miaps/asvc/* 
+		 
+		 whiteList: /asvc/project/*.miaps : * 표현가능
+	-->
+	
+	<!-- CORS Tomcat Filter : 안드로이드 웹뷰에서 파일업로드 시 이 설정으로 하면 403.. 
+	<filter>
+		<filter-name>CorsFilter</filter-name>
+		<filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+		<init-param>
+			<param-name>cors.allowed.origins</param-name>
+			<param-value>http://127.0.0.1:8088,http://localhost:8088,http://127.0.0.1:8080,http://localhost:8080</param-value>
+		</init-param>
+		<init-param>
+			<param-name>cors.allowed.methods</param-name>
+			<param-value>GET,POST,OPTIONS</param-value>			
+		</init-param>
+		<init-param>
+			<param-name>cors.allowed.headers</param-name>
+			<param-value>Mink-Client-Type, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Methods, Access-Control-Allow-Origin, Access-Control-Allow-Headers</param-value>
+		</init-param>
+		<init-param>
+			<param-name>cors.exposed.headers</param-name>
+			<param-value>Access-Control-Allow-Origin,Access-Control-Allow-Credentials</param-value>
+		</init-param>
+		<init-param>
+			<param-name>cors.support.credentials</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>cors.preflight.maxage</param-name>
+			<param-value>1800</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CorsFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	-->
+
+	<!-- 
+		IP로 접근제어를 할 수 있게 함.
+		init-param> default: allow 또는 deny - allow나 deny 설정에 없으면 default 설정에 따름
+		init-param> deny: 허용하지 않을 IP를 등록함
+		init-param> allow: 허용할 IP를 등록함
+		filter-mapping에 등록한 URL 패턴에 대해서만 작동함
+	 -->
+	<!-- 
+	<filter>
+		<filter-name>AdminCenterIPControllFilter</filter-name>
+		<filter-class>com.thinkm.mink.commons.web.IPAccessControllFilter</filter-class>
+		<init-param>
+			<param-name>default</param-name>
+			<param-value>allow</param-value>
+		</init-param>
+		<init-param>
+			<param-name>deny</param-name>
+			<param-value>192.168.188.*, 192.168.0.1</param-value>
+		</init-param>
+		<init-param>
+			<param-name>allow</param-name>
+			<param-value>192.168.7.*, 127.0.0.1</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>AdminCenterIPControllFilter</filter-name>
+		<url-pattern>/asvc/*</url-pattern>
+	</filter-mapping>
+	-->
+
+	<!-- 
+		기본 보안 헤더 설정.
+		init-param 항목에 등록한 내용은 HttpServletResponse 헤더에 전달됨.
+		filter-mapping에 등록한 URL 패턴에 대해서만 작동함
+		아파치에서 설정을 한다면 이 부분은 필요 없음.
+		설정항목 참조: http://cyberx.tistory.com/171
+	 -->
+	<!-- 
+	<filter>
+		<filter-name>BasicSecurityHeaderFilter</filter-name>
+		<filter-class>com.thinkm.mink.commons.web.BasicSecurityHeaderFilter</filter-class>
+		<init-param>
+			<param-name>Content-Security-Policy</param-name>
+			<param-value>default-src 'self' 'unsafe-inline' 'unsafe-eval'</param-value>
+		</init-param>
+		<init-param>
+			<param-name>X-Content-Type-Option</param-name>
+			<param-value></param-value>
+		</init-param>
+		<init-param>
+			<param-name>X-XSS-Protection</param-name>
+			<param-value>1;mode=block</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>BasicSecurityHeaderFilter</filter-name>
+		<url-pattern>/asvc/*</url-pattern>
+	</filter-mapping>
+	-->
+
+	<!-- CSRF java Filter -->
+	<!-- 
+		allowed: http://localhost, http://localhost:8080, protocol://domain:port ....
+	-->
+	<filter>
+		<filter-name>CsrfFilter</filter-name>
+		<filter-class>com.thinkm.mink.commons.login.CSRFFilter</filter-class>
+		<init-param>
+			<param-name>allowed</param-name>
+			<param-value></param-value>
+		</init-param>
+		<init-param>
+			<param-name>Use-Security-Policy</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>APP_USE_WEBFONTS</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>APP_USE_AUDIOS_OR_VIDEOS</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>INCLUDE_MOZILLA_CSP_DIRECTIVES</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CsrfFilter</filter-name>
+		<url-pattern>*.miaps</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+
+	<!-- CORS java Filter -->
+	<filter>
+		<filter-name>CorsFilter</filter-name>
+		<filter-class>com.thinkm.mink.commons.login.CORSFilter</filter-class>
+		<init-param>
+			<param-name>origin</param-name>
+			<param-value>
+			    http://127.0.0.1:8088, http://localhost:8088, http://127.0.0.1:8080, http://localhost:8080			    
+			</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CorsFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>sessionFilter</filter-name>
+		<filter-class>com.thinkm.mink.commons.login.SessionFilter</filter-class>
+		<init-param>
+			<param-name>whiteList</param-name>
+			<param-value>
+			    /asvc/common/commonLoginView.miaps,
+			    /asvc/common/commonLogout.miaps,
+			    /asvc/common/commonLoginUserWelcome.miaps,
+			    /asvc/common/commonSelectGroupUserNoList.miaps,
+			    /asvc/common/commonLoginUserSearchUserPw.miaps,
+			    /asvc/common/commonLoginUserSearchUserPwUpdate.miaps,
+			    /asvc/common/commonMethodNotAllowed.miaps,
+			    /asvc/push/pushDataInsertInf.miaps,
+			    /asvc/push/pushQuickInsert.miaps,
+			    /asvc/push/pushBulkupload.miaps,
+			    /asvc/deploy/*.miaps,
+			    /app/common/commonAppLoginView.miaps,
+			    /app/common/commonAppLogout.miaps,
+			    /app/common/commonAppLoginUserWelcome.miaps,
+			    /app/common/commonAppSelectGroupUserNoList.miaps,
+			    /app/common/commonAppMethodNotAllowed.miaps,
+			    /app/appInstall.miaps,
+			    /app/appFileDown.miaps,
+			    /app/appFileDownUrlReq.miaps,
+			    /hybrid/*.miaps
+			</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>sessionFilter</filter-name>
+		<url-pattern>*.miaps</url-pattern>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+    
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>LogContextFilter</filter-name>
+		<filter-class>com.thinkm.mink.commons.logging.LogContextFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LogContextFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+
+	<!-- Lucy -->
+	<filter>
+		<filter-name>xssEscapeServletFilter</filter-name>
+		<filter-class>com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	    <filter-name>xssEscapeServletFilter</filter-name>
+	    <url-pattern>/asvc/*</url-pattern>
+	    <url-pattern>/app/*</url-pattern>
+	</filter-mapping>
+  <!-- Lucy Filter 적용 - 200401 윤다혜- -->
+<!-- 
+  <filter>
+    <filter-name>LucyFilter</filter-name>
+    <filter-class>com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LucyFilter</filter-name>
+    <url-pattern>*.miaps</url-pattern>
+  </filter-mapping>
+-->
+
+	<!-- MiAPS Core Servlet -->
+	<servlet>
+		<servlet-name>MiapsService</servlet-name>
+		<servlet-class>com.thinkm.mink.core.MinkService</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MiapsService</servlet-name>
+		<url-pattern>/minkSvc/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- asvc/App Center -->
+	<!-- 반드시 MiapsService 보다 늦게 로드 되어야 한다. (저쪽 빈 참조하므로) -->
+	<!-- 
+		        file:${mink.home}/conf/mink-servlet.miapsadmin.xml,
+		        classpath*:com/mink/connectors/spring/mink-servlet.${mink.profile}.xml
+	-->
+	<servlet>
+		<servlet-name>AdminAppCenter</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+		        file:${mink.home}/conf/mink-servlet.miapsadmin.xml,
+		        file:${mink.home}/conf/miaps.core.transaction.xml,
+		        file:${mink.home}/conf/${mink.profile}/miaps.${mink.profile}.transaction*.xml,
+		        classpath*:com/mink/connectors/spring/mink-servlet.${mink.profile}.xml
+		    </param-value>
+		</init-param>
+		<load-on-startup>3</load-on-startup> 
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminAppCenter</servlet-name>
+		<url-pattern>*.miaps</url-pattern>
+	</servlet-mapping>
+	
+	<!-- mobile dtp  -->
+	<servlet>
+		<servlet-name>mobiledtp</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+		        file:${mink.home}/conf/mink-servlet.miapsadmin.xml,
+		        file:${mink.home}/conf/miaps.core.transaction.xml,
+		        file:${mink.home}/conf/${mink.profile}/miaps.${mink.profile}.transaction*.xml,
+		        classpath*:com/mink/connectors/spring/mink-servlet.${mink.profile}.xml
+		    </param-value>
+		</init-param>
+		<load-on-startup>3</load-on-startup> 
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mobiledtp</servlet-name>
+		<url-pattern>/</url-pattern>		
+	</servlet-mapping>
+
+<!-- Hybrid DRW사용시 주석 해제
+	<servlet>
+		<servlet-name>MiAPS_Hybrid</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+		        file:${mink.home}/conf/mink-servlet.hybrid.xml
+		    </param-value>
+		</init-param>
+		<load-on-startup>4</load-on-startup> 
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MiAPS_Hybrid</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+ -->
+ 	
+	<!-- 임시(안드로이드) - 기존 버전관리 지원 
+	<servlet>
+		<servlet-name>AndroidAppDownloadTemp</servlet-name>
+		<servlet-class>com.thinkm.mink.connector.appversion.FileDirectDownload</servlet-class>
+		<load-on-startup>100</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AndroidAppDownloadTemp</servlet-name>
+		<url-pattern>/fileDirectDownload.do</url-pattern>
+	</servlet-mapping>
+ 	-->
+ 	
+	<!-- RESTfull WebService -->
+	<servlet>
+		<servlet-name>RESTfullService</servlet-name>
+		<servlet-class>com.thinkm.mink.core.RESTfullService</servlet-class>
+		<load-on-startup>5</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RESTfullService</servlet-name>
+		<url-pattern>/svc/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- MiAPS 배포관리 Service -->
+	<servlet>
+		<servlet-name>MiAPSDistributionService</servlet-name>
+		<servlet-class>com.thinkm.mink.core.DistributionService</servlet-class>
+		<init-param>
+			<param-name>miaps.distributor.root</param-name>
+			<param-value></param-value>
+		</init-param>
+		<init-param>
+			<param-name>miaps.distributor.mode</param-name>
+			<param-value></param-value>
+		</init-param>
+		<load-on-startup>10</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MiAPSDistributionService</servlet-name>
+		<url-pattern>/distributor/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MiAPSDistributionService</servlet-name>
+		<url-pattern>/player/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MiAPSDistributionService</servlet-name>
+		<url-pattern>/webdistributor/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MiAPSDistributionService</servlet-name>
+		<url-pattern>/webapp/*</url-pattern>
+	</servlet-mapping>
+	
+<!-- Nice 본인인증  사용 시 주석 해제 
+	<servlet>
+		<servlet-name>NiceAuthService</servlet-name>
+		<servlet-class>com.thinkm.mink.core.NiceAuthService</servlet-class>
+		<load-on-startup>11</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NiceAuthService</servlet-name>
+		<url-pattern>/niceAuthSvc/*</url-pattern>
+	</servlet-mapping>
+-->
+	
+<!-- 
+	<servlet>
+		<servlet-name>MailServerWatchdog</servlet-name>
+		<servlet-class>com.thinkm.mink.email.watchdoc.MailServerWatchdogServlet</servlet-class>
+		<load-on-startup>100</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MailServerWatchdog</servlet-name>
+		<url-pattern>/mailwatchdog</url-pattern>
+	</servlet-mapping>
+-->
+
+	<!-- error page
+		: 아래 이외 및 50X에러는 스프링 설정파일에 설정되어 WEB-INF/jsp/common/commonErrorView.jsp의  ${exceptionMessage} 항목에서 에러메시지를 표시 하므로 
+		이 JSP를 수정하면 에러메시지를 표시 하지 않도록 할 수 있습니다. 
+	-->
+	<!-- 400에러를 minkservice에서 발생하므로 주석 처리한다.
+    <error-page>
+    	<error-code>400</error-code>
+    	<location>/WEB-INF/jsp/error/error.jsp</location>
+    </error-page>
+     -->
+	<!-- 에러코드별 페이지 개별 설정 -->
+    <!--
+    <error-page>
+    	<error-code>401</error-code>
+    	<location>/WEB-INF/jsp/error/401.jsp</location>
+    </error-page>
+    <error-page>
+    	<error-code>403</error-code>
+    	<location>/WEB-INF/jsp/error/403.jsp</location>
+    </error-page>
+    <error-page>
+    	<error-code>404</error-code>
+    	<location>/WEB-INF/jsp/error/404.jsp</location>
+    </error-page>
+    <error-page>
+    	<error-code>405</error-code>
+    	<location>/WEB-INF/jsp/error/405.jsp</location>
+    </error-page>
+    <error-page>
+    	<error-code>500</error-code>
+    	<location>/WEB-INF/jsp/error/500.jsp</location>
+    </error-page>
+    <error-page>
+    	<error-code>501</error-code>
+    	<location>/WEB-INF/jsp/error/501.jsp</location>
+    </error-page>
+     <error-page>
+    	<error-code>502</error-code>
+    	<location>/WEB-INF/jsp/error/502.jsp</location>
+    </error-page>
+     <error-page>
+    	<error-code>503</error-code>
+    	<location>/WEB-INF/jsp/error/503.jsp</location>
+    </error-page>
+    <error-page>
+    	<error-code>600</error-code>
+    	<location>/WEB-INF/jsp/error/600.jsp</location>
+    </error-page>
+    <error-page>
+    	<exception-type>java.lang.Throwable</exception-type>
+    	<location>/WEB-INF/jsp/error/error.jsp</location>
+    </error-page>
+    -->
+    <!-- SK 건설 -->
+	<error-page>
+	  <error-code>400</error-code>
+	  <location>/WEB-INF/jsp/error/error.jsp</location>
+	</error-page>
+	<error-page>
+	  <error-code>401</error-code>
+	  <location>/WEB-INF/jsp/error/error.jsp</location>
+	</error-page>
+	<error-page>
+	  <error-code>403</error-code>
+	  <location>/WEB-INF/jsp/error/error.jsp</location>
+	</error-page>
+	<error-page>
+	  <error-code>404</error-code>
+	  <location>/WEB-INF/jsp/error/error.jsp</location>
+	</error-page>
+	<error-page>
+	  <error-code>405</error-code>
+	  <location>/WEB-INF/jsp/error/error.jsp</location>
+	</error-page>
+	<error-page>
+	  <error-code>500</error-code>
+	  <location>/WEB-INF/jsp/error/error.jsp</location>
+	</error-page>
+	<error-page>
+	  <error-code>501</error-code>
+	  <location>/WEB-INF/jsp/error/error.jsp</location>
+	</error-page>
+	<error-page>
+	  <error-code>502</error-code>
+	  <location>/WEB-INF/jsp/error/error.jsp</location>
+	</error-page>
+	<error-page>
+	  <error-code>503</error-code>
+	  <location>/WEB-INF/jsp/error/error.jsp</location>
+	</error-page>
+	<error-page>
+	  <error-code>600</error-code>
+	  <location>/WEB-INF/jsp/error/error.jsp</location>
+	</error-page>
+	<error-page>
+	  <exception-type>java.lang.Throwable</exception-type>
+	  <location>/WEB-INF/jsp/error/error.jsp</location>
+	</error-page>
+
+<!-- 
+	2018/04/20 유상천
+	HTTP method 제한
+	보안 진단(취약점 동적진단) 에서 GET방식은 심각도 '하'의 문제 유형으로 스캔된다.
+	보안 권고문 - 본문 매개변수가 조회에서 허용됨
+	*심각도 '하' 문제유형도 전부 조치를 해야 하면 주석 해제해야함
+ -->
+	<!-- <security-constraint>
+	   	<display-name>Forbidden</display-name>
+		<web-resource-collection>
+			<web-resource-name>Forbidden</web-resource-name>
+			<url-pattern>/asvc/common/commonLoginUserWelcome.miaps</url-pattern>
+			<url-pattern>/asvc/push/pushLogStats.miaps</url-pattern>
+			<url-pattern>/asvc/user/userListSearch.miaps</url-pattern>
+			<url-pattern>/asvc/push/pushTaskListView.miaps</url-pattern>
+			<url-pattern>/asvc/push/pushLogListDownload.miaps</url-pattern>
+			<url-pattern>/asvc/push/pushLogListView.miaps</url-pattern>
+			<url-pattern>/asvc/push/pushTaskDetail.miaps</url-pattern>
+			<url-pattern>/asvc/push/pushDataDetail.miaps</url-pattern>
+			<url-pattern>/asvc/push/pushTaskListView2.miaps</url-pattern>
+			<url-pattern>/asvc/push/pushDataListView.miaps</url-pattern>
+			<url-pattern>/asvc/app/appListView.miaps</url-pattern>
+			<url-pattern>/asvc/device/deviceListView.miaps</url-pattern>
+			<url-pattern>/asvc/mail/mailAccountDelete.miaps</url-pattern>
+			<url-pattern>/asvc/app/appCategoryMemberUpdate.miaps</url-pattern>
+			<url-pattern>/asvc/app/appCategoryMngListViewJSON.miaps</url-pattern>
+			<url-pattern>/asvc/board/boardReSendPushData.miaps</url-pattern>
+			<url-pattern>/asvc/app/appCategoryDetail.miaps</url-pattern>
+			<url-pattern>/asvc/app/appCategoryMngMemberListView.miaps</url-pattern>
+			<url-pattern>/asvc/user/userUpdateUserPwInit.miaps</url-pattern>
+			<url-pattern>/asvc/user/userDetail.miaps</url-pattern>
+			<url-pattern>/asvc/user/userInsert.miaps</url-pattern>
+			<url-pattern>/asvc/user/userListFrame.miaps</url-pattern>
+			<url-pattern>/asvc/device/devicePushSettingListView.miaps</url-pattern>
+			<url-pattern>/asvc/board/boardDataListView.miaps</url-pattern>
+			<url-pattern>/asvc/device/deviceLogLoginStatsView.miaps</url-pattern>
+			<url-pattern>/asvc/device/deviceLogLoginStatsViewDownloadByMode.miaps</url-pattern>
+			<url-pattern>/asvc/device/deviceSelectPushTaskList.miaps</url-pattern>
+			<url-pattern>/asvc/app/appDownloadDetailListView.miaps</url-pattern>
+			<url-pattern>/asvc/app/appDownloadDetailListViewDownload.miaps</url-pattern>
+			<url-pattern>/asvc/app/appDownloadListView.miaps</url-pattern>
+			<url-pattern>/asvc/device/deviceDetail.miaps</url-pattern>
+			<url-pattern>/asvc/device/deviceLogList.miaps</url-pattern>
+			<url-pattern>/asvc/device/deviceTargetUrlDetail.miaps</url-pattern>
+			<url-pattern>/asvc/app/appDetail.miaps</url-pattern>
+			<url-pattern>/asvc/app/appVersionListView.miaps</url-pattern>
+			<url-pattern>/asvc/app/appVersionDetail.miaps</url-pattern>
+			<url-pattern>/asvc/device/deviceListViewDownload.miaps</url-pattern>
+			<url-pattern>/asvc/device/deviceBizAccessList.miaps</url-pattern>
+			<url-pattern>/asvc/device/deviceTargetUrlListView.miaps</url-pattern>
+			<url-pattern>/asvc/mail/mailserverListView.miaps</url-pattern>
+			<url-pattern>/asvc/device/deviceUserAccessList.miaps</url-pattern>
+			<url-pattern>/asvc/setting/settingCodeDetailListViewJSON.miaps</url-pattern>
+			<url-pattern>/asvc/setting/settingCodeGroup.miaps</url-pattern>
+			<url-pattern>/asvc/board/boardDataDetail.miaps</url-pattern>
+			<url-pattern>/asvc/role/roleGroupContainParentFindChildren.miaps</url-pattern>
+			<url-pattern>/asvc/role/roleGroupUpdateUpGrpId.miaps</url-pattern>
+			<url-pattern>/asvc/menu/menuAdminUpdateMenuFn.miaps</url-pattern>
+			<url-pattern>/asvc/setting/settingCodeGroupListView.miaps</url-pattern>
+			<url-pattern>/asvc/role/roleGroupListView.miaps</url-pattern>
+			<url-pattern>/asvc/menu/menuAdminListView.miaps</url-pattern>
+			<url-pattern>/asvc/push/pushLogDetail.miaps</url-pattern>
+			<http-method>GET</http-method>
+          	<http-method>PUT</http-method>
+          	<http-method>DELETE</http-method>
+          	<http-method>TRACE</http-method>
+          	<http-method>COPY</http-method>
+          	<http-method>MOVE</http-method>
+          	<http-method>OPTIONS</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+	   		<role-name></role-name>
+	   	</auth-constraint>
+	</security-constraint> -->
+
+</web-app>

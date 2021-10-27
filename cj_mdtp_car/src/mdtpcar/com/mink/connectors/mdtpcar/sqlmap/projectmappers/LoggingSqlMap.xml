@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mink.connectors.mdtp.mapper.LoggingMapper">
+
+	<insert id="insertLog">
+		INSERT INTO miaps_ssi_log 
+			(log_tm, ch_gid, user_id, uuid, req_target, req_class, req_method, req_params, req_time, req_version, res_code, res_msg, log_year, log_month, log_date)
+		VALUES (
+			#{logTm},
+			#{chGid},
+			#{userId},
+			#{uuid},
+			#{reqTarget},
+			#{reqClass},
+			#{reqMethod},
+			#{reqParams},
+			#{reqTime},
+			#{reqVersion},
+			#{resCode},
+			#{resMsg}, 
+			#{logYear}, 
+			#{logMonth}, 
+			#{logDay})
+	</insert>
+	
+	<insert id="insertScriptErrLog">
+		INSERT INTO miaps_script_err_log 
+			(log_tm, device_id, user_id, req_params, req_time, req_version, packagenm, platform, model, os, log_year, log_month, log_day)
+		VALUES (
+			#{logTm},
+			#{deviceId},
+			#{userId},			
+			#{reqParams},
+			#{reqTime},
+			#{reqVersion},
+			#{packageNm},
+			#{platform},
+			#{model},
+			#{os},
+			#{logYear}, 
+			#{logMonth}, 
+			#{logDay})
+	</insert>
+	
+</mapper>

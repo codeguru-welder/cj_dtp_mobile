@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * Code Reader
+	 * 
+	 * @author chlee
+	 * @since 2016.11.16
+	 */
+-->
+<html>
+  <head>
+    <title>MiAPS Hybrid Code Reader</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+	/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- css load -->
+    <link href="../../resource/css/reset.css" rel="stylesheet" />
+    <link href="../../resource/css/style_add.css" rel="stylesheet" />
+    <link 
+    	rel="stylesheet" 
+    	href="../../vendor/bootstrap/css/bootstrap.min.css"
+    />
+	<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+	<!-- //css load -->
+	
+    <script src="../../resource/js/config.js"></script>
+	<script
+		data-main="pages/service/QRcode.js"
+		src="../../vendor/require/require.js"
+	></script>
+  	
+  </head>
+  <body>
+    <!-- header-->
+    <header>
+      <button type="button" class="back_btn"></button>
+      <span class="page_title">CODE READER</span>
+      <button type="button" class="home_btn"></button>
+    </header>
+    <!--// header-->
+
+    <div class="contents_wrap bg_gray">
+    	<br/>
+		<div class="form-group">
+    		<label for="readData"><span class="glyphicon glyphicon-qrcode"></span>&nbsp;Read Data:</label>
+   		 	<input type="text" class="form-control" id="readData" name="readData" value="" placeholder="입력된 데이터가 여기에 표시됩니다.">
+  		</div>
+  		<div align="center">
+  			<button id="btnRun" class="btn btn-default"><span class="glyphicon glyphicon-qrcode"></span>&nbsp;Camera</button>
+  		</div>
+    </div>   
+  </body>
+</html>

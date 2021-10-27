@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * MiapsHybrid 버전체크, SetDeviceInfo, 커넥터class호출 예제
+	 * 
+	 * @author chlee
+	 * @since 2017.02.22
+	 */
+-->
+<html>
+<head>
+<title>MiAPS Hybrid Code Reader</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+
+<script src="../../resource/js/config.js"></script>
+<script data-main="pages/mobile/codeReader.js" src="../../vendor/require/require.js"></script>
+</head>
+
+<body>
+<div class="container">
+  <div id="headerPosition"></div>
+  <h2>Code Reader</h2>
+  <hr>  
+  <div class="form-group">
+    <label for="readData"><span class="glyphicon glyphicon-qrcode"></span>&nbsp;Read Data:</label>
+    <input type="text" class="form-control" id="readData" name="readData" value="" placeholder="입력된 데이터가 여기에 표시됩니다.">
+  </div>
+  <div align="center"><button id="btnRun" class="btn btn-default"><span class="glyphicon glyphicon-qrcode"></span>&nbsp;Camera</button></div>
+  <br/>
+  <div style="text-align: center;"><button id="btnBack" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;Back</button></div>
+</div>
+</body>
+</html>
+
+
+

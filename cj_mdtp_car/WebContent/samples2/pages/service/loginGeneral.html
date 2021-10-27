@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * MiapsHybrid 버전체크, SetDeviceInfo, 커넥터class호출 예제
+	 * 일반 html, javascript예제
+	 * 
+	 * @author chlee
+	 * @since 2017.06.21
+	 */
+-->
+<html>
+<head>
+<title>MiAPS Hybrid Login Sample</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+
+<script type="text/javascript" src="../../vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../../vendor/miaps/js/miaps_hybrid.js"></script>
+
+<script type="text/javascript">
+$(function(){
+  	$("#btnLogin").on("click", goLogin);
+  	$("#btnBack").on("click", function() {window.history.back();});      	
+  	$("#userId").on("keypress", enterLogin());
+  	$("#userPw").on("keypress", enterLogin());
+  	      	
+	$("#userid").focus();
+	
+	window._cb = callback;	
+	
+	// 버전체크 예제 
+	//miaps.updateApp(null, null);
+	//miaps.updateApp("platform_cd=2000012&sw_name=kr.co.miaps.hybrid.testsample", _cb.cbVerChk);
+	//miaps.updateApp('/minkSvc', null);
+	
+	
+	console.log(navigator.userAgent);
+	if(miaps.MobilePlatform.Android()) {
+		console.log("andorid");
+	} else if (miaps.MobilePlatform.iPhone()) {
+		console.log("iPhone");
+	} else if (miaps.MobilePlatform.iPad()) {
+		console.log("iPad");
+	} else if (miaps.MobilePlatform.Opera()) {
+		console.log("Opera");
+	} else if (miaps.MobilePlatform.Windows()) {
+		console.log("Windows");
+	} else if (miaps.MobilePlatform.BlackBerry()) {
+		console.log("blackberry");
+	} else {
+		console.log("unknown");
+	}
+});
+
+function goLogin() {
+	alert("login");
+	miaps.cursor('iconLogin', 'wait', true);
+	console.log($("#loginFrm").serialize());		
+	miaps.miapsSvc("com.mink.connectors.cjlogistics.login.LoginMan", "login", "MIAPS-LOGIN-TEST", $("#loginFrm").serialize(), "_cb.cbLogin", _cb.cbLogin);
+}
+
+function enterLogin(obj) {
+	var loginFrm = document.loginFrm;
+	
+	
+	
+	if(loginFrm.userId === obj) {
+		if(loginFrm.userId.value == '') return;
+		if(loginFrm.userPw.value == '') {
+			$(loginFrm.userPw).focus();
+			return;
+		} else {
+			goLogin();
+		}
+	}
+	if(loginFrm.userPw === obj) {
+		if(loginFrm.userPw.value == '') return;
+		if(loginFrm.userId.value == '') {
+			$(loginFrm.userId).focus();
+			return;
+		} else {
+			goLogin();
+		}
+	}
+}
+
+function validation() {
+	var loginFrm = document.loginFrm;
+	
+	var answer = false;
+	
+	/*
+	if(loginFrm["userGroup.grpId"].value == '') {
+		alert('소속그룹을 선택하세요!');
+		$(loginFrm["userGroup.grpId"]).focus();
+		return true;
+	}
+	*/
+	if(loginFrm.userId.value == '') {
+		alert(resources.msg.not.input.userid);
+		$(loginFrm.userId).focus();
+		return true;
+	}
+	if(loginFrm.userPw.value == '') {
+		alert(resources.msg.not.input.password);
+		$(loginFrm.userPw).focus();
+		return true;
+	}
+	
+	return answer;
+}
+
+/* ---- callback function ---- 
+ * callback function은 앱에서 호출 되어야 하므로 callback.cbVerChk = function(data) {...로 작성하지 않고 callback.cbVerChk = function cbVerChk(data) {...처럼 함수명을 function뒤에 명시하도록 한다.
+ * 제일 마지막에 window._cb = callback; 명령으로 작성한 callback객체를 어느곳에든지 호출 가능 하도록 전역화 한다.
+ */
+var callback = {	
+	cbVerChk : function (data) {
+		console.log(data);
+		return;
+	},
+	
+	cbSetDeviceInfo : function (data) {
+		console.log(data);
+		return;
+	},
+	
+	cbLogin : function (data) {
+		miaps.cursor('iconLogin', 'default');
+		console.log(data);
+		var obj = miaps.parse(data);
+		// errCode, errMsg
+		if (obj.code != '0') {
+			alert(obj.msg);
+			return;
+		}
+		
+		if (obj.code == '0') {
+			alert(obj.msg);
+			
+			// SetDeviceInfo 예제 
+			console.log(obj.res.Login.userNo);
+			console.log(obj.res.Login.userId);
+			console.log(obj.res.Login.userPw);
+			console.log(obj.res.Login.groupId);
+			//userid, userpw, userno, groupid, cb_func
+			//miaps.setDeviceInfo(obj.res.Login.userId, '', '', '', _cb.cbSetDeviceInfo);
+			//miaps.setDeviceInfo(obj.res.Login.userId, '', '', '', null);
+						
+			// 바로 페이지 이동하면 setDeviceInfo가 실행되지 않아서 타이머를 넣어봄
+			/*setTimeout(function() {
+				location.href='index.html';
+			}, 1000);
+			*/
+			return;
+		}
+	}
+};
+
+</script>
+</head>
+
+<body>
+<div class="container">
+  <div id="headerPosition"></div>
+  <h2>Login Sample</h2>
+  <hr>
+  <form id="loginFrm" name="loginFrm" method="post" onSubmit="return false;">
+    <div class="form-group">
+      <label for="userId"><span class="glyphicon glyphicon-user"></span>&nbsp;ID:</label>
+      <input type="text" class="form-control" id="userId" name="userId" placeholder="Enter ID">
+    </div>
+    <div class="form-group">
+      <label for="userPw"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Password:</label>
+      <input type="password" class="form-control" id="userPw" name="userPw" placeholder="Enter password" autocomplete="off">
+    </div>
+    <div align="center"><button id="btnLogin" class="btn btn-default"><span id="iconLogin" class="glyphicon glyphicon-log-in"></span>&nbsp;Login</button></div>
+  </form>
+  <br/><div style="text-align: center;"><button id="btnBack" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;Back</button></div>  
+</div>
+</body>
+</html>
+
+
+

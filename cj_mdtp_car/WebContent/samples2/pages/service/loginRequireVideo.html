@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * MiapsHybrid 버전체크, SetDeviceInfo, 커넥터class호출 예제
+	 * 
+	 * @author chlee
+	 * @since 2017.02.22
+	 */
+-->
+<html>
+<head>
+<title>MiAPS Hybrid Login Video</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+
+<style type="text/css">
+.hide-on-pc {
+    display: block;
+}
+
+.slide-wrap {
+    position: relative;
+    min-height: 500px;
+    background: no-repeat 50% 50%;
+    background-size: cover;
+    overflow: hidden;
+}
+
+
+.txt-wrap {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    right: 10px;
+    -webkit-transform: translate(0,-50%);
+    -ms-transform: translate(0,-50%);
+    transform: translate(0,-50%);
+    text-align: center;
+    z-index: 100;
+}
+
+.txt-wrap .txt-1 {
+    font-size: 34px;
+    line-height: 36px;
+    color: #fff;
+    /*opacity: 0;*/
+    transform: translate(0,60px);
+}
+
+.txt-wrap .txt-2 {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 21px;
+    color: #fff;
+    /*opacity: 0;*/
+    transform: translate(0,60px);
+}
+</style>
+
+<script src="../../resource/js/config.js"></script>
+<script data-main="pages/service/loginRequireVideo.js" src="../../vendor/require/require.js"></script>
+
+</head>
+
+<body>
+<div class="container">
+  <div id="headerPosition"></div>
+  <h2>Login Sample</h2>
+  <hr>
+
+	  <!-- 
+	  webkit-playsinline : chrome
+	  playsinline : safari
+	  -->
+	<div class="slide-wrap">  
+	  <div data-video-index="0" style="height:100%;">
+			<video autoplay autobuffer loop muted webkit-playsinline playsinline class="video-1" style="-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;height:auto;">
+				<source src="main_1122.mp4" type="video/mp4">
+			</video>
+		</div>
+		<div class="txt-wrap">
+			<p class="txt-1">THE GLOBAL<br>SCM INNOVATOR</p>
+			<p class="txt-2">CJ대한통운은 글로벌 물류 혁신을 주도합니다.</p>
+		</div>	  
+	</div>  
+	
+		<form id="loginFrm" name="loginFrm" method="post" onSubmit="return false;">
+	    <div class="form-group">
+	      <label for="userId"><span class="glyphicon glyphicon-user"></span>&nbsp;ID:</label>
+	      <input type="text" class="form-control" id="userId" name="userId" placeholder="Enter ID">
+	    </div>
+	    <div class="form-group">
+	      <label for="userPw"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Password:</label>
+	      <input type="password" class="form-control" id="userPw" name="userPw" placeholder="Enter password" autocomplete="off">
+	    </div>
+	    <div align="center"><button id="btnLogin" class="btn btn-default"><span id="iconLogin" class="glyphicon glyphicon-log-in"></span>&nbsp;Login</button></div>
+	  </form>
+	  <br/>
+ 
+  <br/>
+  <div style="text-align: center;"><button id="btnBack" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;Back</button></div>
+</div>
+</body>
+</html>
+
+
+

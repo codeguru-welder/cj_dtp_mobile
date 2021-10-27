@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="properties">
+			<props>
+				<prop key="dbType">mysql</prop> <!-- mysql, oracle, mssql, db2, postgres, tibero -->
+				<prop key="dbVersion"></prop> <!-- mssql일 때만 사용함; 2008, 2012; 다른 DB는 빈 값이어도 됨 -->
+				<prop key="dbTypeSuffix"></prop> <!-- 같은 dbType에서도 다른 ibatis 설정을 가지도록 함 -->
+			</props>
+		</property>
+	</bean>
+
+	<!-- default database configuration -->
+	<!-- JNDI - Mink Method -->
+	<!-- 
+	<bean id="mink.db.default" class="com.thinkm.mink.commons.db.JndiDataSource" destroy-method="close" >
+		<property name="initialContextFactory" value="weblogic.jndi.WLInitialContextFactory" />
+		<property name="providerUrl" value="t3://127.0.0.1:7001" />
+		<property name="securityPrincipal" value="userId" />
+		<property name="securityCredentials" value="passwords" />
+		<property name="jndiName" value="java:comp/env/jndi/name" />
+	</bean>
+	-->
+	<!-- JNDI - Spring Method 1 -->
+	<!--
+	<jee:jndi-lookup id="mink.db.default" jndi-name="[jndi_name]"/>
+	-->
+	<!-- JNDI - Spring Method 2 -->
+	<!-- 
+	<bean id="mink.db.default" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="[jndi_name]"/>
+		<property name="resourceRef" value="false"/>
+	</bean>
+	-->
+	<!-- JNDI - Spring Method 3 -->
+	<!-- 
+	<bean id="mink.db.default" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="[jndi_name]"/>
+		<property name="jndiTemplate" ref="jnditemplate">
+	</bean>
+	<bean id="jnditemplate" >
+		<property name="environment">
+			<props>
+				<prop key="java.naming.factory.initial">weblogic.jndi.WLInitialContextFactory</prop>
+				<prop key="java.naming.provider.url"> t3://server:port</prop>
+				<prop key="java.naming.security.principal">userId</prop>
+				<prop key="java.naming.security.credentials">password</prop>
+			</props>
+		</property>
+	</bean>
+	-->
+
+	<!-- MySQL (dbType=mysql) -->
+	<!-- -->
+	<bean id="mink.db.default" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="org.gjt.mm.mysql.Driver" />
+		<property name="username" value="miaps" />
+		<property name="password" value="miaps" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/miaps?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true" />
+		<property name="defaultQueryTimeout" value="5" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+
+	<!-- mariadb (dbType=mysql) -->
+	<!--
+	<bean id="mink.db.default" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+		<property name="username" value="miaps" />
+		<property name="password" value="miaps" />
+		<property name="url" value="jdbc:mariadb://127.0.0.1:3306/miaps?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true" />
+		<property name="defaultQueryTimeout" value="5" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+	-->
+
+	<!-- MS-SQL (dbType=mssql) DB인증 -->
+	<!--
+	<bean id="mink.db.default" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="username" value="miaps" />
+		<property name="password" value="miaps" />
+		<property name="url" value="jdbc:sqlserver://127.0.0.1:1433;databaseName=miaps" />
+		<property name="defaultQueryTimeout" value="5" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+	-->
+	
+	<!-- MS-SQL (dbType=mssql) Windows인증 (-Djava.library.path=sqljdbc_auth.dll이 있는 경로를 VM Arguments에 추가해야 합니다.) -->
+	<!-- 
+	<bean id="mink.db.default" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url" value="jdbc:sqlserver://localhost:1433;databaseName=miaps;integratedSecurity=true;" />
+		<property name="defaultQueryTimeout" value="5" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+	-->
+	
+	<!-- Oracle (dbType=oracle) : SID -->
+	<!-- 
+	<bean id="mink.db.default" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="username" value="miaps" />
+		<property name="password" value="miaps" />
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:orcl" />
+		<property name="defaultQueryTimeout" value="5" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+	-->
+	
+	<!-- Oracle (dbType=oracle) : Service Name, 다중연결 , 이중화-->
+	<!-- 
+	<bean id="mink.db.default" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="username" value="miaps" />
+		<property name="password" value="miaps" />
+	    <property name="url" value="jdbc:oracle:thin:@(DESCRIPTION=(FAIL_OVER=ON)(LOAD_BALANCE=ON)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=host1)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=host2)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=service_name)))"/>
+		<property name="defaultQueryTimeout" value="5" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+	-->
+
+	<!-- DB2 (dbType=db2) -->
+	<!--
+	<bean id="mink.db.default" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="com.ibm.db2.jcc.DB2Driver" />
+		<property name="username" value="sa" />
+		<property name="password" value="sa" />
+		<property name="url" value="jdbc:db2://127.0.0.1:50000/miaps" />
+		<property name="defaultQueryTimeout" value="5" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+	-->
+
+	<!-- PostgreSQL (dbType=postgres) -->
+	<!--
+	<bean id="mink.db.default" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="username" value="miaps" />
+		<property name="password" value="miaps" />
+		<property name="url" value="jdbc:postgresql://127.0.0.1:5432/miaps" />
+		<property name="defaultQueryTimeout" value="5" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+ 	-->
+ 	
+	<!-- Tibero (dbType=tibero) -->
+	<!--
+	<bean id="mink.db.default" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.tmax.tibero.jdbc.TbDriver" />
+		<property name="username" value="miaps" />
+		<property name="password" value="miaps" />
+		<property name="url" value="jdbc:tibero:thin:@127.0.0.1:8629:tibero" />
+		<property name="defaultQueryTimeout" value="30" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+ 	-->
+
+ 	<!-- 암호화 설정 예제 
+ 	<bean id="mink.db.default" class="com.thinkm.mink.commons.db.ExternalSecuredDataSource" destroy-method="close" >
+		<property name="secureClass" value="com.mink.connectors.devexample.common.SecuredDbcp" />
+		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+		<property name="username" value="6jAtHHaYdrBskiBknYFcRQ==" />
+		<property name="password" value="6jAtHHaYdrBskiBknYFcRQ==" />
+		<property name="url" value="jdbc:mariadb://127.0.0.1:3300/miaps?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true" />
+		<property name="defaultQueryTimeout" value="5" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+ 	-->
+ 	
+ 	
+	<!-- 
+		Transaction
+		http://docs.spring.io/spring/docs/3.2.8.RELEASE/spring-framework-reference/html/transaction.html
+	-->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="mink.db.default"/>
+	</bean>
+
+	<!-- tx:advice 및 aop:config 설정은 miaps.core.transaction.xml로 이동함 -->
+	
+</beans>

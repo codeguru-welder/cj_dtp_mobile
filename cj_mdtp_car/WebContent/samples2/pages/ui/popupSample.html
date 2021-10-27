@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MiAPS Hybrid Login Sample</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+<link rel="stylesheet" href="../../resource/css/ui.css">
+<link rel="stylesheet" href="../../resource/css/common.css">
+
+</head>
+
+<body>
+<div class="container" id="container">
+  <div id="headerPosition"></div>
+  <h2>Login Sample</h2>
+  <hr>
+  <div style="text-align: center;"><button id="btnPopup" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;popup</button></div>
+  <br/><br/>
+  <div style="text-align: center;"><button id="btnBack" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;Back</button></div>
+</div>
+
+<script id="pop-sample" type="text/html">
+<div class="layer-contents">
+	<div class="no-data">
+		<i class="ico-warning"></i>
+		<p class="text color-gray">현금 / 체크카드가 없습니다.</p>
+	</div>
+</div>
+</script>
+
+<script type="text/javascript" src="../../vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../../vendor/miaps/js/miaps_hybrid.js"></script>
+<script type="text/javascript" src="../../vendor/template7/template7.min.js"></script>
+<script type="text/javascript" src="../../vendor/miaps/js/miaps_ui.js"></script>
+
+<script type="text/javascript">
+	$("#btnBack").on("click", function() {window.history.back();});   
+	$("#btnPopup").on("click", function(e) {
+		e.preventDefault();
+
+		pop();
+	});
+
+
+	function pop(){
+		var tmplList = '#pop-sample';
+		var content = miapsUI.runTemplate(tmplList, {});
+		var buttons = [
+			'<span class="neg"><button type="button" class="btn-lg-primary">확인</span>'
+		];
+		
+		var popup = miapsUI.popup(null, content, null, function() {
+			popup.hide();
+		});
+		
+		$(".layer > .layer-header > .btn-close").click(function(){
+			popup.hide();
+		});
+		popup.show();
+	}
+
+</script>
+</body>
+</html>
+
+
+

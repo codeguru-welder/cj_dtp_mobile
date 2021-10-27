@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>MiAPS Hybrid Sample2</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="resource/css/simple-sidebar.css" rel="stylesheet">    
+	<!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+	<!-- MiAPS Hybrid library -->
+    <script src="vendor/miaps/js/miaps_hybrid.js"></script>
+    
+    <script src="vendor/miaps/js/miaps_page.js"></script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                       MiAPS Hybrid Menu!!!!!
+                    </a>
+                </li>
+                <li>
+                    <p class="text-muted"><a href="pages/communicationView.html">Communication(href)</a></p>
+                </li>
+                <li>    
+                    <p class="text-muted"><a href="javascript:miapsPage.go('communicationView.html');">Communication(miapsPage.go)</a></p>
+                </li>   
+                <li>
+                    <p class="text-muted"><a href="pages/mobileView.html">Native(href)</a></p>
+                </li>
+                <li>    
+                    <p class="text-muted"><a href="javascript:miapsPage.go('mobileView.html');">Native(miapsPage.go)</a></p>
+                </li>
+                <!-- 
+                <li>
+                    <p class="text-muted"><a href="pages/playmovie.html">동영상 테스트</a></p>
+                </li>
+                 --> 
+                <li>
+                    <p class="text-muted"><a href="pages/thirdparty.html">3rdParty Lib.(href)</a></p>
+                </li>
+                <li>    
+                    <p class="text-muted"><a href="javascript:miapsPage.go('thirdparty.html');">3rdParty Lib.(miapsPage.go)</a></p>
+                </li>
+                <li>
+                    <p class="text-muted"><a href="javascript:miapsPage.go('navi/pageNaviTest.html', {id:'chlee'});">화면이동(miapsPage.go)</a></p>
+                </li> 
+                <li>
+					<a href="javascript:goSMS('01092505308','문자를보내자');">SMS테스트</a>
+                </li>               
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <h1>MiAPS Hybrid</h1>
+                <p><h4>Sample Page</h4></p><br/>
+                <p>- 목록보기를 눌러 원하는 기능을 테스트 합니다.!!!!</p>
+                <br/>
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><span class="glyphicon glyphicon-expand"></span>목록 보기</a>            
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+    function goSMS(number, message) {
+         location.href='sms:'+number+(miaps.isIOS() ? '&' : '?') + 'body='+ message;
+    }
+ 
+    $(function(){
+
+        miaps.mobile({
+            type: 'shake',
+            param: ''
+        }, null); // 자체 콜백없음. miaps_notify.js의 callback()함수를 사용.
+
+         miaps.mobile({
+            type:'savevalue', 
+            param: {
+                'sessionid': 'sessionid_value',
+                'token': 'token_value'
+            }
+        }, function (data) {
+            obj = miaps.parse(data);
+            console.log(JSON.stringify(obj).replace(/,"/g, ',\n"'));
+        });
+
+        miapsPage.clear();
+
+        /*
+	    window.onpopstate = function(event) {
+            alert('location: ${document.location}, state: ${JSON.stringify(event.state)}');
+        }
+        */
+        
+	    miaps.mobile({
+	    	type: 'clearhistory'
+	    	,param: ''
+	    	,callback:''
+	    }, null);
+	    
+	    if('ontouchend' in document) {
+	    	console.log('ontouchend: true');
+    	} else {
+    		console.log('ontouchend: false');
+    	}
+	    
+	    /* 로그인 안한 사람도 푸시를 받을 수 있도록  첫 페이지에서 miaps db에 유저 등록 */
+	  	//miaps.setDeviceInfo('seven', '', '', '', 'seven');
+	    
+	    
+	  	var params = {
+  		    sheet_name: "table1",
+  		    id: 100,
+  		    column_name: "image",
+  		};
+  		//var querystring = $.param( params );
+          //console.log( querystring );
+          
+          miapsPage.getPageInfo(function(data) {
+			console.log(data);
+			
+			var obj = miaps.parse(data);
+            
+            console.log(obj.res);
+        });
+        
+       
+	    
+    });  
+    
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.apache.org//DTD SQL Map Config 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+    <typeAlias alias="Us7Ascii" type="com.thinkm.mink.commons.db.StringTypeHandler"/>
+    <typeHandler jdbcType="varchar" javaType="java.lang.String" callback="Us7Ascii"/>
+    
+<!-- ANSI 표준 SQL -->
+	<!-- dbType 에 맞춰 PrimaryKey 생성 후 반환 (dbType: MySQL, MsSQL(v2008/v2012), Oracle) -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/PrimaryKey.xml"/>
+	<!-- 사용자 정보 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/User.xml"/>
+	<!-- 사용자 그룹 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/UserGroup.xml"/>
+	<!-- 사용자 그룹 구성원 관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/UserGroupMember.xml"/>
+	<!-- 라이선스 관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/UserLicense.xml"/>
+	<!-- 관리자 권한 위임 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/UserRoleDelegate.xml"/>
+	<!-- 어드민센터 메뉴 권한 그룹 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/MenuAdmin.xml"/>
+	<!-- 앱센터 메뉴 권한 그룹 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/MenuApp.xml"/>
+	<!-- 어드민센터 메뉴 권한 구성원 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/MenuRoleAdmin.xml"/>
+	<!-- 앱센터 메뉴 권한 구성원 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/MenuRoleApp.xml"/>
+	<!-- 어드민센터/앱센터 권한 그룹 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/RoleGroup.xml"/>
+	<!-- 어드민센터/앱센터 권한 그룹 구성원 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/RoleGroupMember.xml"/>
+	<!-- 장치관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/Device.xml"/>
+	<!-- 앱관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/App.xml"/>
+	<!-- 푸시관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/Push.xml"/>
+	<!-- 게시판관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/Board.xml"/>
+	<!-- 메일관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/Mail.xml"/>
+	<!-- 메일계정관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/EmailAccount.xml"/>
+	<!-- 앱 권한관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/AppRole.xml"/>
+	<!-- 설정 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/Setting.xml"/>
+	<!-- 범용 리소스 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/Resource.xml"/>
+	<!-- 배포관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/Deploy.xml"/>
+		
+<!-- Oracle -->
+	<!-- 사용자 정보 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/User_oracle.xml"/>
+	<!-- 사용자 그룹 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/UserGroup_oracle.xml"/>
+	<!-- 어드민센터/앱센터 권한 그룹 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/RoleGroup_oracle.xml"/>
+	<!-- 장치관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/Device_oracle.xml"/>
+	<!-- 앱관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/App_oracle.xml"/>
+	<!-- 푸시관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/Push_oracle.xml"/>
+	<!-- 게시판관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/Board_oracle.xml"/>
+	<!-- 어드민센터 메뉴 권한 그룹 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/MenuAdmin_oracle.xml"/>
+	<!-- 앱센터 메뉴 권한 그룹 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/MenuApp_oracle.xml"/>
+	<!-- 메일관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/Mail_oracle.xml"/>
+	<!-- 설정 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/oracleus/Setting_oracle.xml"/>
+
+</sqlMapConfig>

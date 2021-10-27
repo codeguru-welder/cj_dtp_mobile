@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MiAPS Hybrid fingerprint Sample</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- css load -->
+    <link href="../../resource/css/reset.css" rel="stylesheet" />
+    <link href="../../resource/css/style_add.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="../../vendor/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../vendor/miaps/css/miaps.css" />
+    <!-- //css load -->
+  </head>
+
+  <body>
+    <!-- header-->
+    <header>
+      <button type="button" class="back_btn"></button>
+      <span class="page_title">fingerPrint</span>
+      <button type="button" class="home_btn"></button>
+    </header>
+    <!--// header-->
+
+    <!-- content -->
+    <div class="contents_wrap bg_gray">
+      <br />
+      <div style="text-align: center">
+        <button id="finger" class="btn btn-block btn-default">
+          <span class="glyphicon glyphicon-hand-up"></span> 지문인식
+        </button>
+      </div>
+      <br />
+      <div style="text-align: center">
+        <button id="finger-checkdevice" class="btn btn-block btn-default">
+          <span class="glyphicon glyphicon-hand-up"></span> 지문 지원체크
+        </button>
+      </div>
+      <br />
+      <div style="text-align: center">
+        <button id="finger-checkreg" class="btn btn-block btn-default">
+          <span class="glyphicon glyphicon-hand-up"></span> 지문 등록여부
+        </button>
+      </div>
+      <br />
+      <div style="text-align: center">
+        <button id="ios-id" class="btn btn-block btn-default">
+          <span class="glyphicon glyphicon-hand-up"></span> TouchID / FaceID
+          구분
+        </button>
+      </div>
+      <br />
+    </div>
+
+    <script src="../../resource/js/config.js"></script>
+    <script
+      data-main="pages/service/fingerprint.js"
+      src="../../vendor/require/require.js"
+    ></script>
+  </body>
+</html>

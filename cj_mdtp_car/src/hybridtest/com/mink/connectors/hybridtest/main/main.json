@@ -1,0 +1,205 @@
+{
+	"title": "Dummy Main Page",
+	"ver": "ver. 1.0.0",
+	"storage": {
+		"ktbip": "192.168.0.2",
+		"ktbport": "8080",
+		"tmpid": "chlee",
+		"deviceId": "_iOSXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+	},	
+	"menu": [
+		{
+			"id": "0",
+			"name": "로그인",
+			"desc": "로그인 상세 오픈",
+			"link": "menu-open",
+			"param": {
+				"key": "value",
+				"key2" : "value"
+			}
+		},{
+			"id": "1",
+			"name": "조회",
+			"desc": "조회 화면으로 이동합니다.",
+			"link": "html/service/listTemplateHandlebars.html",
+			"param": {
+				"key3": "value"
+			},
+			"menu":[
+				{
+					"id": "01",
+					"name": "로그인-1_1",
+					"desc": "로그인 화면으로 이동합니다.",
+					"link": "html/service/loginRequire.html",
+					"param": {
+						"key5": "value"
+					},
+					"menu":[
+						{
+							"id": "01",
+							"name": "로그인-2_2",
+							"desc": "로그인 화면으로 이동합니다.11",
+							"link": "html/service/loginRequire.html",
+							"param": {
+								"key5": "value"
+							}
+						},{
+							"id": "02",
+							"name": "로그인-2_3",
+							"desc": "로그인 화면으로 이동합니다.22",
+							"link": "html/service/loginRequire.html",
+							"param": {
+								"key6": "value"
+							},
+							"menu" : [
+								{
+								"id": "02",
+								"name": "로그인-3_4",
+								"desc": "로그인 화면으로 이동합니다.22",
+								"link": "html/service/loginRequire.html",
+								"param": {
+									"key6": "value"
+									}
+								}
+							]
+						}
+					]
+				},{
+					"id": "02",
+					"name": "로그인-1_5",
+					"desc": "로그인 화면으로 이동합니다.",
+					"link": "html/service/loginRequire.html",
+					"param": {
+						"key6": "value"
+					},
+					"menu":[
+						{
+							"id": "07",
+							"name": "로그인-2_6",
+							"desc": "로그인 화면으로 이동합니다.",
+							"link": "html/service/loginRequire.html",
+							"param": {
+								"key5": "value"
+							}
+						},{
+							"id": "08",
+							"name": "로그인-2_7",
+							"desc": "로그인 화면으로 이동합니다.",
+							"link": "html/service/loginRequire.html",
+							"param": {
+								"key6": "value"
+							}
+						},{
+							"id": "09",
+							"name": "로그인-2_8",
+							"desc": "로그인 화면으로 이동합니다.",
+							"link": "html/service/loginRequire.html",
+							"param": {
+								"key5": "value"
+							}
+						},{
+							"id": "10",
+							"name": "로그인-2_9",
+							"desc": "로그인 화면으로 이동합니다.",
+							"link": "html/service/loginRequire.html",
+							"param": {
+								"key6": "value"
+							}
+						}
+					]
+				}
+			]
+		},{
+			"id": "2",
+			"name": "이체",
+			"desc": "이체 화면으로 이동합니다.",
+			"link": "html/service/listTemplateHandlebars.html",
+			"param": {
+				"key4": "value"
+			}, "menu":[
+				{
+					"id": "01",
+					"name": "로그인-1_10",
+					"desc": "로그인 화면으로 이동합니다.",
+					"link": "html/service/loginRequire.html",
+					"param": {
+						"key5": "value"
+					},
+					"menu":[
+						{
+							"id": "01",
+							"name": "로그인-2_11",
+							"desc": "로그인 화면으로 이동합니다.11",
+							"link": "html/service/loginRequire.html",
+							"param": {
+								"key5": "value"
+							}
+						},{
+							"id": "02",
+							"name": "로그인-2_12",
+							"desc": "로그인 화면으로 이동합니다.22",
+							"link": "html/service/loginRequire.html",
+							"param": {
+								"key6": "value"
+							},
+							"menu" : [
+								{
+								"id": "02",
+								"name": "로그인-3_13",
+								"desc": "로그인 화면으로 이동합니다.22",
+								"link": "html/service/loginRequire.html",
+								"param": {
+									"key6": "value"
+									}
+								}
+							]
+						}
+					]
+				},{
+					"id": "02",
+					"name": "로그인-1_14",
+					"desc": "로그인 화면으로 이동합니다.",
+					"link": "html/service/loginRequire.html",
+					"param": {
+						"key6": "value"
+					},
+					"menu":[
+						{
+							"id": "07",
+							"name": "로그인-2_15",
+							"desc": "로그인 화면으로 이동합니다.",
+							"link": "html/service/loginRequire.html",
+							"param": {
+								"key5": "value"
+							}
+						},{
+							"id": "08",
+							"name": "로그인-2_16",
+							"desc": "로그인 화면으로 이동합니다.",
+							"link": "html/service/loginRequire.html",
+							"param": {
+								"key6": "value"
+							}
+						},{
+							"id": "09",
+							"name": "로그인-2_17",
+							"desc": "로그인 화면으로 이동합니다.",
+							"link": "html/service/loginRequire.html",
+							"param": {
+								"key5": "value"
+							}
+						},{
+							"id": "10",
+							"name": "로그인-2_18",
+							"desc": "로그인 화면으로 이동합니다.",
+							"link": "html/service/loginRequire.html",
+							"param": {
+								"key6": "value"
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

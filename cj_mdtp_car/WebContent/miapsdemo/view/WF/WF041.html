@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+      name="viewport"
+    />
+    <title>앱접근권한안내</title>
+
+    <!-- css load -->
+    <link href="../../resource/css/common.css" rel="stylesheet" />
+    <link href="../../resource/css/style.css" rel="stylesheet" />
+    <!-- //css load -->
+  </head>
+  <body>
+    <!-- 헤더-->
+    <div class="header">
+      <a class="back_btn" id="go_back"><i class="fas fa-arrow-left"></i></a
+      ><span class="h_title">복지 신청</span>
+    </div>
+
+    <!-- content-->
+    <div
+      style="
+        width: 100%;
+        height: calc(100vh - 110px);
+        padding: 10px 20px;
+        position: relative;
+        overflow: scroll;
+      "
+      class="content_wrap"
+    >
+      <img src="../../resource/images/apply00.png" alt="" />
+    </div>
+
+    <div class="btn_wrap">
+      <button id="confirm" type="submit" class="common_btn">신청</button>
+    </div>
+
+    <!-- js load -->
+    <script src="../../resource/js/jquery-3.3.1.min.js"></script>
+    <script src="../../resource/js/all.min.js"></script>
+    <script
+      type="text/javascript"
+      src="../../vendor/miaps/js/miaps_hybrid.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../vendor/miaps/js/miaps_page.js"
+    ></script>
+    <!-- fontawesome-->
+    <script src="../../resource/js/common.js"></script>
+    <!--// js load -->
+
+    <script>
+      $(function () {
+        // openPopup()으로 Open된 POPUP 페이지가 전달된 데이터 확인
+        miapsPage.getPopupData(function (data) {
+          console.log(data);
+        });
+      });
+      $("#go_back").on("click", function (e) {
+        e.preventDefault();
+        miapsPage.closePopup({
+          backparam: "",
+        });
+      });
+      $("#confirm").on("click", function (e) {
+        e.preventDefault();
+        showModal(1, "알림", "신청되었습니다.");
+      });
+      function popup_cls() {
+        miapsPage.closePopup({
+          //POPUP을 닫을 때 부모 페이지에 전달 할 데이터를 입력 합니다. Ojbect타입의 Json데이터를 입력
+          backparam: "reg_ok",
+        });
+      }
+    </script>
+  </body>
+</html>

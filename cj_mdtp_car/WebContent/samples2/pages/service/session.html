@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+ session 유지 테스트 (miapsSvc, httpSvc통신 session 유지 테스트) 
+ -->
+<html>
+<head>
+<title>MiAPS Hybrid Session Sample</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+
+<script src="../../resource/js/config.js"></script>
+<script data-main="pages/service/session.js" src="../../vendor/require/require.js"></script>
+
+</head>
+
+<body>
+<div class="container">
+  <div id="headerPosition"></div>
+  <h2>Session Sample</h2>
+  <hr>  
+  <form id="loginFrm" name="loginFrm" method="post" onSubmit="return false;">
+    <div class="form-group">
+      <label for="userId"><span class="glyphicon glyphicon-user"></span>&nbsp;ID:</label>
+      <input type="text" class="form-control" id="userId" name="userId" placeholder="Enter ID">
+    </div>
+    <div class="form-group">
+      <label for="userPw"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Password:</label>
+      <input type="password" class="form-control" id="userPw" name="userPw" placeholder="Enter password" autocomplete="off">
+    </div>
+    <div align="center"><button id="btnLogin" class="btn btn-default"><span id="iconLogin" class="glyphicon glyphicon-log-in"></span>&nbsp;Login</button></div>
+  </form>
+  <br/>
+  <div style="text-align: center;"><button id="btnBack" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;Back</button></div>
+  <div id="httpSvcResultDiv"></div>
+</div>
+</body>
+</html>
+
+
+

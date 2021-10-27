@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="
+   	    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.thinkm.mink.asvc, com.thinkm.mink.dao, com.thinkm.mink.miaps.connector, com.thinkm.mink.connector.hybrid, com.mink.connectors.${mink.profile}">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+    
+    <mvc:interceptors>
+    
+		<!-- 로그아웃 후 뒤로가기 방지- 20200402 윤다혜 - ====================================== -->
+		<mvc:interceptor>
+			<mvc:mapping path="/asvc/**"/>
+			<mvc:mapping path="/app/**"/>
+    		<mvc:exclude-mapping path="/asvc/common/commonAppLoginView.miaps"/>
+    		<mvc:exclude-mapping path="/asvc/common/commonLoginView.miaps"/>
+			<mvc:exclude-mapping path="/asvc/common/commonLoginUserWelcome.miaps"/>
+			<mvc:exclude-mapping path="/asvc/common/commonLogout.miaps"/>
+			<bean class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+				<property name="cacheSeconds" value="0" />
+				<property name="useExpiresHeader" value="true" />
+				<property name="useCacheControlHeader" value="true" />
+				<property name="useCacheControlNoStore" value="true" />
+			</bean>
+		</mvc:interceptor>
+		<!-- ================================================================================== -->
+		
+    	<mvc:interceptor>
+    		<mvc:mapping path="/asvc/**"/>
+    		<mvc:exclude-mapping path="/asvc/common/*"/>
+			<mvc:exclude-mapping path="/asvc/deploy/*"/>
+    		<bean class="com.thinkm.mink.commons.login.MenuAuthInterceptor"/>
+    	</mvc:interceptor>
+    </mvc:interceptors>
+
+	<bean id="leaveaTrace" class="egovframework.rte.fdl.cmmn.trace.LeaveaTrace">
+		<property name="traceHandlerServices">
+			<list>
+				<ref bean="traceHandlerService" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="traceHandlerService" class="egovframework.rte.fdl.cmmn.trace.manager.DefaultTraceHandleManager">
+		<property name="reqExpMatcher">
+			<ref bean="antPathMater" />
+		</property>
+		<property name="patterns">
+			<list>
+				<value>*</value>
+			</list>
+		</property>
+		<property name="handlers">
+			<list>
+				<ref bean="defaultTraceHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="antPathMater" class="org.springframework.util.AntPathMatcher" />
+
+	<bean id="defaultTraceHandler" class="egovframework.rte.fdl.cmmn.trace.handler.DefaultTraceHandler" />
+
+
+	<!-- MappingJacksonJsonView 설정 -->
+	<!-- <bean id="jsonReport" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" /> -->
+	
+	<!-- MappingJackson2JsonView 설정 -->
+	<bean id="jsonMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/> 
+	<bean id="jsonReport" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"> <!-- DTO=>JSON 으로 변환하는 view 제공(forAJAX) -->
+		<property name="objectMapper" ref="jsonMapper" />
+	</bean>
+
+	<!-- ViewResolver 설정 시작 -->
+	<bean id="bnViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0"/><!-- 논리적인 View 이름을 사용해 DispatcherServlet의 어플리케이션 컨텍스트에 있는 View Bean을 결정한다. -->
+
+	<bean id="irViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:order="1"><!-- 논리적인 View 이름을 사용하여 템플릿 파일 장원을 사용하여 랜더링 되는 View 객체를 결정한다. -->
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+		<property name="redirectHttp10Compatible" value="false"></property>
+	</bean>
+	
+	<bean id="exceptionResolver" class="com.thinkm.mink.commons.web.DefaultExceptionProcess">
+		<property name="view" value="asvc/common/commonErrorView" />
+	</bean>
+
+	<!-- FILE -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+
+	<!-- Download -->
+	<bean id="download" class="com.thinkm.mink.commons.web.DownloadView"/>
+
+</beans>

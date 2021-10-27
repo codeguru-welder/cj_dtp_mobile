@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+      name="viewport"
+    />
+    <title>복지현황</title>
+
+    <!-- css load -->
+    <link href="../../resource/css/common.css" rel="stylesheet" />
+    <link href="../../resource/css/style.css" rel="stylesheet" />
+    <link href="../../resource/css/swiper.min.css" rel="stylesheet" />
+    <!-- //css load -->
+  </head>
+  <body>
+    <!--  스와이프 -->
+    <div class="main-container">
+      <div class="swiper-wrapper">
+        <!-- 내 정보-->
+        <div class="main_wrap swiper-slide">
+          <div class="main_title" style="font-size: 14px">
+            <span class="bold">홍길동님</span><br />복지시스템과 행복한 하루
+            보내세요.
+          </div>
+          <!-- 이메일 / 휴대전화-->
+          <div class="g_txt" style="padding: 10px 0">
+            email@naver.com <br />
+            010-1234-1234
+          </div>
+          <div class="my_info_btn_wrap">
+            <button type="button" class="gray_btn" id="Logout">로그아웃</button>
+            <button type="button" class="gray_btn" id="mod_setting">
+              <i class="fas fa-pen"></i> 수정
+            </button>
+          </div>
+          <div style="height: calc(100vh - 280px); overflow: scroll">
+            <div class="mydata_btn_wrap">
+              <div class="round_box" id="Import_MyData">My Data 가져오기</div>
+              <div class="round_box" id="Delete_MyData">My Data 삭제</div>
+            </div>
+            <div class="welfare_btn_wrap">
+              <div class="bg_round_box blue" id="applied_welfare">
+                내가 신청한 복지<span class="cnt_num">3</span>
+              </div>
+              <div class="bg_round_box sea" id="optimized_welfare">
+                맞춤 복지 설정
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 도민을 위한 맞춤복지 -->
+        <div class="main_wrap swiper-slide">
+          <div class="main_title">
+            도민을 위한 <span class="bold">맞춤 복지</span>
+          </div>
+          <div style="height: calc(100vh - 170px); overflow: scroll">
+            <div class="main_bg_box bg_blue">
+              <span class="bold white_txt">맞춤완성도</span>
+              <div class="progress_wrap">
+                <span class="st_point"></span>
+                <div class="progress_bar"></div>
+
+                <span class="rate">100%</span>
+                <span class="ed_point"></span>
+              </div>
+              <div class="how_comp_wrap">
+                <span class="how_comp" id="go_setting"
+                  >맞춤완성도를 높이려면?</span
+                >
+              </div>
+            </div>
+            <div class="main_bg_box bg_orange new" id="possible_welfare">
+              <div class="white_txt">
+                지금 신청 할 수 있는<br />
+                <span class="bold white_txt">나만의 맞춤복지</span>가 있습니다.
+                <br />
+                <span class="align_cnt" id="cnt_possible"> 0</span
+                ><span class="cnt_txt">개</span>
+              </div>
+              <img
+                src="../../resource/images/main_box_yellow_arrow.png"
+                alt=""
+                class="arrow"
+              />
+            </div>
+            <div
+              class="main_box"
+              style="margin-left: 5px; margin-right: 5px"
+              id="cnt_total"
+            >
+              <div class="font16">
+                우리 도민을 위한 <br /><span class="bold font18">전체복지</span>
+                안내입니다.
+              </div>
+              <div><span class="wel_cnt">8</span>개</div>
+              <img
+                src="../../resource/images/main_box_white_arrow.png"
+                alt=""
+                class="arrow"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--//스와이프 -->
+
+    <!--pagination -->
+    <div class="pagination_wrap">
+      <div class="main-pagination"></div>
+    </div>
+
+    <!-- 메뉴 바-->
+    <div class="menu_bar">
+      <a href="" class="" id="bottom_home"
+        ><img src="../../resource/images/quickmenu_home.png" alt=""
+      /></a>
+      <a href="" class="new" id="bottom_welfare"
+        ><img src="../../resource/images/quickmenu_01.png" alt=""
+      /></a>
+      <a href="" class="" id="bottom_Mydata"
+        ><img src="../../resource/images/quickmenu_02.png" alt=""
+      /></a>
+      <a href="" class="" id="bottom_setting"
+        ><img src="../../resource/images/quickmenu_03.png" alt=""
+      /></a>
+    </div>
+
+    <!-- js load -->
+    <script src="../../resource/js/jquery-3.3.1.min.js"></script>
+    <script src="../../resource/js/swiper.js"></script>
+    <script src="../../resource/js/all.min.js"></script>
+    <script
+      type="text/javascript"
+      src="../../vendor/miaps/js/miaps_hybrid.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../vendor/miaps/js/miaps_page.js"
+    ></script>
+    <!-- fontawesome-->
+    <script src="../../resource/js/common.js"></script>
+    <!--// js load -->
+
+    <script>
+      // 입력한 페이지ID의 페이지를 Top Page로 만듭니다.
+      // Top Page로 지정된 페이지의 모든 이전 페이지는 History Array에서 삭제 됩니다.
+      // miapsPage.setTopPage("MA050", function (data) {});
+
+      $(function () {
+        miaps.mobile(
+          {
+            type: "loadvalue",
+            param: ["welfare_setting", "main_pageNo"],
+          },
+          function (data) {
+            var obj = miaps.parse(data);
+            var _setting_yn = obj.res.welfare_setting;
+            var _main_pageNo = obj.res.main_pageNo;
+
+            var main_swiper = new Swiper(".main-container", {
+              slidesPerView: 1, //슬라이드 페이지당 뷰 수
+              initialSlide: _main_pageNo, //슬라이드 시작 index
+              pagination: {
+                //페이지 인덱스
+                el: ".main-pagination",
+              },
+              cssMode: true,
+            });
+
+            // console.log(`_setting_yn = ${_setting_yn}`);
+            if (
+              _setting_yn == null ||
+              _setting_yn == "" ||
+              typeof _setting_yn == "undefined"
+            ) {
+              //맞춤 완성도 그래프.
+              progress_bar(0);
+              $("span#cnt_possible").text(0);
+            } else {
+              // 복지완성도 70%표시
+              //맞춤 완성도 그래프.
+              progress_bar(70);
+              $("span#cnt_possible").text(8);
+            }
+          }
+        );
+      });
+      function popup_yes() {
+        miaps.mobile(
+          {
+            type: "savevalue",
+            param: { main_pageNo: "1" },
+          },
+          function (data) {}
+        );
+        miapsPage.back();
+      }
+      $("#Import_MyData").on("click", function (e) {
+        e.preventDefault();
+        msgbox_toast("준비중입니다.");
+      });
+      $("#Delete_MyData").on("click", function (e) {
+        e.preventDefault();
+        miaps.mobile(
+          {
+            type: "savevalue",
+            param: { welfare_setting: "" },
+          },
+          function (data) {
+            msgbox_toast("삭제되었습니다.");
+          }
+        );
+        progress_bar(0);
+        $("span#cnt_possible").text(0);
+      });
+      // 신청한 복지 목록(없을 경우 복지 설정)
+      $("#applied_welfare").on("click", function (e) {
+        e.preventDefault();
+        miaps.mobile(
+          {
+            type: "savevalue",
+            param: { main_pageNo: "0" },
+          },
+          function (data) {}
+        );
+        miapsPage.go("view/WF/WF070.html"); // 신청한 복지 목록
+      });
+      // 맞춤 복지 설정
+      $("#optimized_welfare").on("click", function (e) {
+        e.preventDefault();
+        miaps.mobile(
+          {
+            type: "savevalue",
+            param: { main_pageNo: "0" },
+          },
+          function (data) {}
+        );
+        miapsPage.go("view/WF/WF010.html");
+      });
+      $("#go_setting").on("click", function (e) {
+        e.preventDefault();
+        miaps.mobile(
+          {
+            type: "savevalue",
+            param: { main_pageNo: "1" },
+          },
+          function (data) {}
+        );
+        miapsPage.go("view/WF/WF010.html");
+      });
+      $("#Logout").on("click", function (e) {
+        e.preventDefault();
+        miapsPage.back(); // 로그인화면 이동
+      });
+      $("#possible_welfare").on("click", function (e) {
+        e.preventDefault();
+        miaps.mobile(
+          {
+            type: "loadvalue",
+            param: ["welfare_setting"],
+          },
+          function (data) {
+            var obj = miaps.parse(data);
+            var _setting_yn = obj.res.welfare_setting;
+
+            miaps.mobile(
+              {
+                type: "savevalue",
+                param: { main_pageNo: "1" },
+              },
+              function (data) {}
+            );
+            console.log(`_setting_yn = ${_setting_yn}`);
+            if (
+              _setting_yn == null ||
+              _setting_yn == "" ||
+              typeof _setting_yn == "undefined"
+            ) {
+              miapsPage.go("view/WF/WF010.html"); // 맞춤 복지 설정
+            } else {
+              miapsPage.go("view/WF/WF031.html"); // 맞춤 복지 목록
+            }
+          }
+        );
+      });
+
+      $("#cnt_total").on("click", function (e) {
+        e.preventDefault();
+        miaps.mobile(
+          {
+            type: "savevalue",
+            param: { main_pageNo: "1" },
+          },
+          function (data) {}
+        );
+        miapsPage.go("view/WF/WF031.html"); // 전체 복지 목록
+      });
+      $("#bottom_welfare, #bottom_Mydata, #bottom_setting, #mod_setting").on(
+        "click",
+        function (e) {
+          e.preventDefault();
+          msgbox_toast("준비중입니다.");
+        }
+      );
+
+      $("#bottom_home").on("click", function (e) {
+        return;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Promise Polyfill Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+
+<script src="../../resource/js/config.js"></script>
+<script data-main="pages/promise/callbackSyncPromiseRequire.js" src="../../vendor/require/require.js"></script>
+</head>
+
+<body>
+<div class="container">
+  <div id="headerPosition"></div>
+  <h2>Promise Polyfill Test</h2>
+  <h4>RequireJS</h4>
+  <hr>  
+  <div class="panel panel-default">
+    <div class="panel-heading">Promise Polyfill예제</div>
+    <div class="panel-body">비동기 작업을 동시에 수행 한 후, 모든 작업이 종료 된 후에 완료 함수를 수행하여 준다.</div>
+  </div>
+  <br/>
+  <div align="center"><button id="btnRun" class="btn btn-default"><span class="glyphicon glyphicon-expand"></span>&nbsp;실행</button></div><br>
+  <div style="text-align: center;"><button id="btnBack" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;Back</button></div>
+</div>
+</body>
+</html>
+
+

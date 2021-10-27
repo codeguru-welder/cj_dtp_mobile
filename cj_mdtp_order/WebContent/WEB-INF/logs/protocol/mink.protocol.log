@@ -1,0 +1,81 @@
+=====
+[SDT] 2021-10-19 15:56:04.133
+[EDT] 2021-10-19 15:56:04.919
+[REQ] <?xml version='1.0' encoding='UTF-8'?>
+<mink version='1.1' time='20211019155604' deviceid='MiAPS-WebAppEmulator' userno='' groupid='' userid='' password='' packagenm='' lan='ko'>
+<cmd classid='miapsService' autocommit='false' target='MIAPS-LOGIN-TEST' refid='1'>
+<unit mode='runclass' refid='1'>
+<param name='userId'><![CDATA[octavere]]></param><param name='userPw'><![CDATA[1111]]></param><param name='classname'><![CDATA[com.mink.connectors.cjlogistics.login.LoginMan]]></param><param name='methodname'><![CDATA[login]]></param></unit></cmd></mink>
+
+[RES] {
+	"code" : -505,
+	"msg" : "[-505] Can't load class for com.mink.connectors.cjlogistics.login.LoginMan [cause: com.mink.connectors.cjlogistics.login.LoginMan]"
+}
+
+=====
+[SDT] 2021-10-19 15:56:21.980
+[EDT] 2021-10-19 15:56:22.109
+[REQ] <?xml version='1.0' encoding='UTF-8'?>
+<mink version='1.1' time='20211019155621' deviceid='MiAPS-WebAppEmulator' userno='' groupid='' userid='' password='' packagenm='' lan='ko'>
+<cmd classid='miapsService' autocommit='false' target='MIAPS-LOGIN-TEST' refid='1'>
+<unit mode='runclass' refid='1'>
+<param name='userId'><![CDATA[octavere]]></param><param name='userPw'><![CDATA[1111]]></param><param name='classname'><![CDATA[com.mink.connectors.cjlogistics.login.LoginMan]]></param><param name='methodname'><![CDATA[login]]></param></unit></cmd></mink>
+
+[RES] {
+	"code" : -505,
+	"msg" : "[-505] Can't load class for com.mink.connectors.cjlogistics.login.LoginMan [cause: com.mink.connectors.cjlogistics.login.LoginMan]"
+}
+
+=====
+[SDT] 2021-10-19 16:25:53.144
+[EDT] 2021-10-19 16:25:54.878
+[REQ] <?xml version='1.0' encoding='UTF-8'?>
+<mink version='1.1' time='20211019162553' deviceid='MiAPS-WebAppEmulator' userno='' groupid='' userid='' password='' packagenm='' lan='ko'>
+<cmd classid='miapsService' autocommit='false' target='MIAPS-LOGIN-TEST' refid='1'>
+<unit mode='runclass' refid='1'>
+<param name='userId'><![CDATA[ ]]></param><param name='userPw'><![CDATA[ ]]></param><param name='classname'><![CDATA[com.mink.connectors.cjlogistics.login.LoginMan]]></param><param name='methodname'><![CDATA[login]]></param></unit></cmd></mink>
+
+[RES] {
+	"code" : -505,
+	"msg" : "[-505] Can't load class for com.mink.connectors.cjlogistics.login.LoginMan [cause: com.mink.connectors.cjlogistics.login.LoginMan]"
+}
+
+=====
+[SDT] 2021-10-19 16:48:39.245
+[EDT] 2021-10-19 16:50:00.769
+[REQ] <?xml version='1.0' encoding='UTF-8'?>
+<mink version='1.1' time='20211019164839' deviceid='MiAPS-WebAppEmulator' userno='' groupid='' userid='' password='' packagenm='' lan='ko'>
+<cmd classid='miapsService' autocommit='false' target='MIAPS-LOGIN-TEST' refid='1'>
+<unit mode='runclass' refid='1'>
+<param name='userId'><![CDATA[test]]></param><param name='userPw'><![CDATA[test]]></param><param name='classname'><![CDATA[com.mink.connectors.cjlogistics.login.LoginMan]]></param><param name='methodname'><![CDATA[login]]></param></unit></cmd></mink>
+
+[RES] {"code":-1, "msg":"로그인에 실패 했습니다."}
+
+=====
+[SDT] 2021-10-19 17:00:07.614
+[EDT] 2021-10-19 17:00:07.959
+[REQ] <?xml version='1.0' encoding='UTF-8'?>
+<mink version='1.1' time='20211019170007' deviceid='MiAPS-WebAppEmulator' userno='' groupid='' userid='' password='' packagenm='' lan='ko'>
+<cmd classid='minkService' autocommit='false' target='AppVerChk' refid='1'>
+<unit mode='AppVerChk' refid='1'>
+</unit></cmd></mink>
+
+[RES] <?xml version="1.0" encoding="UTF-8"?><mink version="1.1" time="20211019170007" deviceid="MiAPS-WebAppEmulator" userid="" password=""><rcmd retcode="0" refid="1"><runit refid="1" mode="AppVerChk"><rparam mode="result" type="table"><rcolhs count="10"><rcolh name="app_id" type="" /><rcolh name="version_no" type="" /><rcolh name="version_nm" type="" /><rcolh name="url" type="" /><rcolh name="app_version" type="" /><rcolh name="manifest" type="" /><rcolh name="file_path" type="" /><rcolh name="force_update_yn" type="" /><rcolh name="version_desc" type="" /><rcolh name="store_version_nm" type="" /></rcolhs></rparam></runit></rcmd></mink>
+
+=====
+[SDT] 2021-10-19 17:00:08.183
+[EDT] 2021-10-19 17:00:08.251
+[REQ] <?xml version='1.0' encoding='UTF-8'?>
+<mink version='1.1' time='20211019170008' deviceid='MiAPS-WebAppEmulator' userno='' groupid='' userid='test' password='' packagenm='' lan='ko'>
+<cmd classid='minkService' autocommit='false' target='device' refid='1'>
+<unit mode='saveDeviceInfo' refid='1'>
+<param name='osTp'><![CDATA[IPhone_8.1.2]]></param>
+<param name='clientLocale'><![CDATA[ko]]></param>
+<param name='modelNo'><![CDATA[IPhone_8.1.2]]></param>
+<param name='packageNm'><![CDATA[kr.co.miaps.mshop.dev]]></param>
+<param name='serviceTp'><![CDATA[apns]]></param>
+<param name='pushToken'><![CDATA[ff17dbf938a52fb0b8b3822a66f2106f74a961fc78bd359c3f590007a828e8c6]]></param>
+<param name='phoneNo'><![CDATA[]]></param></unit></cmd></mink>
+
+[RES] <?xml version="1.0" encoding="UTF-8"?><mink version="1.1" time="20211019170008" deviceid="" userid="test" password="" retcode="-302"><systemerror>[-302] Invalid userid</systemerror></mink>
+

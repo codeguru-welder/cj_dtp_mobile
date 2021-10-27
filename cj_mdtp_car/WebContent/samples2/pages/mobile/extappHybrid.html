@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MiAPS Hybrid Ext.Lib</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+
+<script src="../../resource/js/config.js"></script>
+<script data-main="pages/mobile/extappHybrid.js" src="../../vendor/require/require.js"></script>
+
+</head>
+
+<body>
+<div class="container">
+  <div id="headerPosition"></div>
+  <h2>외부 앱 실행(hybird)</h2>
+  <hr>  
+  <form id="extFrm" name="extFrm" method="post" onSubmit="return false;">
+    <div class="form-group">
+      <label for="pkgNm"><span class="glyphicon glyphicon-certificate"></span>&nbsp;Android Package Name</label>
+      <input type="text" class="form-control" id="pkgNm" name="pkgNm" value="kr.co.miaps.dev" placeholder="Android Package Name">
+    </div>
+    <div class="form-group">
+      <label for="schemeNm"><span class="glyphicon glyphicon-certificate"></span>&nbsp;Scheme</label>
+      <input type="text" class="form-control" id="schemeNm" name="schemeNm" value="miaps://" placeholder="Scheme Name">
+    </div> 
+    <div align="center"><button id="btnRun" class="btn btn-default"><span id="iconLogin" class="glyphicon glyphicon-log-in"></span>&nbsp;Run</button></div>
+  </form>
+  <br/>
+  <div style="text-align: center;"><button id="btnBack" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;Back</button></div>
+</div>
+</body>
+</html>
+
+
+

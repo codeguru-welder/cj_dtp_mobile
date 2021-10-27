@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * MiapsHybrid 버전체크, SetDeviceInfo, 커넥터class호출 예제
+	 * 
+	 * @author chlee
+	 * @since 2017.02.22
+	 */
+-->
+<html>
+<head>
+<title>MiAPS Hybrid Login Sample</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+<link rel="stylesheet" href="../../vendor/patternLock/patternLock.css">
+
+<script src="../../resource/js/config.js"></script>
+<script data-main="pages/patternlock/patternLock.js" src="../../vendor/require/require.js"></script>
+
+</head>
+
+<body>
+<div class="container">
+  <div id="headerPosition"></div>
+  <h2>PatternLock Sample</h2>
+  <hr>  
+  <form id="loginFrm" name="loginFrm" method="post" onSubmit="return false;">
+    <div id="patternContainer" style="margin: auto;"></div>
+    
+  </form>
+  <br/>
+  <div style="text-align: center;"><button id="btnReset" class="btn btn-block btn-default"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Reset</button></div>
+  <br/>
+  <div style="text-align: center;"><button id="btnBack" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;Back</button></div>
+</div>
+</body>
+</html>
+
+
+

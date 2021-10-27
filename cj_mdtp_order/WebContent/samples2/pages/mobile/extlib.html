@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * MiapsHybrid 버전체크, SetDeviceInfo, 커넥터class호출 예제
+	 * 
+	 * @author chlee
+	 * @since 2017.02.22
+	 */
+-->
+<html>
+<head>
+<title>MiAPS Hybrid Ext.Lib</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+
+<script src="../../resource/js/config.js"></script>
+<script data-main="pages/mobile/extlib.js" src="../../vendor/require/require.js"></script>
+
+</head>
+
+<body>
+<div class="container">
+  <div id="headerPosition"></div>
+  <h2>Ext. Library</h2>
+  <hr>  
+  <form id="extFrm" name="extFrm" method="post" onSubmit="return false;">
+    <div class="form-group">
+      <label for="extName"><span class="glyphicon glyphicon-certificate"></span>&nbsp;Ext Name:</label>
+      <input type="text" class="form-control" id="extName" name="extName" value="KTB" placeholder="Library Name. ex)KTB, KIDO...">
+    </div>
+    <div class="form-group">
+      <label for="extMethod"><span class="glyphicon glyphicon-certificate"></span>&nbsp;Method:</label>
+      <input type="text" class="form-control" id="extMethod" name="extMethod" value="getUUID1" placeholder="Enter method name">
+    </div>
+    <div class="form-group">
+      <label for="extParams"><span class="glyphicon glyphicon-certificate"></span>&nbsp;Parameters:</label>
+      <input type="text" class="form-control" id="extParams" name="extParams" placeholder="Enter parameters, |로 구분하여 넣습니다.">
+    </div>
+    <div class="form-group">
+      <label for="extReturn"><span class="glyphicon glyphicon-certificate"></span>&nbsp;Return예제:</label>
+      <input type="text" class="form-control" id="extReturn" name="extReturn" placeholder="PC에서 개발시 리턴받을 값을 넣어 테스트 할 때 사용합니다.">
+    </div>
+    
+    <div align="center"><button id="btnRun" class="btn btn-default"><span id="iconLogin" class="glyphicon glyphicon-log-in"></span>&nbsp;Run</button></div>
+  </form>
+  <br/>
+  <div style="text-align: center;"><button id="btnBack" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;Back</button></div>
+</div>
+</body>
+</html>
+
+
+

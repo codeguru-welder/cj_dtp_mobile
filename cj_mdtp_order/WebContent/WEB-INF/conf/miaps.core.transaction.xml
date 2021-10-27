@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- 
+		Transaction
+		http://docs.spring.io/spring/docs/3.2.8.RELEASE/spring-framework-reference/html/transaction.html
+	-->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<!-- all methods starting with 'get' are read-only -->
+			<tx:method name="get*" read-only="true"/>
+			<tx:method name="select*" read-only="true"/>
+			<tx:method name="list*" read-only="true"/>
+			<tx:method name="search*" read-only="true"/>
+			<!-- other methods use the default transaction settings (see below) -->
+			<tx:method name="*" rollback-for="Throwable" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="adminServiceOperation" expression="execution(* com.thinkm.mink.asvc.service.*.*(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="adminServiceOperation"/>
+		<!-- 
+		<aop:pointcut id="appcenterServiceOperation" expression="execution(* com.thinkm.mink.appcenter.service.*.*(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="appcenterServiceOperation"/>
+		-->
+	</aop:config>
+
+</beans>

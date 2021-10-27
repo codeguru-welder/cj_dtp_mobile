@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 개인 로컬PC 개발용 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xmlns:util="http://www.springframework.org/schema/util"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop.xsd
+     http://www.springframework.org/schema/util
+     http://www.springframework.org/schema/util/spring-util.xsd">
+    <!-- 
+    <import resource="classpath*:com/mink/connectors/spring/miaps.cjlogistics.db.${mink.runmode}.xml" />
+    <import resource="classpath*:com/mink/connectors/spring/miaps.cjlogistics.applicationContext.xml" />
+    <import resource="classpath*:com/mink/connectors/spring/miaps.cjlogistics.properties.xml" />
+    -->
+    <import resource="file:${mink.home}/conf/cjlogistics/miaps.cjlogistics.db.${mink.runmode}.xml" />
+    <import resource="file:${mink.home}/conf/cjlogistics/miaps.cjlogistics.applicationContext.xml" />
+    <import resource="file:${mink.home}/conf/cjlogistics/miaps.cjlogistics.properties.xml" />
+</beans>

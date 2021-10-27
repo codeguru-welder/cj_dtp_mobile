@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="miaps.config.distributor" class="com.thinkm.mink.commons.util.MinkConfig" factory-method="getConfig">
+		<property name="configProperties">
+			<props>
+				<!--
+					(Optional) If setting exits in web.xml, this will be ignored.
+					MiAPS app root folder by full-path.
+					Default(blank) is "[WebContent]/player" 
+				-->
+				<prop key="miaps.distributor.root"></prop>
+				<!--
+					(Optional) If setting exits in web.xml, this will be ignored.
+					WebApp Resource root folder by full-path.
+					Default(blank) is "[WebContent]/webapp" 
+				-->
+				<prop key="webapp.distributor.root"></prop>
+				
+				<!-- 2018.02.27 chlee
+					(Optional) If setting exits in web.xml, this will be ignored.
+					WebApp Resource Encrypt before downlaod.
+					Default is "true", if this key not exist, default value is 'false'
+				-->
+				<prop key="webapp.download.encrypt">true</prop>
+				
+				<!-- 2018.02.27 chlee 
+					(Optional) If setting exits in web.xml, this will be ignored.
+					WebApp Resource Encrypt before downlaod.
+					Default is "defaes128", if this key not exist, default value is 'defaes128'
+					* defaes128 : aes128
+					* defaes256 : aes256
+				 -->
+				<prop key="webapp.download.encrypt.type">defaes128</prop>
+				
+				<!-- 2018.02.27 chlee
+					(Optional) If setting exits in web.xml, this will be ignored.
+					WebApp Resource Encrypt before downlaod.
+					Default is "html,htm,js,css,txt", if this key not exist, default value is 'html,htm,js,css,txt'
+				 -->
+				 <prop key="webapp.download.encrypt.ext">html,htm,js,css,txt</prop>
+				 
+				 <!-- 2019.06.17 chlee
+				 	N(n) : (default), not use {project}_dist directory, As before
+				 	Y(y) : deploy in {project}_dist directory, and When "UpdateResource.jsp" is run, 
+				 		   Encrypted all files, and create encrypted zip file in {project} directory.
+				 		   The {project}_dist directory keeps the original.
+				  -->
+				 <prop key="webapp.distributor.dir.separation.mode.yn">Y</prop>
+				 
+				 <!-- 2019.10.14 chlee
+				 	- /asvc/deploy/fileDiffView.miaps에서 파일 반영할 때 사용하는 옵션. 
+				 	prop null or empty : privious version (not changed)
+				 	1.0: resource.inf added the text "|1.0" to the 1st line (fixed 10 byte), and file size was added to each line
+				 	1.1: resource.inf added the text "_groupstart_ ~~ group_name|datetime ~~ _groupend_" after first line, "workgrouop" essentials
+				 -->
+				 <prop key="webapp.resource.info.file.version">1.0</prop>
+				 
+				 <!-- 2019.10.24 chlee
+				 	default: privious version (not changed)
+				 	workgroup: work-group resource download, resource.inf + work-group.inf...
+				 -->
+				 <prop key="webapp.update.resource.mode">default</prop>
+				  
+				 <!-- 2019.10.24 chlee
+					위 webapp.update.resource.mode가 workgroup일 경우 여기 설정된  properties파일을 읽어서 사용함.						
+				 -->
+				<prop key="webapp.workgroup.properties">${mink.home}/conf/miaps.hybrid.res.workgroup.properties</prop>
+				
+				<!-- UpdateResource.jsp 사용유무, Y:사용(default), N:사용안함 (사용안함의 경우 따로 miaps.updateresource.jar를 사용한다는 것.
+				   업로드 계정과, was실행계정이 다를 경우 등 여러 이유로 was에서 UpdateResource.jsp를 실행하면 안될 경우 이 옵션을 사용합니다.
+				 -->
+				<prop key="webapp.update.resource.use.yn">Y</prop>
+ 				
+ 				<!-- download resource buffer size (int), ex: 4096(4k), 8192(8k), 65536(64k) -->
+ 				<prop key="webapp.onesvc.buffer.size">65536</prop>
+ 				
+				<!--
+					(Optional)
+					Default server mode: "file" or "database"
+					Default(blank) is "file"
+				-->
+				<prop key="miaps.distributor.mode">file</prop>
+				<!-- 
+					Default user and password.
+					Use this if user or password by each folder is not set.
+				-->
+				<prop key="miaps.distributor.user">miaps</prop>
+				<prop key="miaps.distributor.password">miaps</prop>
+
+				<!--
+					App folder credential settings.
+					ex) 
+					<prop key="miaps.distributor.[app_folder_nm].user">[user_id]</prop>
+					<prop key="miaps.distributor.[app_folder_nm].password">[password]</prop>
+					<prop key="miaps.distributor.[app_folder_nm].mode">[server_mode]</prop>
+				--> <!-- 
+				<prop key="miaps.distributor.test.user">miapsdemo</prop>
+				<prop key="miaps.distributor.test.password">asdf1234!@#$</prop>
+				<prop key="miaps.distributor.test.mode">file</prop>
+				-->
+
+			</props>
+		</property>
+	</bean>
+</beans>

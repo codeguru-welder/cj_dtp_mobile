@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Promise Polyfill Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+
+<link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+
+<script type="text/javascript" src="../../vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../../vendor/miaps/js/miaps_hybrid.js"></script>
+<script type="text/javascript" src="../../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../vendor/polyfill/polyfill.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		$("#btnRun").on("click", goRun);
+		$("#btnBack").on("click", function() {window.history.back();});      	
+	});
+	
+	function callConnector() {
+		var classNm, method, params;
+		
+		classNm = arguments[0];
+		method = arguments[1];
+		params = arguments[2];
+		
+		function _callConnector(classNm, method, params) {
+			if (window._debug) {
+				console.log('callConnector', method, params);
+			}
+			
+			return new Promise(function(resolve, reject) {
+				miaps.miapsSvcSp(classNm, method, params, '/minkSvc', 
+					function(result) {
+						if (typeof result === 'string') {
+							try {
+								result = miaps.parse(result);
+							} catch(e) {
+								reject({code: '9999', error: result});
+								return;
+							}
+						}
+						
+						if (result.error) {
+							reject(result);
+						} else {
+							resolve(result);
+						}
+					})						
+			});
+		}
+		
+		return _callConnector(classNm, method, params);
+	}
+	
+	function callService() {
+		var args = arguments;
+		var classNm = args[0];
+		var method = args[1];
+		var paramArr = [];
+		var funcArr = [];
+		
+		for (var i=2; i < args.length; i++) {
+			if (typeof(args[i]) === 'function') {
+				funcArr.push(args[i]);
+			} else {
+				paramArr.push(args[i]);
+			}
+		}
+		
+		var params = Object.assign({}, paramArr);
+		//params.body = paramArr[0];
+		//params.serviceCode = args[0];
+		var onSuccess = funcArr[0];
+		var onError = funcArr[1];
+		
+		var promise = callConnector(classNm, method, params);
+		if (onSuccess) {
+			promise = promise.then(onSuccess);
+		}
+		if (onError) {
+			promise = promise.catch(onError);
+		}
+		
+		return promise;
+	}
+	
+	function goRun() {
+		var timestamp = new Date().getTime();
+		
+		Promise.all([
+			callService('com.mink.connectors.hybridtest.list.JsonService',
+			'run',{
+				a:'1',
+				b:'2'
+			}).then(function(result) {
+				console.log('첫번째');
+				console.log(result);
+			}),
+			callService('com.mink.connectors.hybridtest.list.JsonService',
+			'run',{
+				a:'1',
+				b:'2'
+			}, function(result) {
+				console.log('두번째');
+				console.log(result);
+			})			
+		]).then(function() {
+			alert('ok');
+		}).catch(function(error) {
+			alert(error);
+		});
+	}
+</script>
+</head>
+
+<body>
+<div class="container">
+  <div id="headerPosition"></div>
+  <h2>Promise Polyfill Test</h2>
+  <hr>  
+  <div class="panel panel-default">
+    <div class="panel-heading">Promise Polyfill예제</div>
+    <div class="panel-body">비동기 작업을 동시에 수행 한 후, 모든 작업이 종료 된 후에 완료 함수를 수행하여 준다.</div>
+  </div>
+  <br/>
+  <div align="center"><button id="btnRun" class="btn btn-default"><span class="glyphicon glyphicon-expand"></span>&nbsp;실행</button></div><br>
+  <div style="text-align: center;"><button id="btnBack" class="btn btn-block btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;Back</button></div>
+</div>
+</body>
+</html>
+
+

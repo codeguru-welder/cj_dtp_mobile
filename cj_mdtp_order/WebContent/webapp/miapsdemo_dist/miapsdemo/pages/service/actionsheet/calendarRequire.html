@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta
+		content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+		name="viewport"/>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<title>Calendar</title>
+	<!-- css load start -->
+	<link href="../../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Miaps Calendar CSS는 miaps.css에 들어가 있음 -->
+	<link href="../../../vendor/miaps/css/miaps.css" rel="stylesheet">
+	<link href="../../../resource/css/action_sheet.css" rel="stylesheet">
+	<link href="../../../resource/css/reset.css" rel="stylesheet" />
+	<link href="../../../resource/css/style_add.css" rel="stylesheet" />
+	<style>
+    .form-group input, button {
+      margin-bottom: 10px;
+    }
+
+    .page-footer {
+      position: fixed;
+      top: 90%;
+      left: 0;
+      width: 100%;
+      padding: 20px
+    }
+  	</style>
+	<!-- css load end -->
+</head>
+<body class="bg_gray">
+  	<div class="mh-container">
+	  	<!-- header-->
+		<header>
+			<button type="button" class="back_btn"></button>
+			<span class="page_title">Calendar</span>
+			<button type="button" class="home_btn"></button>
+		</header>
+		<br/>
+		<!--// header-->
+    	<div class="form-group" id="contents">
+      		<input class="form-control" id="inpCal" max="2019.12.31" min="2019.01.01" type="text" value="2019.01.01">
+			<input class="form-control" id="inpCal2" type="text">
+		   	<button class="btn btn-block btn-default" id="btnShowCal">달력노출1</button>
+		   	<button class="btn btn-block btn-default" id="btnShowCal2">달력노출2</button>
+    	</div>
+  	</div>
+</body>
+	<script src="../../../resource/js/config.js"></script>
+	<script data-main="pages/service/actionsheet/calendarRequire.js" src="../../../vendor/require/require.js"></script>
+</html>

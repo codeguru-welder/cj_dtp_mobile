@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- MiAPS DB Setting Start -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="properties">
+			<props>
+				<prop key="dbType">tibero</prop>
+				<prop key="dbVersion"></prop>
+				<prop key="dbTypeSuffix"></prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- MySQL -->
+	<!-- 	
+	<bean id="mink.db.default" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="org.gjt.mm.mysql.Driver" />
+		<property name="username" value="miaps" />
+		<property name="password" value="miaps" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/miaps?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true" />
+		<property name="defaultQueryTimeout" value="5" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+	-->
+	<!-- mariadb (dbType=mysql) -->
+	<!--
+	
+	<bean id="mink.db.default" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+		<property name="username" value="miaps" />
+		<property name="password" value="miaps" />
+		<property name="url" value="jdbc:mariadb://127.0.0.1:3364/miaps?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;allowMultiQueries=true" />
+		<property name="defaultQueryTimeout" value="5" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean> -->
+	<!-- MS-SQL -->
+	<!--
+	<bean id="mink.db.default" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="username" value="miaps" />
+		<property name="password" value="miaps" />
+		<property name="url" value="jdbc:sqlserver://127.0.0.1:1433;databaseName=miaps" />
+		<property name="defaultQueryTimeout" value="5" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+	-->
+
+	<!-- Oracle -->
+	<!--
+	<bean id="mink.db.default" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="username" value="miaps5" />
+		<property name="password" value="miaps5" />
+		<property name="url" value="jdbc:oracle:thin:@58.181.28.55:1521:xe" />
+		<property name="defaultQueryTimeout" value="5" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+ -->
+	<!-- DB2 -->
+	<!--
+	<bean id="mink.db.default" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="com.ibm.db2.jcc.DB2Driver" />
+		<property name="username" value="db2admin" />
+		<property name="password" value="db2admin" />
+		<property name="url" value="jdbc:db2://127.0.0.1:50000/miaps" />
+		<property name="defaultQueryTimeout" value="5" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+	-->
+	
+	<!-- Tibero (dbType=tibero) -->
+	<bean id="mink.db.default" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.tmax.tibero.jdbc.TbDriver" />
+		<property name="username" value="dtpmodev" />
+		<property name="password" value="dtpmodev123!" />
+		<property name="url" value="jdbc:tibero:thin:@128.11.2.14:8629:dtpdev" />
+		<property name="defaultQueryTimeout" value="30" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+	<!-- MiAPS DB Setting END -->
+	
+	
+	<!-- Project DB Setting Start -->
+	<!-- mink.runmode=loc -->
+	<!-- mobile DB conn -->
+	<bean id="project.db.loc" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="com.tmax.tibero.jdbc.TbDriver" />
+		<property name="username" value="dtpmodev" />
+		<property name="password" value="dtpmodev123!" />
+		<property name="url" value="jdbc:tibero:thin:@128.11.2.14:8629:dtpdev" />
+		<property name="defaultQueryTimeout" value="30" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+	
+	<!-- portal DB conn -->
+	<bean id="project.db.portal.loc" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="com.tmax.tibero.jdbc.TbDriver" />
+		<property name="username" value="dtpdev" />
+		<property name="password" value="dtpdev123!" />
+		<property name="url" value="jdbc:tibero:thin:@128.11.2.14:8629:dtpdev" />
+		<property name="defaultQueryTimeout" value="30" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+	
+	<bean id="cj.db.loc" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="com.tmax.tibero.jdbc.TbDriver" />
+		<property name="username" value="dtpmodev" />
+		<property name="password" value="dtpmodev123!" />
+		<property name="url" value="jdbc:tibero:thin:@128.11.2.14:8629:dtpdev" />
+		<property name="defaultQueryTimeout" value="30" />
+		<property name="initialSize" value="0" />
+		<property name="maxTotal" value="8" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="0" />
+		<property name="maxWaitMillis" value="5000" />
+	</bean>
+	<!-- Customers DB Setting Start -->
+	
+    
+</beans>

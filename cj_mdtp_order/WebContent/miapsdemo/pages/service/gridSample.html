@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>MiAPS Hybrid Grid Sample</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../vendor/miaps/css/miaps.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../vendor/toastui/grid/tui-grid.css"/>
+
+    <script src="../../vendor/toastui/grid/tui-grid.js"></script>
+    <script type="text/javascript" src="../../vendor/jquery/jquery.min.js"></script>
+
+    <script type="text/javascript" src="../../vendor/miaps/js/miaps_hybrid.js"></script>
+    <script type="text/javascript" src="../../vendor/miaps/js/miaps_wp.js"></script>
+    <script type="text/javascript" src="../../vendor/miaps/js/miaps_page.js"></script>
+
+    <style>
+        .mt-30 {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Grid Sample</h1>
+    </div>
+    <hr/>
+    <div class="content-wrapper">
+        <div id="dataSourceGrid"></div>
+        <hr>
+        <a href="https://github.com/nhn/tui.grid/tree/master/packages/toast-ui.grid/docs/ko">
+            Toast UI Grid Document
+        </a>
+    </div>
+    <div class="footer mt-30">
+        <button class="btn btn-block btn-primary" id="btn-back">Back</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function init() {
+        $('#btn-back').on('click', function () {
+            miapsPage.back()
+        })
+
+        // 커넥터 통신을 위한 set device info
+        miaps.setDeviceInfo('test00001', '', '', '', 'test00001')
+    }
+
+    // 페이징을 위한 전역 변수
+    var globalValue = {
+        indexNum: 0,
+        perPage: 20
+    }
+
+    var gridObject = {
+        data: [],
+        // 컬럼은 데이터와 맞춰준다.
+        columns: [
+            {
+                header: 'seq',
+                name: 'seq',
+                width: 25,
+                hidden: true
+            },
+            {
+                header: 'DATA01',
+                name: 'DATA_01',
+                width: 100,
+                editor: 'text'
+            },
+            {
+                header: 'DATA02',
+                name: 'DATA_02',
+                width: 100,
+                editor: 'text'
+            },
+            {
+                header: 'DATA03',
+                name: 'DATA_03',
+                width: 100,
+                editor: 'text'
+            },
+            {
+                header: 'DATA04',
+                name: 'DATA_04',
+                width: 'auto',
+                editor: 'text'
+            },
+            {
+                header: 'DATA05',
+                name: 'DATA_05',
+                width: 'auto',
+                editor: 'text'
+            },
+            {
+                header: 'DATA06',
+                name: 'DATA_06',
+                width: 'auto',
+                editor: 'text'
+            },
+            {
+                header: 'DATA07',
+                name: 'DATA_07',
+                width: 'auto',
+                editor: 'text'
+            },
+            {
+                header: 'DATA08',
+                name: 'DATA_08',
+                width: 'auto',
+                editor: 'text'
+            },
+            {
+                header: 'DATA09',
+                name: 'DATA_09',
+                width: 'auto',
+                editor: 'text'
+            },
+            {
+                header: 'DATA10',
+                name: 'DATA_10',
+                width: 'auto',
+                editor: 'text'
+            },
+        ],
+        header: {
+            complexColumns: [
+                {
+                    header: 'DATA01 + DATA02',
+                    name: 'PARENT01',
+                    childNames: ['DATA_01', 'DATA_02']
+                },
+                {
+                    header: 'DATA01 + DATA02 + DATA03',
+                    name: 'PARENT02',
+                    childNames: ['PARENT01', 'DATA_03']
+                }
+            ],
+            height: 100
+        }
+    }
+
+    const dataSourceOptions = {
+        el: document.getElementById('dataSourceGrid'),
+        columns: gridObject.columns,
+        data: gridObject.data,
+        header: gridObject.header,
+        bodyHeight: 500,
+        pageOptions: {
+            useClient: true,
+            type: 'scroll',
+            perPage: globalValue.perPage
+        },
+        hideLoadingBar: false,
+        // rowHeaders: ['rowNum', 'checkbox']
+    }
+
+    // Grid 생성
+    const dataSourceGrid = new tui.Grid(dataSourceOptions)
+
+    var service = {
+        /**
+         * 데이터가져오기
+         *
+         * @param start 시작 index
+         * @param scroll paging boolean
+         */
+        getData: function (start, scroll) {
+            miaps.cursor(null, 'wait', true)
+            console.log('call connector')
+
+            var param = {
+                'start': start,
+                'end': (start + globalValue.perPage)
+            }
+
+            miapsWp.callService(
+                "com.mink.connectors.hybridtest.grid.GridConnector",
+                "selectDataList",
+                param
+            ).then(function (data) {
+                var obj = miaps.parse(data.res)
+                if (scroll) {
+                    // 무한 스크롤 시 appendRows
+                    dataSourceGrid.appendRows(obj)
+                } else {
+                    // 처음 데이터를 모두 받아올 때 데이터 세팅
+                    dataSourceGrid.resetData(obj)
+                }
+                console.log('set data')
+                miaps.cursor(null, 'default')
+            })
+        },
+        /**
+         * 1 건 데이터 수정
+         * @param param
+         */
+        updateData: function (param) {
+            miaps.cursor(null, 'wait', true)
+            miapsWp.callService(
+                "com.mink.connectors.hybridtest.grid.GridConnector",
+                "updateDataList",
+                param
+            ).then(function (data) {
+                var obj = miaps.parse(data)
+                console.log(obj)
+                miaps.cursor(null, 'default')
+            })
+        }
+    }
+
+    init()
+
+    // 데이터 세팅
+    service.getData(globalValue.indexNum)
+
+    // 데이터 수정 시 발생하는 이벤트
+    dataSourceGrid.on('editingFinish', function (e) {
+        console.log('change!')
+        var key = e.rowKey
+        var param = [{
+            data_01: dataSourceGrid.getValue(key, 'DATA_01'),
+            data_02: dataSourceGrid.getValue(key, 'DATA_02'),
+            data_03: dataSourceGrid.getValue(key, 'DATA_03'),
+            data_04: dataSourceGrid.getValue(key, 'DATA_04'),
+            data_05: dataSourceGrid.getValue(key, 'DATA_05'),
+            data_06: dataSourceGrid.getValue(key, 'DATA_06'),
+            data_07: dataSourceGrid.getValue(key, 'DATA_07'),
+            data_08: dataSourceGrid.getValue(key, 'DATA_08'),
+            data_09: dataSourceGrid.getValue(key, 'DATA_09'),
+            data_10: dataSourceGrid.getValue(key, 'DATA_10'),
+            seq: dataSourceGrid.getValue(key, 'SEQ')
+        }]
+
+        // 여러 rows를 동시에 update 할때를 대비해
+        // List로 parameter를 받도록 커넥터에서 설정하여,
+        // serialize와 uri encoding이 필요
+        var serialized = JSON.stringify(param)
+        var uriEncodedList = encodeURIComponent(serialized)
+        service.updateData({updateList: uriEncodedList})
+    })
+
+    // 데이터가 모두 채워졌을 때 이벤트
+    dataSourceGrid.on('onGridUpdated', function (e) {
+        console.log('onGridUpdated')
+    })
+
+    // Infinity Scroll + get datasource
+    dataSourceGrid.on('scrollEnd', function (e) {
+        console.log('scrollEnd')
+        globalValue.indexNum += globalValue.perPage
+        service.getData(globalValue.indexNum, true)
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+
+html, body {
+  width: 100%;
+  height: 100%;
+  letter-spacing: -1px; /* overflow: auto; */
+}
+
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, button, abbr, acronym, address, big, button, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, legend, input, label, select, textarea, table, caption, thead, tbody, tfoot, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, hr, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+body {
+  font: 14px/1 'NanumSquare', Sans-serif;
+  font-weight: 400;
+  color: #000;
+  -webkit-text-size-adjust: 100%;
+  -webkit-overflow-scrolling: touch;
+  word-wrap: break-word;
+  word-break: break-all;
+  background-color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+}
+
+.contents {
+  padding: 20px;
+}
+
+.as-contents {
+  padding: 0 15px 30px;
+}
+
+.as-contents .lead-area {
+  margin: 0 0 20px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid #aaa;
+  text-align: center;
+}
+
+.as-contents .lead strong {
+  font-weight: inherit;
+}
+
+.bottom-sheet-inner .as-contents .lead-area .lead {
+  font-size: 19px;
+}
+
+/* bottom-sheet 리스트, 타이틀 있는 경우 */
+.bottom-sheet .layer-contents .lead-area ~ *:nth-child(2) [class^="title-"] {
+  margin-top: -22px;
+  background-color: #fff;
+}
+
+.bottom-sheet .layer-contents .lead-area ~ * [class^="title-"] {
+  margin-bottom: 10px;
+}
+
+.lead {
+  font-size: 21px;
+  line-height: 1.45em;
+}
+
+
+.title-d2 {
+  display: block;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.title-d2:not(.type-small) ~ .title-d2:not(.type-small), [class^="title-"]:not(.title-sub) + .title-area, [class^="title-"]:not(.title-sub) + .title-btn-bar, * + .title-comment-area,
+* + .title-btn-bar, .wrap-section ~ .info-list-group, .title-d2 ~ .wrap-section .title-d2,
+.data-table + .form-group, .form-group + .form-group, .check-btn-list + .form-group,
+[class^=wrap-] ~ .wrap-form, .prod-detail ~ .wrap-form, .form-group ~ .wrap-tab, .notification ~ .wrap-form, .wrap-form ~ .border-line, .prod-join ~ .wrap-form.line,
+[class^=wrap-] ~ .form, .wrap-form .tbl-list:not(.bd0):not(.mgb0) + .form-group, .wrap-form .tbl-list:not(.bd0):not(.mgb0) + .form-group:first-of-type, .form-group + .wrap-form, .agree-ui + .wrap-form {
+  margin-top: 30px !important;
+}
+
+/* title */
+[class^="title-d"] {
+  line-height: 1.4em;
+}
+
+.wrap-section {
+  margin-top: 30px;
+}
+
+.wrap-section:first-of-type {
+  margin-top: 0;
+}
+
+
+.bottom-sheet .layer-contents [class^="title-"] + .tbl-list {
+  background-color: #f7f7f7;
+  border: none;
+}
+
+.tbl-list {
+  line-height: 1.3;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #ddd;
+}
+
+.tbl-list-tr {
+  clear: both;
+}
+
+.tbl-list-tr::after {
+  content: '';
+  display: block;
+  clear: both
+}
+
+.tbl-list-th, .tbl-list-td {
+  font-size: 16px;
+  padding: 10px;
+  letter-spacing: -1px;
+}
+
+.tbl-list-th {
+  float: left;
+  width: 32%;
+  padding-bottom: 0;
+  font-weight: 300;
+  padding-right: 5px;
+}
+
+.tbl-list-td {
+  margin-left: 32%;
+  text-align: right;
+  padding-left: 5px;
+  letter-spacing: 0 !important;
+}
+
+.tbl-list-td::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+[class*='wrap-section'] + [class*='wrap-section'], .tbl-list + .tbl-list, a + a .tbl-list {
+  border-top: none;
+}
+
+.tbl-list-tr:first-child > .tbl-list-th, .tbl-list-tr:first-child > .tbl-list-td {
+  padding-top: 20px;
+}
+
+.tbl-list-tr:last-child > .tbl-list-td,
+.tbl-list-tr:last-child > .accordion > .accordion-list > .tbl-list-th[aria-expanded="false"] + .tbl-list-td {
+  padding-bottom: 20px;
+}

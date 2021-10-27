@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+          name="viewport"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+    <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
+    <link href="../../vendor/miaps/css/miaps.css" rel="stylesheet">
+
+    <script src="../../resource/js/config.js"></script>
+    <script data-main="pages/mobile/nativeTest.js" src="../../vendor/require/require.js"></script>
+    <title>Miaps Native Example Page</title>
+
+    <style>
+        .btn {
+            font-size: 16px;
+        }
+
+        .sub-menu {
+            padding-bottom: 20px;
+        }
+
+        .btn-menu {
+            background-color: #228b22;
+            border-color: #228b22;
+            color: #fff;
+        }
+
+        .btn-warn {
+            background-color: #ffa500;
+            border-color: #ffa500;
+            color: #fff;
+        }
+
+        .btn-dan {
+            background-color: #dc143c;
+            border-color: #dc143c;
+            color: #fff;
+        }
+
+        .btn-menu:hover, .btn-warn:hover, .btn-dan:hover {
+            outline: none;
+            box-shadow: none;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <div style="text-align: center; float: left; margin-right: 10px;">
+            <button class="btn btn-default" id="btn-back">
+                <span class="glyphicon glyphicon-circle-arrow-left"></span>
+            </button>
+        </div>
+        <h2>Native Features</h2>
+    </div>
+    <div>
+        <div class="sub-menu">
+            <h4>Function</h4>
+            <button class="btn btn-block btn-menu" id="btn-watermark">Watermark</button>
+            <button class="btn btn-block btn-menu" id="btn-scan">Scan QR / Barcode</button>
+            <button class="btn btn-block btn-menu" id="btn-session">Session</button>
+            <button class="btn btn-block btn-menu" id="btn-statusbar-color">Status Bar Color</button>
+            <button class="btn btn-block btn-menu" id="btn-capture">Capture</button>
+            <button class="btn btn-block btn-menu" id="btn-newbrowser">New Browser</button>
+            <button class="btn btn-block btn-menu" id="btn-shake">Shake</button>
+            <button class="btn btn-block btn-menu" id="btn-encrypt">Encrypt</button>
+            <button class="btn btn-block btn-warn" id="btn-decrypt">Decrypt</button>
+        </div>
+        <div class="sub-menu">
+            <h4>App</h4>
+            <button class="btn btn-block btn-menu" id="btn-appid">App ID</button>
+            <button class="btn btn-block btn-menu" id="btn-bundleid">Bundle ID</button>
+            <button class="btn btn-block btn-menu" id="btn-version">Version</button>
+            <button class="btn btn-block btn-menu" id="btn-applicationinfo">Application Info</button>
+            <button class="btn btn-block btn-menu" id="btn-isinstalled">Is Installed</button>
+        </div>
+        <div class="sub-menu">
+            <h4>Device</h4>
+            <button class="btn btn-block btn-menu" id="btn-device-id">Device ID</button>
+            <button class="btn btn-block btn-menu" id="btn-device-model">Device Model</button>
+            <button class="btn btn-block btn-menu" id="btn-platform">Platform</button>
+            <button class="btn btn-block btn-menu" id="btn-platform-version">Platform Version</button>
+            <button class="btn btn-block btn-menu" id="btn-language">Language</button>
+            <button class="btn btn-block btn-menu" id="btn-network">Network</button>
+            <button class="btn btn-block btn-menu" id="btn-timezone">Time Zone</button>
+            <button class="btn btn-block btn-menu" id="btn-deviceip">Device IP</button>
+            <button class="btn btn-block btn-menu" id="btn-geolocation">Geolocation</button>
+            <button class="btn btn-block btn-menu" id="btn-istablet">Is Tablet</button>
+            <button class="btn btn-block btn-menu" id="btn-finger-start">Finger Start</button>
+            <button class="btn btn-block btn-menu" id="btn-finger-checkdevice">Finger Check Device</button>
+            <button class="btn btn-block btn-menu" id="btn-finger-checkreg">Finger Check Reg</button>
+        </div>
+        <div class="sub-menu">
+            <h4>User Info</h4>
+            <button class="btn btn-block btn-menu" id="btn-savecontact">Save Contact</button>
+            <button class="btn btn-block btn-warn" id="btn-loadcontact">Load Contact</button>
+            <button class="btn btn-block btn-menu" id="btn-value-save">Save Secret Value</button>
+            <button class="btn btn-block btn-warn" id="btn-value-load">Load Secret Value</button>
+            <button class="btn btn-block btn-dan" id="btn-value-clear">Clear All Secret Value</button>
+        </div>
+        <div class="sub-menu">
+            <h4>File</h4>
+            <button class="btn btn-block btn-menu" id="btn-camera">Camera</button>
+            <button class="btn btn-block btn-menu" id="btn-gallery">Gallery</button>
+            <button class="btn btn-block btn-menu" id="btn-file-list">File List</button>
+            <button class="btn btn-block btn-menu" id="btn-file-contents">File Contents</button>
+            <button class="btn btn-block btn-warn" id="btn-file-upload">File Upload</button>
+            <button class="btn btn-block btn-dan" id="btn-file-delete">File Delete</button>
+        </div>
+        <div class="sub-menu">
+            <h4>Back Button(Android Only)</h4>
+            <button class="btn btn-block btn-menu" id="btn-enablebackbtn">Enable Back Button</button>
+            <button class="btn btn-block btn-warn" id="btn-disablebackbtn">Disable Back Button</button>
+            <button class="btn btn-block btn-dan" id="btn-clearhistory">Clear History</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

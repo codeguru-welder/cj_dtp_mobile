@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * save, load value
+	 * 
+	 * @author chlee
+	 * @since 2016.11.16
+	 */
+-->
+<html>
+  <head>
+    <title>MiAPS Hybrid Save,Load Value</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+	/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- css load -->
+    <link href="../../resource/css/reset.css" rel="stylesheet" />
+    <link href="../../resource/css/style_add.css" rel="stylesheet" />
+    <link 
+    	rel="stylesheet" 
+    	href="../../vendor/bootstrap/css/bootstrap.min.css"
+    />
+	<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+	<!-- //css load -->
+	
+    <script src="../../resource/js/config.js"></script>
+	<script
+		data-main="pages/service/saveLoadValue.js"
+		src="../../vendor/require/require.js"
+	></script>
+  	
+  </head>
+  <body>
+    <!-- header-->
+    <header>
+      <button type="button" class="back_btn"></button>
+      <span class="page_title">Save,Load Value</span>
+      <button type="button" class="home_btn"></button>
+    </header>
+    <!--// header-->
+
+    <div class="contents_wrap bg_gray">
+    	<br/>
+  		<div align="center">
+	  		<input type="text" class="form-control" id="data" name="data" value="" placeholder="저장할 데이터를 입력해주세요.">
+			<br/>
+  			<button id="saveValue" class="btn btn-default"><span class="glyphicon glyphicon-save"></span>&nbsp;Save Value</button>
+  			&nbsp;&nbsp;&nbsp;
+  			<button id="loadValue" class="btn btn-default"><span class="glyphicon glyphicon-open"></span>&nbsp;Load Value</button>
+  			<br/>
+  			<br/>
+  			<button id="clearAllValue" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span>&nbsp;Clear All Value</button>
+  		</div>
+    </div>
+  </body>
+</html>

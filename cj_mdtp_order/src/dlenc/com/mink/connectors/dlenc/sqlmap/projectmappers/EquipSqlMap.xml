@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mink.connectors.dlenc.mapper.EquipMapper">
+
+  <select
+    id="selectLocationCode"
+    parameterType="java.util.Map"
+    resultType="java.util.LinkedHashMap"
+  >
+    SELECT cd_id, cd_nm
+    FROM dlenc_code
+    WHERE cd_grp = '010000'
+  </select>
+
+  <select
+    id="selectEquipType"
+    parameterType="java.util.Map"
+    resultType="java.util.LinkedHashMap"
+  >
+    SELECT cd_id, cd_nm
+    FROM dlenc_code
+    WHERE cd_grp = '020000'
+  </select>
+
+  <select
+    id="selectEquipStd"
+    parameterType="java.util.Map"
+    resultType="java.util.LinkedHashMap"
+  >
+    SELECT cd_id, cd_nm
+    FROM dlenc_code
+    WHERE cd_grp = concat('02', #{cd_id}, '01')
+  </select>
+
+  <select
+    id="selectEquipPlan"
+    parameterType="java.util.Map"
+    resultType="java.util.LinkedHashMap"
+  >
+    SELECT cd_id, cd_nm, wk_ut
+    FROM dlenc_code
+    WHERE cd_grp = concat('02', #{cd_id}, '02')
+  </select>
+
+  <select
+    id="selectLocWork"
+    parameterType="java.util.Map"
+    resultType="java.util.LinkedHashMap"
+  >
+    SELECT loc_cd, work_nm, car_no, work_dt, type_cd, unit_cd, rest_tm
+    FROM dlenc_loc_work
+    WHERE loc_cd = #{loc_cd}
+      AND work_nm = #{work_nm}
+      AND car_no = #{car_no}
+      AND work_dt = #{work_dt}
+  </select>
+
+  <select
+    id="selectLocWorkDtl"
+    parameterType="java.util.Map"
+    resultType="java.util.LinkedHashMap"
+  >
+    SELECT work_cd, work_qt, work_tm
+    FROM dlenc_loc_work_dtl
+    WHERE loc_cd = #{loc_cd}
+      AND work_nm = #{work_nm}
+      AND car_no = #{car_no}
+      AND work_dt = #{work_dt}
+  </select>
+
+  <insert
+    id="insertLocWork"
+    parameterType="java.util.Map"
+  >
+    INSERT INTO dlenc_loc_work
+    (loc_cd,
+     work_nm,
+     car_no,
+     work_dt,
+     type_cd,
+     unit_cd,
+     rest_tm)
+    VALUES (#{loc_cd},
+            #{work_nm},
+            #{car_no},
+            #{work_dt},
+            #{type_cd},
+            #{unit_cd},
+            #{rest_tm})
+    ON DUPLICATE KEY UPDATE type_cd = #{type_cd},
+                            unit_cd = #{unit_cd},
+                            rest_tm = #{rest_tm}
+  </insert>
+
+  <delete
+    id="deleteLocWorkDtl"
+    parameterType="java.util.Map"
+  >
+    DELETE
+    FROM dlenc_loc_work_dtl
+    WHERE loc_cd = #{loc_cd}
+      AND work_nm = #{work_nm}
+      AND car_no = #{car_no}
+      AND work_dt = #{work_dt}
+  </delete>
+
+  <insert
+    id="insertLocWorkDtl"
+    parameterType="java.util.Map"
+  >
+    INSERT INTO dlenc_loc_work_dtl (
+    loc_cd,
+    work_nm,
+    car_no,
+    work_dt,
+    work_cd,
+    work_qt,
+    work_tm
+    ) values
+      <foreach
+        collection="insertList"
+        item="item"
+        separator=","
+      > (
+          #{item.loc_cd,jdbcType=VARCHAR},
+          #{item.work_nm,jdbcType=VARCHAR},
+          #{item.car_no,jdbcType=VARCHAR},
+          #{item.work_dt,jdbcType=VARCHAR},
+          #{item.work_cd,jdbcType=VARCHAR},
+          #{item.work_qt,jdbcType=DECIMAL},
+          #{item.work_tm,jdbcType=DECIMAL}
+        )
+      </foreach>
+  </insert>
+
+</mapper>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * AES128 value
+	 * 
+	 * @author chlee
+	 * @since 2016.11.16
+	 */
+-->
+<html>
+  <head>
+    <title>MiAPS Hybrid AES128 Encrypt/Decrypt</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- css load -->
+    <link href="../../resource/css/reset.css" rel="stylesheet" />
+    <link href="../../resource/css/style_add.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="../../vendor/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../vendor/miaps/css/miaps.css" />
+    <!-- //css load -->
+  </head>
+  <body>
+    <!-- header-->
+    <header>
+      <button type="button" class="back_btn"></button>
+      <span class="page_title">AES128</span>
+      <button type="button" class="home_btn"></button>
+    </header>
+    <!--// header-->
+
+    <div class="contents_wrap bg_gray">
+      <br />
+      <!-- <style>
+        select {
+          width: 100%;
+          padding: 0.8em 0.5em;
+          border: 1px solid #999;
+          font-family: inherit;
+          background: url("../../resource/img/hybrid_arrow.png") no-repeat 95%
+            50%;
+          background-color: #fff;
+          border-radius: 0px;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+        }
+
+        select::-ms-expand {
+          display: none;
+        }
+      </style> -->
+
+      <!-- <select name="" id="kind">
+        <option value="AES128" selected>AES128</option>
+        <option value="AES256">AES256</option>
+      </select>
+      <br /> -->
+      <br />
+      <div align="center">
+        <input
+          type="text"
+          class="form-control"
+          id="data"
+          name="data"
+          value=""
+          placeholder="데이터를 입력해주세요."
+        />
+        <br />
+        <button id="btnEncrypt" class="btn btn-default">
+          <span class="glyphicon glyphicon-save"></span>&nbsp;Encrypt
+        </button>
+        <br />
+        <br />
+        <input
+          type="text"
+          class="form-control"
+          id="decdata"
+          name="decdata"
+          value=""
+        />
+        <br />
+        <button id="btnDecrypt" class="btn btn-default">
+          <span class="glyphicon glyphicon-open"></span>&nbsp;Decrypt
+        </button>
+        <br />
+        <br />
+        <input
+          type="text"
+          class="form-control"
+          id="resdata"
+          name="resdata"
+          value=""
+        />
+        <br />
+        <button id="clearAllValue" class="btn btn-default">
+          <span class="glyphicon glyphicon-trash"></span>&nbsp;Clear All Value
+        </button>
+        <br />
+      </div>
+    </div>
+
+    <script src="../../resource/js/config.js"></script>
+    <script
+      data-main="pages/service/AES128.js"
+      src="../../vendor/require/require.js"
+    ></script>
+  </body>
+</html>

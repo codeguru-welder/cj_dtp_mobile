@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!--  
+		mink-config default
+		- editable by every project site
+	-->
+	<bean id="minkConfig" class="com.thinkm.mink.commons.util.MinkConfig" factory-method="getConfig">
+		<!--
+			Protocol encryptor settings.
+				- class must implement com.thinkm.mink.core.protocol.ProtocolEncryptor
+		-->
+		<property name="protocolEncryptor" value="defaultProtocolEncryptor" />
+		<!-- property name="protocolEncryptor" value="aesProtocolEncryptor" / -->
+		<!-- property name="protocolEncryptor" value="ariaProtocolEncryptor" / -->
+
+		<!--
+			Password encryptor settings.
+				- class must implement com.thinkm.mink.commons.encryption.PasswordEncryptor
+		-->
+		<!-- property name="passwordEncryptor" value="defaultPasswordEncryptor" /-->
+		<property name="passwordEncryptor" value="aesPasswordEncryptor" />
+		<!-- property name="passwordEncryptor" value="ariaPasswordEncryptor" / -->
+
+		<!-- property name="loginPasswordEncryptor" value="defaultPasswordEncryptor" / -->
+		<property name="loginPasswordEncryptor" value="aesPasswordEncryptor" />
+		<!-- property name="loginPasswordEncryptor" value="ariaPasswordEncryptor" / -->
+		<!-- property name="loginPasswordEncryptor" value="sha256PasswordEncryptor" / -->
+
+		<!--
+			Password checking rule settings.
+				- class must implement com.thinkm.mink.core.auth.PasswordCheckingRule
+		-->
+		<property name="passwordCheckingRule" value="noPasswordCheckingRule"/>
+		<!-- property name="passwordCheckingRule" value="defaultPasswordCheckingRule"/ -->
+
+		<!--
+			Authenticator settings.
+				- This class must implements com.thinkm.mink.core.auth.MinkAuthenticator
+		-->
+		<!-- property name="authenticator" value="nullAuthenticator" / -->
+		<property name="authenticator" value="defaultAuthenticator" />
+
+		<property name="configProperties">
+			<props>
+				<!-- System configuration -->
+				<!-- prop key="mink.license.file">${mink.home}/conf/MinkLicense.zip</prop -->
+				<prop key="mink.license.file">${mink.home}/conf/MinkLicense-ThinkM_Development.lic</prop>
+			    <prop key="default.encoding">UTF-8</prop>
+
+				<!--
+				  * E-Mail 
+				-->
+				<prop key="mink.email.enabled">false</prop> <!-- use email service or not. true, false -->
+				<prop key="mink.email.push_task_id">1</prop> <!-- mink_push_task.task_id for email push, default=0  -->
+
+				<!-- Logging configuration -->
+				<!--
+				  * -Dlog4j.configurationFile=file:///D:/workspace/.../conf/mink-logging.log4j.xml
+				  * 위의 환경변수 설정으로 Log4j를 실행하면 이 설정은 필요 없음.
+				  * 환경변수 설정으로 Log4j가 올라오지 않으면 아래의 설정을 활성화하여 소스에서 직접 Log4j를 실행하도록 함.
+				  *   
+				-->
+				<prop key="log4j.config.file">${mink.home}/conf/mink-logging.log4j.xml</prop>
+				<prop key="log4j.devicelog.db.target"></prop> <!-- comma separated. default(empty)=all -->
+ 
+				<!-- APP파일 저장 테이블 선택 (version / version_file) : 이 프로퍼티가 없으면 기본값(version)사용 : miaps_app_version Table -->
+				<prop key="miaps.app.file.table">version_file</prop>
+				<prop key="miaps.app.file.split.size">3</prop> <!-- MegaByte단위, 예) 1 = 1MB -->
+
+			    <!--
+			    	Database configuration.
+			    		- set <null> if not to use database
+				-->
+				<prop key="mink.db.type">${dbType}</prop> <!-- mssql, mysql, oracle, db2 -->
+				<prop key="mink.db.id">mink.db.default</prop>
+				<prop key="mink.devicelog.db.id">mink.db.default</prop>
+				<!-- msSQL v2008 v2012 -->
+				<prop key="mink.db.version">${dbVersion}</prop>
+				<prop key="mink.db.StringTypeHandler.dbtype"></prop>
+				<prop key="mink.db.StringTypeHandler.systype"></prop>
+
+			    <!-- Document Server Info -->
+				<prop key="document.server.domain">127.0.0.1</prop>
+				<prop key="document.server.port">8088</prop> <!-- default: 8088 -->
+				<prop key="document.server.timeout">180</prop> <!-- in seconds; default: 180 -->
+
+				<!-- Security. -->
+				<!--
+					비암호화 통신을 허용할 것인지의 여부. default = false 
+				-->
+				<prop key="nonencrypted.clientdata.allowed">false</prop>
+				<!-- 
+					비밀번호 암호화 키
+						- "[default]" is the default value
+				-->
+				<prop key="password.encryption.key">[default]</prop>
+				<!-- 
+					암호화 키 보관 C 라이브러리(JNI 이용)
+						- com.thinkm.mink.commons.encryption.MiapsCryptoKeyStore
+						- 설정하지 않으면 기존의 방법(환경설정에 텍스트로 관리)을 사용함
+						- defaultProtocolEncryptor, aesProtocolEncryptor, defaultPasswordEncryptor, aesPasswordEncryptor
+						- 라이브러리 파일명: XXX.dll(윈도우), libXXX.so(유닉스)
+						- 라이브러리는 -Djava.library.path=${jni_library_path} 설정에 저장되어야 함
+				-->
+				<prop key="miaps.crypto.keystore.default"></prop> <!-- miapscryptokeystoredefault -->
+				<prop key="miaps.crypto.keystore.lib"></prop> <!-- miapscryptokeystore -->
+
+				<!--
+					MultipartFormData - file upload temp dir.
+						- "[default]" is the default value
+						- default = {mink.home}/UploadedFiles
+				-->
+				<prop key="file.upload.temp.dir">[default]</prop>
+				<!-- 
+					파일 업로드 시 데이터베이스에 저장하는 경우
+						- 서버 이중화에 대응하여 적용함
+						- miaps_res_files, miaps_res_file_part 테이블 이용함
+						- res_id = UUID(파일 업로드 임시 폴더명)
+						- file_nm = 파일명
+						- res_desc = 파라메타명
+						- 값이 설정되면 데이터베이스에 저장하고 ("[default]" 설정인 폴더의)임시 파일은 삭제함
+				-->
+				<!-- 
+				<prop key="file.upload.temp.dir">[db][default]</prop>
+				-->
+
+				<!--
+					Allow single device to multi users.  
+				-->
+				<prop key="allow.device.to.multi.user">true</prop>
+
+				<!--
+					Allow single user to multi device.  
+				-->
+				<prop key="allow.user.to.multi.device">true</prop>
+
+				<!--
+					true - 최종 로그인 한 장치 하나만 활성화. 마지막 이외의 기존 매핑(miaps_user_device)은 삭제됨.
+					false - 여러 개의 장치를 로그인하여도 모두 유지함.  
+				-->
+				<prop key="allow.user.to.mapping.only.last_device">false</prop>
+
+				<!--
+					Allow personal data(phone number) to be saved when device info is uploaded.
+				-->
+				<prop key="allow.device.personal.data.saved">true</prop>
+
+				<!--
+					최종 접속 후 일정한 기간이 경과한 장치(사용자)의 접속을 제한함.
+					- 단위: 개월 (1 이상의 값)
+					- 공백으로 설정하면 제한하지 않음 (default)
+					- 둘 중 하나 또는 모두 설정하거나 설정하지 않을 수 있음
+				-->
+				<prop key="disallowed.access.term.by.device"></prop>
+				<prop key="disallowed.access.term.by.user"></prop>
+
+				<!-- MiAPS IDE configuration -->
+				<prop key="miaps.default.auto.commit">true</prop>
+				<prop key="miaps.default.target">AppStudio-testRequest</prop>
+				<prop key="miaps.default.methodname">run</prop>
+				<prop key="miaps.test.device.id">MiAPS-AppStudio</prop>
+				<prop key="miaps.test.user.id"></prop>
+				<prop key="miaps.test.password"></prop>
+				<prop key="miaps.agent.url.encoding">EUC-KR</prop> <!-- for old agent url, request params' encoding. -->
+				<prop key="miaps.agent.url.method">POST</prop> <!-- for old agent url, request method (GET | POST). default: GET -->
+				<prop key="miaps.querystring.encoding">UTF-8</prop>
+
+				<prop key="miaps.rquery.string.use_binarystream">false</prop> <!-- default: false -->
+				<prop key="miaps.factory.initial.connection">true</prop> <!-- Create Connection by MiapsDataSourceFactory; default=true -->
+
+				<!-- AppCenter config -->
+				<prop key="mink.server.url">https://192.168.7.77</prop> <!-- ios download url -->
+				<prop key="mink.server.url.ios">https://192.168.7.77/miaps/app/</prop> <!-- ios app download url -->
+				<prop key="mink.server.url.android">http://192.168.7.77/miaps/app/</prop> <!-- android app download url -->
+				<!--
+					- (optional) Alternate app download url to external site.
+					- available arguments: %{userNo}, %{deviceId}, %{appId}, %{versionNo}
+				-->
+				<prop key="mink.server.url.appdown.ios"></prop> <!-- (optional) plist file full path over ssl. if this is set, mink.server.url.ios is ignored -->
+				<prop key="mink.server.url.appdown.android"></prop> <!-- (optional) apk file full path. if this is set, mink.server.url.android is ignored -->
+				<!-- 
+					App file download root directory.
+					if empty, default is "{-Dmink.home}/apprepository/".
+					DB(miaps_app, miaps_app_files 테이블)에 저장된 파일 컨텐츠는 이 디렉터리 아래에 저장되면서 다운로드됨.
+					파일이 존재하면 파일을 바로 다운로드하고, 없으면 DB를 읽어 저장한 후에 다운로드함.
+					파일 규칙: ${miaps.app.download.root}/[app_id]/[version_no]/[appfile].[apk | ipa | plist)
+				-->
+				<prop key="miaps.app.download.root"></prop>
+
+				<!-- 20151112 chlee
+					* iOS 앱 다운로드, 설치 시 화면에 표시되는 아이콘 설정
+					* Input Parameter: S(Small), B(Big)	- 작은아이콘/큰아이콘 선택			
+				 -->
+				 <prop key="miaps.ios.install.icon">B</prop>
+
+				<!--
+					- 이메일 본문, 첨부 등의 다운로드 URL 생성에 사용
+					- 도메인 또는 IP와 PORT만 지정함
+					- 미설정 시 request 객체에서 얻음
+					- http://192.168.7.77:8080
+					- 사용법: MinkConfig.getConfig.getContentProviderServer()
+				-->
+				<prop key="mink.server.contentProviderServer"></prop>
+
+				<!--
+					Locale for messageSource.
+					"default" or blank or empty is the system default locale.
+					"ko" = Locale.KOREAN
+					"ko_KR" = Locale.KOREA
+					"en" = Locale.ENGLISH
+					"en_US" = Locale.US
+					"ja" = Locale.JAPANESE
+					"ja_JP" = Locale.JAPAN 
+				-->
+				<prop key="resource.locale">ko</prop>
+
+				<!-- Admin jsp page concerns -->
+				<prop key="admin.login.session.timeout">3600</prop> <!-- in seconds -->
+				<prop key="admin.jsp.login.copyright">Copyright 2008 thinkM Inc. All right reserved.</prop>
+				<prop key="admin.jsp.login.background">images/img_logbgadmin_miaps.png</prop>
+				<prop key="admin.jsp.common.top.logo">images/top_logo_miaps.png</prop>
+				<prop key="admin.jsp.common.foot.copyright">images/foot_copy_miaps.png</prop>
+				<!-- 
+					- KED = 기업데이터
+					- LGF = 엘지패션
+					- CX = 코엑스
+				-->
+				<prop key="admin.project.type"></prop>
+				
+				<!-- 
+					Delimiter for remoteQuery task name from target attribute.
+				 -->
+				<prop key="mink.protocol.target.task.delimiter">^</prop>
+
+				<!-- 
+					Device log, additional field names
+				-->
+				<!-- 
+				<prop key="mink.device.log.additional.params">app_gbn, reserve1, reserve2</prop>
+				<prop key="mink.device.log.additional.params.default">businesscare,,</prop>
+				-->
+
+				<!-- 
+					external login process class.
+					must implement com.thinkm.mink.commons.login.LegacyLogin
+				-->
+				<prop key="interface.login.processor"></prop>
+
+				<prop key="ldap.properties">${mink.home}/conf/miaps.ldap.properties</prop>
+
+				<!--
+					파일서버 커넥터의 Root directory를 설정함.
+						- Full absolute path 또는 SMB URL.
+						- (Windows) D:/MiAPS/FileServer/dir
+						- (Unix like) /home/miaps/MiAPS/FileServer/dir
+						- (SMB) smb://server/share/dir
+
+						- SMB를 사용할 경우에는 추가적으로 jcifs.properties 설정이 필요할 수 있음.
+				-->
+				<prop key="miaps.fileserver.root"></prop>
+
+				<!--
+					파일 업로드 커넥터 또는 파일서버 커넥터에서 SMB URL을 사용하는 경우에 필요한 설정.
+						- 절대경로 - D:/MiAPS/mink-home/conf/miaps.jcifs.properties
+						- -Dmink.home 환경변수 사용 - ${mink.home}/conf/miaps.jcifs.properties
+						- 클래스패스 사용 - classpath*:com/mink/connectors/spring/miaps.jcifs.properties
+				-->
+				<prop key="jcifs.properties">${mink.home}/conf/miaps.jcifs.properties</prop>
+
+				<!-- 
+					JCIFS 는 CIFS / SMB 네트워크 프로토콜을 구현하는 100% 자바로 작성된 Open Source Client Library 이다.
+					CIFS 는 Microsoft Windows 플랫폼 상에서의 파일 공유 표준 프로토콜이다.
+					
+					네트워크드라이브 서버경로
+				 -->
+				<prop key="jcifs.network.drive.server.path"></prop>
+
+				<!-- 
+					* 로그인 통계시 사용할 업무타겟명
+					* 주의! 로그인 성공 후 다음 업무의 타겟명을 사용할 것(로그인 업무에는 사용자 정보가 없음)
+					* 예) 로그인 성공 후 장치등록 업무타겟명: device-saveDeviceInfo
+					* 2015.03.20 by ek
+					*
+				-->
+				<prop key="miaps.target_url.succeeded_login">device-saveDeviceInfo</prop>
+				
+				<!-- 
+					* 장치의 사용자 정보가 있어야 하는지 여부
+					* 1. 로그인 통계시, 사용자 정보가 있는 로그만 통계를 낼 것인지 여부를 결정할 때 쓰임
+					* 2. 장치조회시, 사용자 정보가 있는 장치만 조회할지 여부를 결정할 때 쓰임
+					* 디폴트는 사용자 정보가 없어도 됨.
+					* 2014.09.17 by ek
+					*
+				-->
+				<prop key="miaps.device_must_have_user.yn">N</prop>
+
+				<!--
+					* RESTfull 웹서비스를 지원함.
+					* 
+					* /pathInfo=classPathAndName.methodName
+					*
+					* ex) 
+					*   /auth=com.mink.connectors.test.Auth.login,
+					*   /user/group=com.mink.connectors.user.Group.service,
+					*   /user/user=com.mink.connectors.user.User.service, 
+					*   /push/*=com.mink.connectors.push.Push.service
+				-->
+				<prop key="mink.restfull.service"></prop>
+				
+				<!--
+					* 로그인 화면에 사용되는 그룹 표시(선택) 방식 선택 프로퍼티
+					* Input Parameter: top_group, navi_group
+					* top_group: 최상위 그룹 중 선택하여 로그인	[기본값]				
+					* navi_group: 유저ID로 로그인 후 유저ID 중복되면 중복된 유저의 그룹 네비게이션을 선택하여 로그인
+					* 2015.05 chlee					 
+				 -->
+				 <prop key="miaps.login.group_select_method">top_group</prop>
+				 
+				 <!--
+				 	* 어드민 센터: "앱 센터 > 앱 관리" 에서 '공통 앱 여부' 항목에서 '공통 아님'을 선택 할 경우 앱 사용 권한을 등록 할 수 있도록 수정
+				 	* Y : 앱 권한 등록 사용 (miaps_app_role 테이블이 필요)
+				 	* N : 앱 권한 등록 사용 안함
+				  -->
+				 <prop key="miaps.app.role.yn">Y</prop>
+
+				<!--
+					* 이메일 커넥터에서 일정을 처리하기 위함.
+					* https://github.com/ical4j/ical4j
+				-->
+				<prop key="ical4j.properties">${mink.home}/conf/miaps.ical4j.properties</prop>
+				
+				<!-- 20151103 chlee
+					* 범용 리소스 파일 보존 타입 : 기본경로에 파일로 쓸 것인가, 공유디렉토리에 파일로 쓸 것인가, DB에 쓸 것인가 선택
+					* 'miaps.res.save.type'의 입력 값 :file, db, nas 셋 중 하나를 입력
+					* 'miaps.res.save.type'이 file일 경우는 mink.server.url/{contextpath}/se2/upload_images, mink.server.url/{contextpath}/se2/multiupload_images에 리소스 데이터를 씁니다.
+					* 'miaps.res.save.type'이 nas일 경우는 miaps.res.share.dir에 webroot아래에 생성한 공유디렉토리의 바로가기경로나, 심볼릭링크경로를 입력합니다.
+					* 'miaps.res.save.type'이 db일 경우 'miaps.res.file.split.size'에 입력된 값(사이즈)으로 파일을 잘라서 DB(miaps_res_file_part)에 저장
+					* mink.server.url에 url이나 ip를 꼭 입력 해야 합니다.
+				-->
+				<prop key="miaps.res.save.type">file</prop>
+				<prop key="miaps.res.share.dir"></prop> <!-- nas에서 사용 -->
+				<prop key="miaps.res.file.split.size">3</prop> <!-- MegaByte단위, 예) 1 = 1MB, db에서 사용 -->
+				
+				<!--
+					다운로드 용량이 클 경우 임시 디렉토리에 파일로 쓴 후 다운로드 하도록 할 때 사용하는 디렉토리를 지정
+					- "[default]" is the default value
+					- default = {mink.home}/DownloadTempFiles
+				-->
+				<prop key="miaps.temp.download.file.path">[default]</prop>
+				<!--
+					파일 다운로드 실행 시 보안을 위하여 허용 가능한 디렉터리 및 확장자를 설정할 수 있음
+					- 각 항목은 콤마(,)로 구분하여 여러 개를 입력할 수 있음
+					- 디렉터리는 전체경로를 입력함(예: /users/miaps/download, C:/miaps/download)
+					- 확장자는 점(.)을 붙이지 않고 확장자 자체만 입력함(예: jpg, pdf, png) 
+				-->
+				<prop key="miaps.download.allowed.path"></prop> <!-- 허용 디렉터리 -->
+				<prop key="miaps.download.allowed.ext"></prop> <!-- 허용 확장자 -->
+				<prop key="miaps.download.disallowed.path"></prop> <!-- 불허 디렉터리 -->
+				<prop key="miaps.download.disallowed.ext"></prop> <!-- 불허 확장자 -->
+				
+				<!-- command=filedownload에서 사용하는 chatset, utf-8, 8859_1 -->
+				<prop key="miaps.download.file.charset">UTF-8</prop>
+
+				<!-- 
+					이 서버서 접속하는 MiAPS App(Player)와 같은 encoding설정을 입력 합니다.
+					defaes128, defaes256, defaria128, defaria192, defaria256 
+				-->
+				<prop key="hybrid_web_access_protocol_encryption">defaes128</prop>
+				
+				<!--
+					* 어드민센터, 앱센터에서 로그인시 패스워드를 SHA256단방향 암호화하여 전달하려면 Y로 수정합니다. 
+					* Y : SHA256HEX 단방향 암호화 사용.
+				 	* N : 암호화 사용 안함.
+				 -->
+				<prop key="miaps.web.secure.login">N</prop>
+
+				<!-- 
+					장치접속로그를 기록할 때 사용할 방법을 선택함
+					- Log4J - Log4J의 JDBC Appender를 사용하여 장치접속로그를 기록함. 기존의 방식. Default
+					- iBatis - DeviceLog 클래스 내에서 JDBC를 직접 연결하여 장치접속로그를 기록함. Log4J 설정을 무시하고 iBatis를 이용함.
+					- None - 장치접속로그를 기록하지 않음
+					* 파일에 기록되는 로그는 별도의 Log4J 설정으로 제어함
+				-->
+				<prop key="deviceLogDb.enablecWith">None</prop>
+
+				<!--
+					EWS를 이용한 이메일 서비스 커넥터 설정
+					- 커넥터: com.thinkm.mink.miaps.ews.MiapsEwsConnector
+					- domain: EWS 인증 시 사용할 도메인 정보. 로그인 시 필요할 경우에만 설정
+					- version: Exchange2007_SP1(default), Exchange2010, Exchange2010_SP1, Exchange2010_SP2
+					- emailsuffix: 이메일 주소를 이용하여 자동으로 접속 URL을 결정하게 함. "userId@emailsuffix" 형식으로 이메일 주소가 결정됨
+					- endpoint: 이메일 주소로 접속 URL을 자동으로 찾지 않고 고정된 URL을 사용함. endpoint가 설정되면 이것이 먼저 사용됨
+					- tracelogEnabled: EWS 실행 시 trace log 여부. true, false(default). 커넥터 메소드 파라메타(tracelog)로 변경할 수 있음
+					- excludedFolderName: 폴더 목록에서 표시하지 않을 항목을 설정함
+					- bodyConverter: 이메일 본문을 특수 목적으로 변조할 때 사용할 클래스. com.thinkm.mink.email.util.BodyConverter 인터페이스를 구현해야 함
+				-->
+				<prop key="miaps.ews.domain"></prop>
+				<prop key="miaps.ews.version"></prop>
+				<prop key="miaps.ews.emailsuffix"></prop>
+				<prop key="miaps.ews.endpoint"></prop>
+				<prop key="miaps.ews.tracelogEnabled"></prop>
+				<prop key="miaps.ews.contentServlet">/minkSvc</prop>
+				<prop key="miaps.ews.excludedFolderName">Sync Issues, 동기화 문제</prop>
+				<prop key="miaps.ews.bodyConverter"></prop>
+				<prop key="miaps.ews.admin.username"></prop>
+				<prop key="miaps.ews.admin.secretkey"></prop>
+				<prop key="miaps.ews.admin.emailaddr"></prop>
+
+				<!-- 
+					어드민센터에서 푸시메시지 등록 시 추가적인 데이터를 입력할 항목을 정의함.
+					- title: 메시지 제목 입력 항목
+					- sound: 알림 소리 입력 항목
+					- category: 알림 메시지의 카테고리 지정 (기본 값: 푸시업무 ID가 사용됨)
+					- launch-image: 푸시알림 실행 이미지 지정 (iOS 전용)
+					- icon: 푸시알림 아이콘 지정 (Android 전용)
+					- color: 알림 메시지 색상 지정 (Android 전용)
+					- tag: 푸시알림 태그 입력 (Android 전용)
+					- click-action: 푸시알림 실행 명령 입력 (Android 전용)
+					- 추가적인 입력 항목이 있으면 여기에 설정하면 어드민센터 푸시입력 화면에 UI가 생성될 것이고,
+					- 어드민센터 입력 UI에서 입력한 내용이 key=value 형식으로 miaps_push_data 테이블의 push_msg 필드에 값으로 등록됨.
+					- 여기에 설정할 때는 "항목=항목설명"의 형식으로 등록하고, 콤마로 구분함.
+				-->
+				<!--
+				<prop key="miaps.admin.push.message-detail">
+					title=메시지 제목,
+					sound=알림 소리,
+					category=카테고리,
+					launch-image=(iOS)실행 이미지,
+					icon=(Android)아이콘,
+					color=(Android)메시지 색상,
+					tag=(Android)태그,
+					click-action=(Android)실행 명령,					
+				</prop>
+				-->
+				<prop key="miaps.admin.push.message-detail">
+					title=메시지 제목,
+					sound=알림 소리,
+					icon=(Android)아이콘,
+				</prop>
+
+				<!-- Android Tablet, iPad 앱 사용하는 프로젝트인지 설정 (defalt : true)-->
+				<!-- false일 경우는 테블릿, 아이패드 앱이 없는 프로젝트인데 
+					 폰용 앱을 설치하여 사용하는 경우가 있으므로 자동 업데이트 가능하도록 
+					 버전업데이트시 폰용 플랫폼 코드로 체크하게 한다.
+				 -->
+				<prop key="isAndroidTabletProject">true</prop>
+				<prop key="isIpadProject">true</prop>
+
+				<prop key="miaps.minkSvc.loadmessage">MiAPS Enterprise Server is loaded...</prop>
+
+				<!-- Allowed MiAPS Connector call Packages
+					:접속을 허용할 커넥터 패키지를 ,로 구분하여 입력합니다. 키 또는 값이 없으면 모두 허용, 있으면 해당 패키지들만 허용합니다. 
+				 -->
+				<prop key="miaps.connector.allowed.package"></prop>
+
+				<!-- 클라이언트의 요청 데이터의 복호화/압축해제/XML해석 등에서 오류가 발생할 때 로그를 출력할지 결정함(default: false) -->
+				<prop key="miaps.protocol.parsing_exception.print_log">false</prop>
+				
+				<!-- MiAPS Hybrid, 개발서버에 PC브라우저로 접속하여  miapsSvc등 통신사용할 때, 방화벽등으로 location정보를 사용하지 못할때 사용할  정보. 기본은  코멘트처리 또는 빈값 -->
+				<!-- 
+				<prop key="miaps.hybrid.emul.server.name"></prop>
+				<prop key="miaps.hybrid.emul.server.port"></prop>
+				 -->
+
+				<!--
+					장치 최종 접속 일시(miaps_user_device 테이블의  last_access_dt 필드)는 클라이언트의 요청이 있을 때마다 업데이트 되는데,
+					어떤 경우에는 너무 많은 요청이 발생하여 업데이트 쿼리가 과다하게 수행되는 불만이 있으므로,
+					장치등록(클라이언트 메소드: setDeviceInfo, 서버 프로토콜: saveDeviceInfo) 시 한 번만 실행할 수 있게 함
+					default: false (모든 프로토콜에 업데이트 시킴) 
+				-->
+				<prop key="miaps.updateUserDevice.withSetDevice">false</prop>
+
+			</props>
+		</property>
+	</bean>
+
+</beans>

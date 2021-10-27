@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.apache.org//DTD SQL Map Config 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+	<typeAlias alias="EncHandler" type="com.thinkm.mink.commons.db.EncryptionTypeHandler"/>
+    <typeHandler jdbcType="varchar" javaType="java.lang.String" callback="EncHandler"/>
+	
+	<!-- ResultMap 
+	<sqlMap resource="com/thinkm/mink/asvc/maps/ResultMap.xml"/>
+	-->
+
+<!-- ANSI 표준 SQL -->
+	<!-- dbType 에 맞춰 PrimaryKey 생성 후 반환 (dbType: MySQL, MsSQL(v2008/v2012), Oracle, postgresql) -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/PrimaryKey.xml"/>
+	<!-- 사용자 정보 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/User.xml"/>
+	<!-- 사용자 그룹 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/UserGroup.xml"/>
+	<!-- 사용자 그룹 구성원 관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/UserGroupMember.xml"/>
+	<!-- 라이선스 관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/UserLicense.xml"/>
+	<!-- 관리자 권한 위임 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/UserRoleDelegate.xml"/>
+	<!-- 어드민센터 메뉴 권한 그룹 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/MenuAdmin.xml"/>
+	<!-- 앱센터 메뉴 권한 그룹 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/MenuApp.xml"/>
+	<!-- 어드민센터 메뉴 권한 구성원 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/MenuRoleAdmin.xml"/>
+	<!-- 앱센터 메뉴 권한 구성원 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/MenuRoleApp.xml"/>
+	<!-- 어드민센터/앱센터 권한 그룹 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/RoleGroup.xml"/>
+	<!-- 어드민센터/앱센터 권한 그룹 구성원 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/RoleGroupMember.xml"/>
+	<!-- 장치관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/Device.xml"/>
+	<!-- 앱관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/App.xml"/>
+	<!-- 푸시관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/Push.xml"/>
+	<!-- 게시판관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/Board.xml"/>
+	<!-- 메일관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/Mail.xml"/>
+	<!-- 메일계정관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/EmailAccount.xml"/>
+	<!-- 앱 권한관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/AppRole.xml"/>
+	<!-- 설정 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/Setting.xml"/>
+	<!-- 범용 리소스 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/Resource.xml"/>
+	<!-- 배포관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/Deploy.xml"/>
+		
+<!-- postgresql -->
+	<!-- *인클루드 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/postgres/Include.xml"/>
+	<!-- 사용자 정보 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/postgres/User.xml"/>
+	<!-- 사용자 그룹 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/postgres/UserGroup.xml"/>
+	<!-- 어드민센터/앱센터 권한 그룹 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/postgres/RoleGroup.xml"/>
+	<!-- 장치관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/postgres/Device.xml"/>
+	<!-- 앱관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/postgres/App.xml"/>
+	<!-- 푸시관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/postgres/Push.xml"/>
+	<!-- 게시판관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/postgres/Board.xml"/>
+	<!-- 어드민센터 메뉴 권한 그룹 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/postgres/MenuAdmin.xml"/>
+	<!-- 앱센터 메뉴 권한 그룹 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/postgres/MenuApp.xml"/>
+	<!-- 메일관리 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/postgres/Mail.xml"/>
+	<!-- 설정 -->
+	<sqlMap resource="com/thinkm/mink/asvc/maps/postgres/Setting.xml"/>
+
+</sqlMapConfig>

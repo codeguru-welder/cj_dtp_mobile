@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+      name="viewport"
+    />
+    
+    <!-- translations 다국어 시작 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- translations 다국어 끝 -->
+    
+    <title>Action Sheet</title>
+
+    <!-- css load -->
+    <link href="../../../resource/css/reset.css" rel="stylesheet" />
+    <link href="../../../resource/css/style_add.css" rel="stylesheet" />
+    <link href="../../../resource/css/action_sheet.css" rel="stylesheet">
+    <link href="../../../vendor/miaps/css/miaps.css" rel="stylesheet" />
+    <!-- TimePicker에서만 사용 -->
+    <link href="../../../resource/css/swiper.min.css" rel="stylesheet" />
+    <!-- //css load -->
+  </head>
+
+  <body class="bg_gray">
+  	<!-- action sheet 적용 영역 (class="mh-container" 필수) -->
+  	<div class="mh-container">
+	    <!-- header-->
+	    <header>
+	      <button type="button" class="back_btn"></button>
+	      <span class="page_title">Action Sheet</span>
+	      <button type="button" class="home_btn"></button>
+	    </header>
+	    <!--// header-->
+	
+	    <!-- content -->
+	    <div class="contents_wrap">
+	      <div class="home_btn_wrap">
+	      
+	      	<!-- Require.js -->
+	      	
+	        <!-- 달력 -->
+	        <button type="button" class="calendarActRequire">
+	          <div>
+	            <p class="btn_name">Calendar</p>
+	            <p class="btn_exp">달력 Action Sheet 입니다.</p>
+	          </div>
+	          <img src="../../../resource/img/icon01.png" alt="" />
+	        </button>
+	        <!-- 댓글형 리스트 -->
+	        <button type="button" class="commentActRequire">
+	          <div>
+	            <p class="btn_name">Comment</p>
+	            <p class="btn_exp">댓글형태 리스트 Action Sheet 입니다.</p>
+	          </div>
+	          <img src="../../../resource/img/icon01.png" alt="" />
+	        </button>
+	        <!-- 체크버튼 리스트 -->
+	        <button type="button" class="checkbuttonActRequire">
+	          <div>
+	            <p class="btn_name">CheckButton</p>
+	            <p class="btn_exp">체크버튼 리스트 Action Sheet 입니다.</p>
+	          </div>
+	          <img src="../../../resource/img/icon01.png" alt="" />
+	        </button>
+	        <!-- 은행목록 -->
+	        <button type="button" class="bankActRequire">
+	          <div>
+	            <p class="btn_name">BankList</p>
+	            <p class="btn_exp">은행목록 Action Sheet 입니다.</p>
+	          </div>
+	          <img src="../../../resource/img/icon01.png" alt="" />
+	        </button>
+	        <!-- 다국어 -->
+	        <button type="button" class="translationsActRequire">
+	          <div>
+	            <p class="btn_name">translations 다국어</p>
+	            <p class="btn_exp">translations 다국어 Action Sheet 입니다.</p>
+	          </div>
+	          <img src="../../../resource/img/icon01.png" alt="" />
+	        </button>
+	        <!-- Time Picker -->
+	        <button type="button" class="timeActRequire">
+	          <div>
+	            <p class="btn_name">TimePicker</p>
+	            <p class="btn_exp">TimePicker Action Sheet 입니다.</p>
+	          </div>
+	          <img src="../../../resource/img/icon01.png" alt="" />
+	        </button>
+	        
+	        <!-- 일반 HTML형식 -->
+	        
+	        <!-- 달력 -->
+	        <button type="button" class="calendarActGeneral">
+	          <div>
+	            <p class="btn_name">Calendar</p>
+	            <p class="btn_exp">달력 Action Sheet 입니다.</p>
+	          </div>
+	          <img src="../../../resource/img/icon01.png" alt="" />
+	        </button>
+	        <!-- 댓글형 리스트 -->
+	        <button type="button" class="commentActGeneral">
+	          <div>
+	            <p class="btn_name">Comment</p>
+	            <p class="btn_exp">댓글형태 리스트 Action Sheet 입니다.</p>
+	          </div>
+	          <img src="../../../resource/img/icon01.png" alt="" />
+	        </button>
+	        <!-- 체크버튼 리스트 -->
+	        <button type="button" class="checkbuttonActGeneral">
+	          <div>
+	            <p class="btn_name">CheckButton</p>
+	            <p class="btn_exp">체크버튼 리스트 Action Sheet 입니다.</p>
+	          </div>
+	          <img src="../../../resource/img/icon01.png" alt="" />
+	        </button>
+	        <!-- 은행목록 -->
+	        <button type="button" class="bankActGeneral">
+	          <div>
+	            <p class="btn_name">BankList</p>
+	            <p class="btn_exp">은행목록 Action Sheet 입니다.</p>
+	          </div>
+	          <img src="../../../resource/img/icon01.png" alt="" />
+	        </button>
+	        <!-- 다국어 -->
+	        <button type="button" class="translationsActGeneral">
+	          <div>
+	            <p class="btn_name">translations 다국어</p>
+	            <p class="btn_exp">translations 다국어 Action Sheet 입니다.</p>
+	          </div>
+	          <img src="../../../resource/img/icon01.png" alt="" />
+	        </button>
+	        <!-- Time Picker -->
+	        <button type="button" class="timeActGeneral">
+	          <div>
+	            <p class="btn_name">TimePicker</p>
+	            <p class="btn_exp">TimePicker Action Sheet 입니다.</p>
+	          </div>
+	          <img src="../../../resource/img/icon01.png" alt="" />
+	        </button>
+	      </div>
+	    </div>
+	    <!--// content -->
+    </div>
+  </body>
+
+  <script src="../../../resource/js/config.js"></script>
+  <script data-main="pages/service/actionsheet/actionsheet.js" src="../../../vendor/require/require.js"></script>
+</html>

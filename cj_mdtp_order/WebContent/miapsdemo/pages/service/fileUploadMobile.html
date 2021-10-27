@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * File Upload html
+	 * 
+	 * @author chlee
+	 * @since 2016.11.16
+	 */
+-->
+<html>
+  <head>
+    <title>MiAPS Hybrid FileUpload Sample</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- css load -->
+    <link href="../../resource/css/reset.css" rel="stylesheet" />
+    <link href="../../resource/css/style_add.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="../../vendor/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../vendor/miaps/css/miaps.css" />
+    <!-- //css load -->
+
+    <script src="../../resource/js/config.js"></script>
+    <script
+      data-main="pages/service/fileUploadMobile.js"
+      src="../../vendor/require/require.js"
+    ></script>
+  </head>
+  <body>
+    <!-- header-->
+    <header>
+      <button type="button" class="back_btn"></button>
+      <span class="page_title">FILE UPLOAD</span>
+      <button type="button" class="home_btn"></button>
+    </header>
+    <!--// header-->
+
+    <div class="contents_wrap bg_gray">
+      <!-- <h2>FileUpload Mobile</h2> -->
+      <hr />
+      <div>
+        <div id="show-image"></div>
+        <div style="clear: both"></div>
+      </div>
+      <br />
+      <div style="text-align: center">
+        <button id="btnCamera" class="btn btn-block btn-default">
+          <span class="glyphicon glyphicon-camera"></span> Camera
+        </button>
+      </div>
+      <br />
+      <div style="text-align: center">
+        <button id="btnGallery" class="btn btn-block btn-default">
+          <span class="glyphicon glyphicon-picture"></span> Gallery
+        </button>
+      </div>
+      <br />
+      <div style="text-align: center">
+        <button id="btnUpload" class="btn btn-block btn-default">
+          <span class="glyphicon glyphicon-cloud-upload"></span> Upload - file
+        </button>
+      </div>
+      <br />
+      <div style="text-align: center">
+        <button id="btnUpload_base64" class="btn btn-block btn-default">
+          <span class="glyphicon glyphicon-cloud-upload"></span> Upload - base64
+        </button>
+      </div>
+      <br />
+      <div>
+        <div id="upload-image"></div>
+        <div style="clear: both"></div>
+      </div>
+      <br />
+    </div>
+
+    <script type="text/x-handlebars-template" id="display-template">
+      <div
+        id="_upload_display"
+        class="upload-display"
+        style="float:left; margin: 0 auto;"
+      >
+        <div class="upload-thumb-wrap">
+          local image:
+          <br />
+          <img
+            src="{{src}}"
+            class="img-thumbnail"
+            width="100%"
+            *height="236"
+            *
+            id="_preview"
+          />
+        </div>
+      </div>
+      <div id="desc" style="margin-top: 10px;">
+        <strong>
+          Name:
+        </strong>{{name}}<br />
+        <strong>
+          Size:
+        </strong>{{size}}bytes
+        <br />
+        <strong>
+          Type:
+        </strong>{{type}}
+      </div>
+    </script>
+
+    <script type="text/x-handlebars-template" id="upload-template">
+      <div
+        id="_upload_display2"
+        class="upload-display"
+        style="float:left; margin: 0 auto;"
+      >
+        <div class="upload-thumb-wrap">
+          Upload image:
+          <br />
+          <img
+            src="{{path}}"
+            class="img-thumbnail"
+            width="100%"
+            height="236"
+            id="_preview"
+          />
+        </div>
+      </div>
+      <div id="desc2" style="margin-top: 10px;">
+        <strong>
+          image URL:
+        </strong>
+        <span style="word-break: break-word;">
+          {{path}}
+        </span>
+        <br />
+      </div>
+    </script>
+  </body>
+</html>

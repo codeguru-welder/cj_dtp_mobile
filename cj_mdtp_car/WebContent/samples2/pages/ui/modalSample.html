@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width" name="viewport">
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <link href="../../vendor/bootstrap/css/bootstrap4.css" rel="stylesheet">
+  <link href="../../vendor/miaps/css/miaps.css" rel="stylesheet">
+
+  <script src="../../vendor/jquery/jquery.min.js" type="text/javascript"></script>
+
+  <title>Modal Sample</title>
+
+  <script src="../../resource/js/miaps_simple_modal.js" type="text/javascript"></script>
+
+  <script>
+    // Button Event
+    function miapsModalEvent() {
+      var msg = $('#inputMsg').val()
+      showModal(msg, 'confirm', exFn)
+      return false
+    }
+
+    // After miapsModal Event
+    function exFn() {
+      console.log(glMsg)
+      if (glMsg.toUpperCase().startsWith('HTTP')) {
+        location.href = glMsg
+      } else {
+        console.log('NO URL')
+      }
+    }
+
+    function goBack() {
+      window.history.back()
+    }
+  </script>
+  <style>
+    .row div:first-child {
+      padding-right: 0;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>Modal Sample</h1>
+    <hr>
+  </div>
+  <div class="main">
+    <div class="row">
+      <div class="col-9">
+        <input class="form-control" id="inputMsg" placeholder="Insert URL (https://example.com)" type="text">
+      </div>
+      <div class="col-3">
+        <button class="btn btn-outline-dark" onclick="miapsModalEvent()">POP!</button>
+      </div>
+    </div>
+    <p>
+      <br>
+    <h3>사용법</h3>
+    <blockquote>
+      Simple Modal은 jQuery를 필요로 합니다.
+    </blockquote>
+    <ul>
+      <li><code>showModal()</code>함수는 <code>onclick</code> 이벤트로 바로 호출하지 않고 버튼 이벤트 함수 내부에서 호출하는것을 권장합니다.</li>
+      <li><code>showModal(msg, type, event)</code>함수를 이용하여 <i>miapsModal</i>을 호출합니다.</li>
+      <li><code>msg</code>는 <i>miapsModal</i>에 출력하고 싶은 문자열입니다.</li>
+      <li><code>type</code>은 <i>miapsModal</i>의 버튼을 결정합니다.</li>
+      <ul>
+        <li><code>[ok]</code> : OK 버튼 하나만 나타냅니다.</li>
+        <li><code>[confirm]</code> : confirm 버튼과 cancel 버튼을 표시합니다.</li>
+        <li><code>[other text]</code> : 그 외의 텍스트는 OK 버튼 자리에 입력됩니다.</li>
+      </ul>
+      <li><code>event</code>는 <i>miapsModal</i>의 확인 버튼 이후의 이벤트를 함수로 구현하여 넣습니다.</li>
+    </ul>
+  </div>
+  <div>
+    <button style="width: 100%" class="btn btn-outline-danger mt-5" onclick="goBack()">Back</button>
+  </div>
+</div>
+</body>
+</html>

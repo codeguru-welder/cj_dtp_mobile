@@ -1,0 +1,104 @@
+@charset "utf-8";
+/* base */
+body { margin: 0; padding: 0; background-color: #fff; }
+img,fieldset { border:0 none;}
+dl,ul,ol,li { list-style: none; }
+hr { display:none; }
+h1,h2,h3,h4,h5,dl,dt,dd,ul,li,ol,th,td,p,blockquote,form,fieldset,legend,body { margin: 0; padding: 0; font-family: '돋움', 'Dotum', '굴림', 'gulim', 'Helvetica', 'Apple-Gothic'; letter-spacing: -1px; }
+a { text-decoration: none; }
+a:link, a:hover, a:active { text-decoration: none; }
+input, select, textarea { vertical-align: middle; }
+
+.nodp { display: none; }
+.clr { clear: both; }
+.imbg { background: url('') no-repeat; }
+
+input[type="text"], input[type="password"] { margin: 0; padding: 3px; border: 1px solid #B8BFE9; -webkit-appearance: none; -webkit-border-radius: 1px; }
+input[type="checkbox"] { width: 16px; height: 16px; border-color: #999; background-color: #fff; -webkit-appearance: none; -webkit-border-radius: 3px; }
+input:checked[type="checkbox"] { border-color: #999; background-color: #fff; -webkit-appearance: checkbox; }
+
+#mobileWrap { width: 288px; margin: 0 auto; padding: 0 13px; }
+#mobileMenuWrap { width: 288px; margin: 0 auto; padding: 0px 13px; vertical-align: middle;}
+
+#topWrap h1 {height:22px;margin:10px 0 8px 4px;text-indent:-1000em;overflow:hidden;}
+#topWrap h2 {height:12px;margin:10px 0 8px 4px;text-indent:-1000em;overflow:hidden;}
+
+#contentsWrap { width: 288px; padding-top: 9px; background-color: #CBCEDB;  background-position: left -33px; }
+#contentsWrap form { padding: 13px 14px 3px 14px; background-color: #F0F2FB; border-left: 1px solid #CBCEDB; border-right: 1px solid #CBCEDB; }
+#contentsWrap legend { display: none; }
+#contentsWrap h2 { color: #434095; font-size: 17px; font-weight: bold; margin-bottom: 5px; }
+	/* Login Error msg */
+	.err_msg_wrap { padding: 0 3px 0 50px; background-position: -290px -2px; padding-bottom: 10px; }
+	.err_msg_wrap .msg { color: #666; font-size: 11px; text-align: justify; letter-spacing: -1px; }
+	.err_pic_msg_wrap { padding: 5px 2px 0 48px; background-position: -290px -2px; padding-bottom: 10px; }
+	.err_pic_msg_wrap .msg_pic { color: #666; font-size: 11px; letter-spacing: -1px; }
+
+	/* Login Box */
+	.login_brd_wrap { position: relative; height: 100%; padding: 1px; background-color: #F0F2FB; }
+	.login_wrap { position: relative; padding: 12px 16px 3px 14px; background-color: #FFF; }
+	.login_wrap dl { height: 100%; }
+	.login_wrap dt { display: block; float: left; width: 68px; height: 33px; color: #606D93; font-size: 14px; line-height: 35px; font-weight: bold; overflow: hidden; }
+	.login_wrap dt label { letter-spacing: -1px; white-space: nowrap; }
+	.login_wrap dt label.id { letter-spacing: 5px; }
+	.login_wrap dd { display: block; float: right; height: 27px; padding: 3px 0; }
+	.login_wrap dd input { width: 147px; height: 18px; font-size: 100%; border: 1px solid #B8BFE9; }
+
+	.id_save { clear: both; padding: 5px 0 8px 0; vertical-align: middle; text-align: right; }
+	.id_save label { color: #666; font-size: 13px; font-weight: bold; vertical-align: middle; padding: 0 2px; letter-spacing: 0; }
+
+	.notice_save { padding-bottom:5px;font-size:11px;line-height:1.4em;color:#666;}
+
+	/* Pic Char */
+	#guess { background-color: #EBEEF9; }
+	.refresh { position: relative; height: 47px; padding: 0 2px; margin-top: 3px; }
+		#guessImage { width: 160px; height: 33px; border: 1px solid #C0C0C0; }
+		.btRefresh { position: absolute; top: 0; right: 2px; display: block; width: 55px; height: 35px; background-position: -70px -50px; text-indent: -1000em; overflow: hidden; z-index: 2; }
+
+	/*--- 회원가입/비번찾기  ---*/	
+	.join_search{width:218px;margin:4px 0 0 -8px;padding:0 0 0 16px;border-top:1px solid #EEF0F4;}
+	.join_search a{color:#4E5F95;font-size:13px;letter-spacing:-1px;line-height:37px;}
+
+	.notice_save2{margin:5px 0 0 8px;padding-bottom:5px;color:#555;font-size:12px;letter-spacing:-1px;line-height:20px;}
+	.notice_save3{margin:5px 0 0 7px;padding-bottom:5px;color:#555;font-size:12px;letter-spacing:-1px;line-height:15px;}
+	#notice_fb{display:none;}
+
+	/* 서비스 아이콘 */
+	.ns{overflow:hidden;margin:5px 10px 0}
+	.ns li{overflow:hidden;position:relative;float:left;width:75px;height:86px;background:url() no-repeat 5px 3px}
+	.ns a{overflow:hidden;display:block;width:100%;height:100%;text-align:center;font-size:0.86em;line-height:1em;letter-spacing:-1px}
+	.ns .i{display:block;width:57px;height:57px;margin:7px 0 6px 9px;background:#e1e1e1 url()}
+	.ns .wn{white-space:nowrap}
+	.ns1 .i{background-position:0 0}
+	.ns2 .i{background-position:-57px 0}
+	.ns3 .i{background-position:-114px 0}
+	.ns4 .i{background-position:-171px 0}
+	.ns5 .i{background-position:0 -57px}
+	.ns6 .i{background-position:-57px -57px}
+	.ns7 .i{background-position:-114px -57px}
+	.ns8 .i{background-position:-171px -57px}
+	.ns9 .i{background-position:0 -114px}
+	.ns10 .i{background-position:-57px -114px}
+	.ns11 .i{background-position:-114px -114px}
+	.ns12 .i{background-position:-171px -114px}
+	.ns13 .i{background-position:0 -171px}
+	.ns14 .i{background-position:-57px -171px}
+	.ns15 .i{background-position:-114px -171px}
+	.ns16 .i{background-position:-171px -171px}
+	.ns17 .i{background-position:0 -228px}
+
+	/* 로그인 버튼 */
+	#login_btn {width:288px; height:40px; padding:1px 85px 1px 85px;}
+	
+	.imgbtn { display: block; width: 68px; height: 31px; background-position: left -50px; margin: 10px auto 8px auto; -webkit-border-radius: 0;text-indent:-3000em;border:none; }
+
+	/* 로그인 박스 bg */
+	.login_inlt, .login_inrt, .login_inlb, .login_inrb { position: absolute; display:none; width: 3px; height: 3px; overflow: hidden; border: none; z-index: 2; }
+		.login_inlt, .login_inrt { top: 0px; }
+		.login_inlb, .login_inrb { bottom: 0px; }
+		.login_inlt { left: 0px; background-position: -50px top; }
+		.login_inrt { right: 0px; background-position: -53px top; }
+		.login_inlb { left: 0px; background-position: -50px -3px; }
+		.login_inrb { right: 0px; background-position: -53px -3px; }
+
+#footerWrap { padding-top: 3px; background-position: left -45px; }
+	.copy { color: #999; font-size: 10px; font-family: 'Tahoma', 'Helvetica'; text-align: center; letter-spacing: 0; padding: 8px 0; background-color: #fff; }

@@ -1,0 +1,24 @@
+	* {margin:0; padding:0;}
+	body {margin:0; padding:0; font-size:.75em; background:url('../app/img/backbg.jpg') repeat-x left top; 
+	      font-family:"���� ���", Malgun gothic, "����", Dotum, "����", Gulim, AppleGothic;}
+	img {vertical-align:top;}
+	a:hover, a:active, a:focus {text-decoration:underline;}
+	img {border:none;}
+	
+	fieldset {border:none;}
+	legend {display:none;}
+
+	#container {width:262px; height:400px; margin:0 auto;}
+	
+	#logtop {width:262px; height:61px; background:url('../app/img/log_logo.jpg') no-repeat left top ;}
+
+	#contents .login_area form {
+		position:relative;
+		float:left; width:262px; height:121px;
+		background:url('../app/img/log_boxbg.jpg') no-repeat left top;}
+	.login_area table {width:210; height:103;  margin:0px 22px 0px 22px;}
+	.login_area table th {padding:5px 0; width:104px; text-align:left;}
+
+	#footer-n {clear:both; width:262px; height:78px; padding:10px 5px;}
+	#footer-c {width:262px; height:40px; padding:1px 85px 1px 85px;}
+	#footer-s {color:#666; width:262px; height:30px; padding:12px 15px 10px 17px; font-size:90%;}

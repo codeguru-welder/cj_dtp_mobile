@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mink.connectors.cjlogistics.mapper.ProjectMapper">
+
+   <!-- resultType= egovMap은 map을 작성해 주는 class (egovframework.rte.psl.dataaccess.util.EgovMap) -->
+   
+   <select id="selectUser" resultType="egovMap" parameterType="Map">
+        select user_id AS userId, user_nm AS userNm
+        from project_user
+        where user_id = #{id}
+        and user_pw = #{pw}
+    </select>
+    
+    <select id="selectwelfare" resultType="egovMap"  parameterType="Map">
+		SELECT * FROM DEMO_WELFARE_LISTS		
+		WHERE 1 = 1
+		<if test="id != null">
+       	AND ID = #{id}
+		</if>
+	</select>
+	
+	<select id="select_req_welfare" resultType="egovMap"  parameterType="Map">
+		SELECT * FROM DEMO_WELFARE_REQLIST
+		WHERE USERID = #{id}		
+	</select>
+	
+	<select id="insert_req_welfare" parameterType="Map">
+		INSERT INTO DEMO_WELFARE_REQLIST 
+			(USERID, REQTITLE, REQDATE, REQSTATUS)
+		VALUES (
+			#{id},
+			#{title},
+			#{date},			
+			'진행중')		
+	</select>
+	
+    <!-- oracle -->
+    <select id="getSpeedTestList" resultType="egovMap" parameterType="int">
+		<![CDATA[
+	    select 
+			seq, value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, ROWNUM AS paste_id
+		from speed_test
+		where rownum >= 1 and rownum <= #{limit}
+		]]> 
+	</select>
+	
+	<!-- MySQL
+    <select id="getSpeedTestList" resultType="egovMap" parameterType="String">
+		<![CDATA[
+	    select 
+			seq, value0, value1, value2, value3, value4, value5, value6, value7, value8, value9 
+		from speed_test
+		limit #{limit}
+		]]> 
+	</select>
+	-->
+	
+	<select id="getUserList" resultType="egovMap" parameterType="Map">
+		<![CDATA[	    
+		SELECT * FROM ( 
+			SELECT ROWNUM RNUM, LST.*
+			FROM (	
+				SELECT user_id
+				    ,user_pw
+				    ,user_nm
+		    	FROM project_user
+				) LST
+			) TT
+		WHERE RNUM BETWEEN #{START_ROW} AND #{END_ROW}		
+		]]> 
+	</select>
+	
+	<select id="getUserTotalCnt" resultType="egovMap">
+		SELECT 
+			COUNT(*) AS CNT
+		FROM project_user
+	</select>
+
+	<select id="getAllUser" resultType="egovMap">
+		SELECT * FROM project_user
+	</select>
+</mapper>

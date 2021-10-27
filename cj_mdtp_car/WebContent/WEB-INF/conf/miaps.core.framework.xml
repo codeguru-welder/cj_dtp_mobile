@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- messages from resource bundle -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">									
+		<property name="basenames">
+			<list>
+				<value>file:${mink.home}/conf/mink-messages</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Remote Query configuration -->
+	<bean id="remoteQuery" class="com.thinkm.mink.connector.DefaultModule" scope="prototype">
+		<constructor-arg>
+			<ref bean="rqueryConnectionFactory"/>
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="rqueryRunnable"/>
+		</constructor-arg>
+	</bean>
+
+	<bean id="rqueryConnectionFactory" class="com.thinkm.mink.rquery.RqueryDataSourceFactory" />
+
+	<bean id="rqueryRunnable" class="com.thinkm.mink.rquery.RemoteQueryRunnable" scope="prototype">
+		<constructor-arg>
+			<ref bean="rqueryConverter"/>
+		</constructor-arg>
+	</bean>
+
+	<bean id="rqueryConverter" class="com.thinkm.mink.rquery.RemoteQueryConverter" />
+
+	<!-- Email service configuration -->
+	<bean id="emailService" class="com.thinkm.mink.connector.DefaultModule" scope="prototype">
+		<constructor-arg>
+			<ref bean="emailConnectionFactory"/>
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="emailServiceRunnable"/>
+		</constructor-arg>
+	</bean>
+
+	<bean id="emailConnectionFactory" class="com.thinkm.mink.connector.NullDataSourceFactory"/>
+
+	<bean id="emailServiceRunnable" class="com.thinkm.mink.email.EmailServiceRunnable" scope="prototype">
+		<constructor-arg>
+			<ref bean="emailServiceConverter"/>
+		</constructor-arg>
+	</bean>
+
+	<bean id="emailServiceConverter" class="com.thinkm.mink.email.EmailServiceConverter" />
+
+	<!-- MiAPS Servivce configuration -->
+	<bean id="miapsService" class="com.thinkm.mink.connector.DefaultModule" scope="prototype">
+		<constructor-arg>
+			<ref bean="miapsConnectionFactory"/>
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="miapsServiceRunnable"/>
+		</constructor-arg>
+	</bean>
+
+	<bean id="miapsConnectionFactory" class="com.thinkm.mink.miaps.MiapsDataSourceFactory"/>
+
+	<bean id="miapsServiceRunnable" class="com.thinkm.mink.miaps.MiapsServiceRunnable" scope="prototype">
+		<constructor-arg>
+			<ref bean="miapsServiceConverter"/>
+		</constructor-arg>
+	</bean>
+
+	<bean id="miapsServiceConverter" class="com.thinkm.mink.miaps.MiapsServiceConverter" scope="prototype" />
+
+	<!-- Default Mink Service -->
+	<bean id="minkService" class="com.thinkm.mink.connector.DefaultModule" scope="prototype">
+		<constructor-arg>
+			<ref bean="minkConnectionFactory"/>
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="minkRunnable"/>
+		</constructor-arg>
+	</bean>
+
+	<bean id="minkConnectionFactory" class="com.thinkm.mink.connector.DefaultDataSourceFactory" />
+
+	<bean id="minkRunnable" class="com.thinkm.mink.connector.DefaultRunnable" scope="prototype">
+		<constructor-arg>
+			<ref bean="minkConverter"/>
+		</constructor-arg>
+		<property name="runMethods">
+			<props>
+				<prop key="checkLicense">com.thinkm.mink.connector.login.License.checkLicense</prop>
+				<prop key="saveDeviceInfo">com.thinkm.mink.connector.login.Device.saveDeviceInfo</prop>
+				<prop key="savePushInfo">com.thinkm.mink.connector.login.Device.savePushInfo</prop>
+				<prop key="listPushInfo">com.thinkm.mink.connector.login.Device.listPushInfo</prop>
+				<prop key="listTaskInfo">com.thinkm.mink.connector.login.Device.listTaskInfo</prop>
+				<prop key="receivePush">com.thinkm.mink.connector.login.Device.receivePush</prop>
+				<prop key="download">com.thinkm.mink.connector.login.Device.fileDownload</prop>
+				<prop key="login">com.thinkm.mink.connector.login.User.login</prop>
+				<prop key="appcenter">com.thinkm.mink.connector.appcenter.AppCenterMan.getappinfo</prop>
+				<prop key="AppVerChk">com.thinkm.mink.connector.appversion.AppVerChk.appverchk</prop>
+				<prop key="initDevice">com.thinkm.mink.connector.login.Device.initDevice</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="minkConverter" class="com.thinkm.mink.connector.DefaultConvertor" scope="prototype" />
+
+
+	<!-- default beans -->
+	<bean id="defaultProtocolEncryptor" class="com.thinkm.mink.core.protocol.DefaultProtocolEncryptor">
+		<constructor-arg value="[default]" />
+	</bean>
+	<bean id="aesProtocolEncryptor" class="com.thinkm.mink.core.protocol.AESProtocolEncryptor">
+		<constructor-arg value="[default]" /> <!-- 16bytes(128bit) or 32bytes(256bit) key required -->
+		<!--
+		  - 256bit 키를 사용하기 위해서는 자바 다운로드 사이트에서 해당 버전의 라이브러리를 받아 설치해야 한다.
+		  - 다운로드 파일 - Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files for JDK/JRE
+		  - 설치 위치 - $JAVA_HOME/jre/lib/security 
+		 -->
+	</bean>
+	<bean id="ariaProtocolEncryptor" class="com.thinkm.mink.core.protocol.ARIAProtocolEncryptor">
+		<constructor-arg value="[default]" /> <!-- 16bytes(128bit) or 24bytes(192bit) or 32bytes(256bit) key required -->
+	</bean>
+	<bean id="seedProtocolEncryptor" class="com.thinkm.mink.core.protocol.SEEDProtocolEncryptor">
+		<constructor-arg value="[default]" />
+	</bean>
+	<!-- 한컴시큐어 XecureSmart 구간암호화 사용, Xecure 라이브러리 및 서버가 필요합니다. -->
+	<bean id="xecureProtocolEncryptor" class="com.thinkm.mink.core.protocol.XecureProtocolEncryptor" />
+	 
+		
+	<bean id="defaultPasswordEncryptor" class="com.thinkm.mink.commons.encryption.DefaultPasswordEncryptor"></bean>
+	<bean id="aesPasswordEncryptor" class="com.thinkm.mink.commons.encryption.AESPasswordEncryptor">
+		<constructor-arg value="[default]" /> <!-- 16bytes(128bit) key -->
+	</bean>
+	<bean id="ariaPasswordEncryptor" class="com.thinkm.mink.commons.encryption.ARIAPasswordEncryptor">
+		<constructor-arg value="[default]" /> <!-- 32bytes(256bit) key -->
+	</bean>
+	<bean id="sha256PasswordEncryptor" class="com.thinkm.mink.commons.encryption.Sha256PasswordEncryptor"></bean>
+	<bean id="seedPasswordEncryptor" class="com.thinkm.mink.commons.encryption.SEEDPasswordEncryptor">
+		<constructor-arg value="[default]" /> <!-- 16bytes(128bit) key -->
+	</bean>
+	
+	<bean id="noPasswordCheckingRule" class="com.thinkm.mink.core.auth.NoPasswordCheckingRule"></bean>
+	<bean id="defaultPasswordCheckingRule" class="com.thinkm.mink.core.auth.DefaultPasswordCheckingRule"></bean>
+	<bean id="nullAuthenticator" class="com.thinkm.mink.core.auth.NullAuthenticator"></bean>
+	<bean id="defaultAuthenticator" class="com.thinkm.mink.core.auth.DefaultAuthenticator"></bean>
+
+</beans>

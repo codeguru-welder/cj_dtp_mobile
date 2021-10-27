@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+      name="viewport"
+    />
+    <title>약관동의</title>
+
+    <!-- css load -->
+    <link href="../../resource/css/common.css" rel="stylesheet" />
+    <link href="../../resource/css/style.css" rel="stylesheet" />
+    <!-- //css load -->
+  </head>
+  <body>
+    <!-- 헤더-->
+    <div class="header">
+      <a href="#" id="go_back" class="back_btn"
+        ><i class="fas fa-arrow-left"></i></a
+      ><span class="h_title">약관동의</span>
+    </div>
+
+    <!-- content-->
+    <div class="content_wrap">
+      <!-- 약관항목-->
+      <div class="agree_wrap">
+        <div class="agree_box">
+          <input type="checkbox" id="agr_1" class="ess_chk" /><label for="agr_1"
+            >서비스 이용약관(필수)</label
+          ><span id="btn_detail01"
+            >자세히 <i class="fas fa-chevron-right"></i
+          ></span>
+        </div>
+        <div class="agree_box">
+          <input type="checkbox" id="agr_2" class="ess_chk" /><label for="agr_2"
+            >개인정보 처리방침(필수)</label
+          ><span id="btn_detail02"
+            >자세히 <i class="fas fa-chevron-right"></i
+          ></span>
+        </div>
+        <div class="agree_box">
+          <input type="checkbox" id="agr_3" class="ess_chk" /><label for="agr_3"
+            >개인(신용)정보<br />수집/활용/제공 동의(필수)</label
+          ><span id="btn_detail03"
+            >자세히 <i class="fas fa-chevron-right"></i
+          ></span>
+        </div>
+        <div class="agree_box">
+          <input type="checkbox" id="agr_4" class="ess_chk" /><label for="agr_4"
+            >전송자의 개인신용정보<br />수집/활용 동의(필수)</label
+          ><span id="btn_detail04"
+            >자세히 <i class="fas fa-chevron-right"></i
+          ></span>
+        </div>
+      </div>
+      <!-- 모든 약관 동의 -->
+      <div class="all_agree_wrap">
+        <input type="checkbox" id="agr_all" /><label for="agr_all"
+          >모든 약관에 동의합니다.</label
+        >
+      </div>
+    </div>
+
+    <!-- 공통 버튼 -->
+    <div class="btn_wrap">
+      <button id="btn_agree" type="submit" class="common_btn act_btn" disabled>
+        약관동의
+      </button>
+    </div>
+
+    <!-- js load -->
+    <!-- <script src="../../resource/js/jquery-3.3.1.min.js"></script> -->
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../resource/js/all.min.js"></script>
+    <script src="../../resource/js/common.js"></script>
+    <script
+      type="text/javascript"
+      src="../../vendor/miaps/js/miaps_hybrid.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../vendor/miaps/js/miaps_page.js"
+    ></script>
+    <!--// js load -->
+
+    <script>
+      $("#go_back").on("click", function (e) {
+        e.preventDefault();
+        miapsPage.back();
+      });
+      $("#btn_detail01, #btn_detail02, #btn_detail03, #btn_detail04").on(
+        "click",
+        function (e) {
+          e.preventDefault();
+          msgbox_toast("준비중입니다.");
+        }
+      );
+      $("#btn_agree").on("click", function (e) {
+        e.preventDefault();
+        miapsPage.go("LN110", "view/LN/LN110.html", {}, "replace");
+      });
+    </script>
+  </body>
+</html>

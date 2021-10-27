@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+      name="viewport"
+    />
+    <title>miapsdemo8888888888</title>
+  </head>
+
+  <body></body>
+  <!-- js load -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="resource/js/common.js"></script>
+
+  <script type="text/javascript" src="vendor/miaps/js/miaps_hybrid.js"></script>
+  <script type="text/javascript" src="vendor/miaps/js/miaps_page.js"></script>
+  <!--// js load -->
+  <script>
+    $(function () {
+      // Android WebView Clear History.
+      miaps.mobile(
+        {
+          type: "clearhistory",
+          param: "",
+          callback: "",
+        },
+        null
+      );
+
+      // miaps Page 및 Popup History Array를 비웁니다.
+      miapsPage.clear();
+
+      /* 버전체크 예제 (PC웹, 개발 테스트)*/
+      /*miaps.updateApp("platform_cd=2000012&sw_name=kr.co.miaps.mshop.dev", _cb.cbVerChk);*/
+      miaps.updateApp(null, null); /* 앱 전용 */
+
+      // 네이티브 기능 페이지 이동
+      miapsPage.go("main.html");
+    });
+  </script>
+</html>

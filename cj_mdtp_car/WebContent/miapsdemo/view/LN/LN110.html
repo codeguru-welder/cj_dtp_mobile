@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
+      name="viewport"
+    />
+    <title>기본정보입력</title>
+
+    <!-- css load -->
+    <link href="../../resource/css/common.css" rel="stylesheet" />
+    <link href="../../resource/css/style.css" rel="stylesheet" />
+    <!-- //css load -->
+  </head>
+  <body>
+    <!-- 헤더-->
+    <div class="header">
+      <a id="go_back" class="back_btn"><i class="fas fa-arrow-left"></i></a
+      ><span class="h_title">기본정보</span>
+    </div>
+
+    <!-- content-->
+    <div class="content_wrap">
+      <div class="g_txt" style="margin-bottom: 20px">
+        회원 가입을 위한 기본 정보 입력이 필요합니다.
+      </div>
+      <!-- 이메일 -->
+      <div class="title">
+        아이디(이메일)<span class="status_off" style="margin-left: auto"
+          >중복 확인</span
+        >
+      </div>
+      <!-- 중복확인 버튼-사용가능한 아이디이면 status_off 에서 status_on 으로 클래스 변경  -->
+      <div class="email_wrap">
+        <input type="text" class="ess" />
+        <i class="fas fa-at"></i>
+        <input type="text" placeholder="직접입력" class="ess" />
+        <span class="email_combo"></span>
+      </div>
+      <br />
+
+      <!-- 비밀번호-->
+      <div class="title">비밀번호</div>
+      <div class="pass_wrap">
+        <input type="password" class="ess" />
+      </div>
+      <br />
+
+      <!-- 비밀번호 확인-->
+      <div class="title">비밀번호 확인</div>
+      <div class="pass_wrap">
+        <input type="password" class="ess" />
+      </div>
+      <br />
+
+      <!-- 이름 -->
+      <div class="title">이름</div>
+      <div class="text_wrap">
+        <input type="text" class="ess" />
+      </div>
+      <br />
+
+      <!-- 휴대폰 번호입력 -->
+      <div class="title">휴대폰 번호입력</div>
+      <div class="phone_wrap">
+        <input type="tel" name="" id="" maxlength="3" class="ess" /><i
+          class="fas fa-minus"
+        ></i>
+        <input type="tel" name="" id="" maxlength="4" class="ess" /><i
+          class="fas fa-minus"
+        ></i>
+        <input type="tel" name="" id="" maxlength="4" class="ess" />
+      </div>
+      <br />
+
+      <!-- 알림 메시지 수신 -->
+      <div class="round_box" style="text-align: left">
+        <input type="checkbox" id="agr_rcv" checked /><label for="agr_rcv"
+          >알림 메시지 수신</label
+        >
+      </div>
+      <br />
+    </div>
+
+    <!-- 가입버튼 -->
+    <div class="btn_wrap">
+      <button id="btn_SignUp" type="submit" class="common_btn act_btn" disabled>
+        회원가입
+      </button>
+    </div>
+
+    <!-- js load -->
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../resource/js/all.min.js"></script>
+    <script src="../../resource/js/common.js"></script>
+    <script
+      type="text/javascript"
+      src="../../vendor/miaps/js/miaps_hybrid.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../vendor/miaps/js/miaps_page.js"
+    ></script>
+    <!--// js load -->
+
+    <script>
+      $("#go_back").on("click", function (e) {
+        e.preventDefault();
+        miapsPage.back();
+      });
+      $("#btn_SignUp").on("click", function (e) {
+        e.preventDefault();
+        msgbox_toast("가입되었습니다.");
+        miapsPage.go("MA/MA050.html");
+      });
+    </script>
+  </body>
+</html>

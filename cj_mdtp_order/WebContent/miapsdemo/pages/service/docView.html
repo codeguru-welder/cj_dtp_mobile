@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- 
+	/*
+	 * Scan html
+	 * 
+	 * @author chlee
+	 * @since 2016.12.14
+	 */
+-->
+<html>
+  <head>
+    <title>Documents Viewer</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+	/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- css load -->
+    <link href="../../resource/css/reset.css" rel="stylesheet" />
+    <link href="../../resource/css/style_add.css" rel="stylesheet" />
+    <link 
+    	rel="stylesheet" 
+    	href="../../vendor/bootstrap/css/bootstrap.min.css"
+    />
+	<link rel="stylesheet" href="../../vendor/miaps/css/miaps.css">
+	<!-- //css load -->
+	
+    <script src="../../resource/js/config.js"></script>
+	<script
+		data-main="pages/service/docView.js"
+		src="../../vendor/require/require.js"
+	></script>
+  	
+  </head>
+  <body>
+    <!-- header-->
+    <header>
+      <button type="button" class="back_btn"></button>
+      <span class="page_title">Documents Viewer</span>
+      <button type="button" class="home_btn"></button>
+    </header>
+    <!--// header-->
+
+    <div class="contents_wrap bg_gray">
+    	<br/>
+		<form id="frmDocView" name="frmDocView" method="post" onSubmit="return false;">
+			<div class="form-group">
+	      		<label for="msurl"><span class="glyphicon glyphicon-globe"></span> MiAPS Server URL:</label>
+	      		<input type="text" class="form-control" id="msurl" name="msurl" value="http://miaps.thinkm.co.kr/miaps5/minkSvc" placeholder="http://miaps.thinkm.co.kr/miaps5/minkSvc">
+	   		</div>
+	    <div class="form-group">
+	      <label for="docurl"><span class="glyphicon glyphicon-globe"></span> Documents URL:</label>
+	      <input type="text" class="form-control" id="docurl" name="docurl" value="http://miaps.thinkm.co.kr/dv_test.docx" placeholder="http://miaps.thinkm.co.kr/t.docx">
+	    </div>
+	    <div class="help-block">Documents Viewer 예제 입니다. 단말에서만 테스트 가능합니다.</div>
+	    <br/>
+	    <div align="center"><button id="btnRunDocView" class="btn btn-default"><span class="glyphicon glyphicon-expand"></span> DocView실행</button></div>	
+	</form>
+    </div>
+  </body>
+</html>

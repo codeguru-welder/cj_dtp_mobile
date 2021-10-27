@@ -1,0 +1,6 @@
+[2021-10-19 15:56:04:855] [deviceId:MiAPS-WebAppEmulator] [targetUrl:MIAPS-LOGIN-TEST] [20211019155604.710 ~ 20211019155604.854] [intervals:144] [user: -1::] [result: 200] 
+[2021-10-19 15:56:22:104] [deviceId:MiAPS-WebAppEmulator] [targetUrl:MIAPS-LOGIN-TEST] [20211019155622.090 ~ 20211019155622.103] [intervals:13] [user: -1::] [result: 200] 
+[2021-10-19 16:25:54:742] [deviceId:MiAPS-WebAppEmulator] [targetUrl:MIAPS-LOGIN-TEST] [20211019162554.634 ~ 20211019162554.741] [intervals:107] [user: -1::] [result: 200] 
+[2021-10-19 16:50:00:757] [deviceId:MiAPS-WebAppEmulator] [targetUrl:MIAPS-LOGIN-TEST] [20211019164840.356 ~ 20211019165000.756] [intervals:80400] [user: -1::] [result: 200] 
+[2021-10-19 17:00:07:780] [deviceId:MiAPS-WebAppEmulator] [targetUrl:AppVerChk-AppVerChk] [20211019170007.662 ~ 20211019170007.780] [intervals:118] [user: -1::] [result: 200] 
+[2021-10-19 17:00:08:207] [deviceId:MiAPS-WebAppEmulator] [targetUrl:NONE] [20211019170008.188 ~ 20211019170008.207] [intervals:19] [user: -1::test] [result: -302] [-302] Invalid userid (-302)

@@ -1,0 +1,287 @@
+/* 기본 */
+body {font-family: "Arial", "굴림"; font-size: 12px; color: #555555; line-height:17px;}
+body {
+	scrollbar-face-color: #F7F7F7; 
+	scrollbar-shadow-color:#B3B3B3; 
+	scrollbar-highlight-color:#B3B3B3; 
+	scrollbar-3dlight-color: #FFFFFF; 
+	scrollbar-darkshadow-color: #FFFFFF; 
+	scrollbar-track-color: #DDDDDD; 
+	scrollbar-arrow-color: #8B9EA6;
+}
+
+td {  
+	font-family: 맑은 고딕, HYHeadLine, 돋움, verdana, arial, helvetica, sans-serif;
+	font-size: 12px;
+	color: #333333;
+	line-height:17px;
+	/*selector-dummy: expression(this.hideFocus=true);*/
+}
+ 
+a:link {text-decoration: none ; color: #1E5FAC;}
+a:visited {text-decoration: none ; color: #1E5FAC;}
+a:active {text-decoration: none ; color: #1E5FAC;}
+a:hover {text-decoration: none ; color: #D56C38;}
+
+
+.button_{
+	cursor:hand;
+	font-family: "Arial", "돋움";
+	font-weight:none; 
+	font-size:12px; 
+	color:#FFFFFF;
+	height:16px;
+	Width: 86px; 
+	margin:0px 0px; 
+	background:#5B9693; 
+	border-color: #4D807D;
+; border: 0px solid
+}
+
+
+.input_textfield {
+	height: 16px;
+	width: 100%;
+	padding: 3px 0px 0px 2px;
+	border: 1px solid #CCCCCC;
+	font-family: "Arial", "돋움";
+	font-size: 12px;
+	color: #333333;
+	text-decoration: none;
+	background-color: #FFFFFF;
+	margin: 0px;
+} 
+
+.input_textfield_date {
+	height: 22px;
+	width: 130px;
+	padding: 3px 0px 0px 2px;
+	border: 1px solid #CCCCCC;
+	font-family: "Arial", "돋움";
+	font-size: 12px;
+	color: #333333;
+	text-decoration: none;
+	background-color: #FFFFFF;
+	margin: 0px;
+}
+
+
+ 
+.input_textarea {
+	height: 50px;
+	width: 100%;
+	padding: 2px 0px 0px 3px;
+	border: 1px solid #CCCCCC;
+	font-family: "Arial", "돋움";
+	font-size: 12px;
+	color: #666666;
+	text-decoration: none;
+	background-color: #FFFFFF;
+	margin: 0px;
+} 
+
+.input_combobox {
+	height: 16px;
+	width: 100%;
+	font-family: "Arial", "돋움";
+	font-size: 12px;
+	color: #666666;
+	text-decoration: none;
+	background-color: #FFFFFF;
+} 
+
+
+.select_combobox {
+	height: 20px; 
+	width: 150px;
+	font-family: "Arial", "돋움";
+	font-size: 12px;
+	color: #666666;
+	text-decoration: none;
+	background-color: #FFFFFF;
+	border:1px solid #cccccc; 
+} 
+
+.select_combobox1 {
+	height: 22px;
+	width: 130px;
+	font-family: "Arial", "돋움";
+	font-size: 12px;
+	color: #666666;
+	text-decoration: none;
+	background-color: #FFFFFF;
+	border:1px solid #cccccc; 
+} 
+
+.select_combobox2 {
+	height: 22px;
+	width: 90px;
+	font-family: "Arial", "돋움";
+	font-size: 12px;
+	color: #666666;
+	text-decoration: none;
+	background-color: #FFFFFF;
+	border: 1px solid #CCCCCC;
+} 
+
+.select_combobox3 {
+
+	height: 22px;
+	width: 75px;
+	font-family: "Arial", "돋움";
+	font-size: 12px;
+	color: #666666;
+	text-decoration: none;
+	background-color: #FFFFFF;
+	border: 1px solid #CCCCCC;
+}
+
+.select_combobox4 {
+	height: 16px;
+	width: 90px;
+	font-family: "Arial", "돋움";
+	font-size: 12px;
+	color: #666666;
+	text-decoration: none;
+	background-color: #FFFFFF;
+}
+
+.select_combobox5 {
+	height: 22px;
+	width: 100px;
+	font-family: "Arial", "돋움";
+	font-size: 12px;
+	color: #666666;
+	text-decoration: none;
+	background-color: #FFFFFF;
+	border: 1px solid #CCCCCC;
+}
+
+.table_nav_now {
+	font-family: "Arial", "굴림"; 
+	font-size: 12px; 
+	color: #2A78B1; 
+	font-weight: bold;}
+
+.title_black {font-family: "Arial", "돋움"; 
+	font-size: 14px;
+	color: #24334A;	
+	text-decoration: none;
+	font-weight: bold;}
+	
+.title_g {font-family: "Arial", "돋움"; 
+	font-size: 14px;
+	color: #005984;	
+	text-decoration: none;
+	font-weight: bold;}	
+
+.text_bule {
+	font-family:  "Arial", "굴림";
+	font-size: 12px;
+	color: #0066CC;
+	text-decoration: none;
+}
+
+.text_org {
+	font-family: "Arial", "굴림";
+	font-size: 12px;
+	color: #F37021;
+	text-decoration: none;
+    height: 13px;
+}
+
+.text bk{ font-family: "Arial", "굴림"; font-size: 12px; color: #000000;}
+.text a:link {text-decoration: none ; color: #1F305B;}
+.text a:visited {text-decoration: none ; color: #999999;}
+.text a:active {text-decoration: underline ; color: #CB9454;}
+.text a:hover {text-decoration: underline ; color: #CB9454;}
+
+.text_sm {
+	font-family:맑은 고딕, HYHeadLine, 돋움, verdana, arial, helvetica, sans-serif;
+    font-size:11px;
+    color: #333333;
+}
+
+.title_content {
+	font-family: "Arial", "돋움";
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.title_orange {
+	font-family: "Arial", "굴림";
+	font-size: 12px;
+	color: #FF6600;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.title_blue {
+    font-family: "Arial", "굴림"; 
+	font-size: 12px; 
+	color: #4E80CB; 
+	text-decoration: none; 
+	font-weight: bold;
+}
+
+.menu01 {font-family: "Arial", "굴림"; font-size: 12px; color: #5D6A81; text-decoration: none; font-weight: bold;}
+	A:link.menu01     {text-decoration: none ; color: #5D6A81; font-weight: bold;}
+  	A:visited.menu01  {text-decoration: none ; color: #5D6A81; font-weight: bold;}
+ 	A:active.menu01   {text-decoration: none ; color: #5D6A81; font-weight: bold;}
+  	A:hover.menu01    {text-decoration: none ; color: #D56C38; font-weight: bold;}
+.title_gr {
+
+	font-family: "Arial", "굴림";
+	font-size: 12px;
+	color: #6F811A;
+	text-decoration: none;
+	font-weight: bold;
+}
+.title_wh {
+
+
+	font-family: "Arial", "굴림";
+	font-size: 12px;
+	color: #FFFFFF;
+	text-decoration: none;
+	font-weight: bold;
+}
+.title_green {
+
+
+
+	font-family: "Arial", "굴림";
+	font-size: 12px;
+	color: #333333;
+	text-decoration: none;
+	font-weight: bold;
+}
+.input_textarea_b {
+
+	height: 150px;
+	width: 100%;
+	padding: 2px 0px 0px 3px;
+	border: 1px solid #CCCCCC;
+	font-family: "Arial", "돋움";
+	font-size: 12px;
+	color: #666666;
+	text-decoration: none;
+	background-color: #FFFFFF;
+	margin: 0px;
+}
+
+.input_textarea2 {
+	height: 170px;
+	width: 100%;
+	padding: 2px 0px 0px 3px;
+	border: 1px solid #CCCCCC;
+	font-family: "Arial", "돋움";
+	font-size: 12px;
+	color: #666666;
+	text-decoration: none;
+	background-color: #FFFFFF;
+	margin: 0px;
+}
+

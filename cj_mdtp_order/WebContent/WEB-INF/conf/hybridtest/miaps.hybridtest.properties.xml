@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+ <!--  
+  'cjlogistics' specific configurations.
+ -->
+	<bean id="mink.config.hybridtest" class="com.thinkm.mink.commons.util.MinkConfig" factory-method="getConfig">
+	    <!-- property name="loginPasswordEncryptor" value="sha256PasswordEncryptor" / -->
+	    
+		<property name="configProperties">
+			<props>
+			    <prop key="miaps.web.secure.login">Y</prop>
+
+				<!-- Default Settings -->
+				<prop key="document.server.domain">127.0.0.1</prop>
+				<prop key="document.server.port">8088</prop>
+				<prop key="document.server.timeout">180</prop>
+				
+				<prop key="miaps.factory.initial.connection">false</prop>
+				<prop key="log4j.config.file">${mink.home}/conf/mink-logging.log4j.xml</prop>
+				
+				<!-- Development Settings (-Dmink.runmode=loc) -->
+				<prop key="mink.server.url.loc"> http://127.0.0.1:8080/miaps/</prop>
+				<prop key="mink.server.url.ios.loc"> https://127.0.0.1:8080/miaps/app/</prop>
+				<prop key="mink.server.url.android.loc">http://127.0.0.1:8080/miaps/app/</prop>
+				
+				<!-- Development Settings (-Dmink.runmode=dev) -->
+				<prop key="mink.server.url.dev">http://miaps.thinkm.co.kr/cjlogistics</prop>
+				<prop key="mink.server.url.ios.dev">https://miaps.thinkm.co.kr/cjlogistics/app/</prop>
+				<prop key="mink.server.url.android.dev">http://miaps.thinkm.co.kr/cjlogistics/app/</prop>
+				
+				<!-- Production Settings (-Dmink.runmode=prod) -->
+				<prop key="mink.server.url.prod">https://server.domain</prop>
+				<prop key="mink.server.url.ios.prod">https://server.domain/miaps/app/</prop>
+				<prop key="mink.server.url.android.prod">http://server.domain/miaps/app/</prop>
+				
+				<!-- Distributor Settings -->
+				<prop key="miaps.distributor.lfpos.user">miaps</prop>
+				<prop key="miaps.distributor.lfpos.password">miaps</prop>
+				<prop key="miaps.distributor.lfpos.mode">file</prop>
+				
+				<!-- Extra Defined Settings -->
+				<prop key="execute.status.ok.code">200</prop>
+				<prop key="execute.status.ok.msg">요청을 완료하였습니다.</prop>
+				<prop key="execute.status.fail.code">500</prop>
+				<prop key="execute.status.fail.msg">오류가 발생하였습니다.</prop>
+				
+				<!-- 
+				external login process class.
+				must implement com.thinkm.mink.commons.login.LegacyLogin
+				-->
+				<prop key="interface.login.processor"></prop>
+				
+				<!-- Nice본인인증 서비스, code및password는 계약 된 값을 입력합니다. -->
+				<prop key="execute.nice.site.code"></prop>
+				<prop key="execute.nice.site.password"></prop>
+				
+				<prop key="execute.nice.site.domain.loc">192.168.0.2:8080/miaps/niceAuthSvc/</prop>
+				<prop key="execute.nice.site.domain.dev">miaps.thinkm.co.kr/miaps5/niceAuthSvc/</prop>
+				
+				<prop key="execute.nice.site.returnUrl.loc">http://127.0.0.1:8080/miaps/samples/nice/nice.auth.result.html</prop>				
+				<prop key="execute.nice.site.returnUrl.dev">http://127.0.0.1:8088/nice/nice.auth.result.html</prop>
+				
+				<!-- command=filedownload에서 사용하는 chatset, utf-8, 8859_1 -->
+				<prop key="miaps.download.file.charset">UTF-8</prop>
+				
+			</props>
+		</property>
+ 	</bean>
+</beans>

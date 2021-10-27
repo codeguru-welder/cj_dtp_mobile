@@ -1,0 +1,438 @@
+/* --------------------공통 ----------------------*/
+body{position: relative; width:100%; height: 100%; }
+input[type='text'], input[type='password'], input[type='tel'], input[type='number']{ border-bottom:solid 2px #d9d9d9; outline: none; font-size:15px;height: 30px;line-height: 30px; padding:0 5px;border-radius:0;}
+input[type='text']:focus, input[type='password']:focus, input[type='tel']:focus, input[type='number']:focus{border-bottom:solid 2px #005aab;}
+input::placeholder, textarea::placeholder{color:#8c8c8c;} 
+select{ -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url(../images/chevron-down.svg); background-position: 99% center;
+    background-repeat: no-repeat; background-size: 24px;padding-right:20px; font-size: 16px; border-radius: 0;background-color: #fff;}
+select::-ms-expand {display:none;}
+input[type="checkbox"]{display: none;}
+input[type="checkbox"] + label{font-size:18px; background-image: url(../images/btn_check00.png);background-repeat: no-repeat;background-size: 20px; background-position:0 center; 
+    padding:5px 0 5px 30px; display: block;} 
+input[type="checkbox"]:checked + label{background-image: url(../images/btn_check01.png); } 
+
+/* 헤더 */
+.header{height:60px; display:flex; align-items:center;}
+.header .back_btn{width:60px; height:60px; line-height: 60px; font-size: 15px;text-align: center;}
+.header .cls_btn{width:60px; height:60px; line-height: 60px; font-size: 15px;text-align: center; margin-left:auto;}
+.header .h_title{font-size: 20px;line-height: 60px; font-weight: 600;padding-left:20px; display: block;}
+.header .back_btn + .h_title{padding-left:0;}
+.header .back_btn:active,
+.header .cls_btn:active{background-color: #f0eeee;}
+
+/* 텍스트 */
+.g_txt{font-size:15px; color:#8c8c8c;}
+.red_txt{color:#ff3030 !important;}
+.white_txt{color:#fff !important;}
+.gray_txt{color:#585858 !important;}
+.blue_txt{color:#005aab !important;}
+.bold{font-weight: 600 !important;}
+.al_l{text-align: left !important;}
+.al_c{text-align: center !important;}
+.al_r{text-align: right !important;}
+.title{color:#005aab;font-size: 18px; font-weight: 600;margin-bottom:10px;display: flex; align-items: center;}
+.font16{font-size: 16px !important;} 
+.font18{font-size: 18px !important;} 
+.font20{font-size: 20px !important;} 
+
+/* 박스 레이아웃 */
+.round_box{display: block; background-color: #fff; border:solid 1px #d2d2d2; border-radius: 5px;padding:15px;color:#000; font-size: 15px;text-align: center;}
+
+/* 컨텐츠 영역 */
+.content_wrap{width:100%;height:calc(100vh - 110px); padding:10px 20px; position: relative; overflow: scroll;}
+.padding_wrap{padding:10px 20px;}
+
+/* 버튼 */
+.common_btn{font-size:20px;color:#fff; height:50px;background-color: #005aab; text-align: center;width:100%; line-height: 50px;}
+.common_btn:disabled{font-size:20px;color:#969696; height:50px; background-color: #d7dae0;text-align: center;}
+.btn_wrap{position: absolute; bottom:0; left:0;right:0;}
+.btn_wrap > button{width:100%;}
+.btn2_wrap{display: grid; grid-template-columns: 30% 70%;}
+.btn2_wrap > button:nth-of-type(1){font-size:20px;color:#969696; height:50px; background-color: #d7dae0;text-align: center;}
+
+/* 팝업 (풀팝업은 CM030 참조) */
+.popup{background-color: #fff; position: absolute; top:20vh; width:280px; left:50%; margin-left:-140px; z-index: 10; display: none; border-radius: 5px;}
+.popup .head{color: #005aab; font-weight: 600;font-size:15px; padding:10px 20px 0;}
+.popup .wrapper{padding:20px;}
+.popup .txt{color: #000; font-size:14px;}
+.popup .email_list{height:150px; overflow: scroll;}
+.popup .email_list > li{ height:40px;line-height: 40px;text-align: center;border-bottom: solid 1px #d7d7d7;font-size:20px;}
+.popup .email_list > li:active{ background-color: #005aab; opacity: 0.5;} 
+.popup .popup_btn_wrap > button{width: 100%; height:50px;line-height: 50px; font-size: 18px;color:#fff; background-color: #005aab; border-radius: 0 0 5px 5px; }
+.popup .popup_btn2_wrap{display: grid; grid-template-columns: 35% 65%;}
+.popup .popup_btn2_wrap > button:nth-of-type(1){color:#969696; background-color: #d7dae0; border-radius: 0 0 0 5px; height:50px;line-height: 50px; font-size: 18px;}
+.popup .popup_btn2_wrap > button:nth-of-type(2){color:#fff; background-color: #005aab; border-radius: 0 0 5px 0; height:50px;line-height: 50px; font-size: 18px;}
+.dimmed{position: absolute; top:0;bottom:0;left:0;right:0; background-color: #000; opacity: 0.6; z-index: 5; display: none;}
+
+/* 하단 메뉴 바*/
+.menu_bar{position: absolute; bottom:0;left:0;width:100%;overflow: hidden; box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1); border-radius: 5px 5px 0 0;
+    display: grid; grid-template-columns: repeat(4, 25%); height:50px; align-items: center; background-color: #fff; }
+.menu_bar > a{ text-align: center; color:#8c8c8c; font-size: 15px;}
+.menu_bar > a > img{ height:40px;}
+.menu_bar > a.new{background: url(../images/quickmenu_new.png) no-repeat 65% top /50px; }
+
+
+/*------------------------------------ CM010 간편 비번 입력 ----------------------------------------*/
+.simple_pass_wrap{height:calc(100vh - 426px); display: flex; align-items: center; justify-content: center;}
+.simple_pass_box{width:70%; border-bottom: solid 2px #d9d9d9; display: flex; align-items: center; justify-content: space-around;padding-bottom:15px;} 
+.simple_pass_box > span{width:15px; height:15px; background-color: #d9d9d9; border-radius: 20px;}
+.simple_keypad_wrap{position: absolute; bottom: 0; left:0; right:0;}
+.simple_keypad_wrap .g_txt{display: block; padding:20px; text-align: right;}
+.simple_keypad{background-color: #233f59; display:grid;grid-template-columns: repeat(3, 1fr);gap:10px; padding:30px 10px;}
+.simple_keypad > button{color:#fff; font-size: 28px; text-align: center; padding:10px 0;}
+.simple_keypad > button:active{background-color: #0086ff;}
+
+
+/* ---------------------------------- CM030 주소 검색 전체 팝업  ------------------------------------------ */
+.full_popup{position: absolute; left:0;right:0;top:0;bottom:0; z-index: 10; display: none; background-color: #fff;}
+.full_popup .h_title{padding-left:10px;}
+.srch_box{border:solid 1px #d2d2d2;border-radius: 5px;padding:5px 10px; position: relative; }
+.srch_btn{font-size: 18px;line-height: 40px;width: 40px;height: 40px;position: absolute; right:0;top:0;}
+.srch_btn:active{background-color: #f0eeee;}
+.srch_box > input[type='text']{border: none; width:80%;}
+.srch_box > input[type='text']:focus{border: none;}
+.addr_title{display: grid; grid-template-columns: 80% 20%;text-align: center; border-bottom:solid 2px #000;padding-bottom:5px; margin-top:20px;}
+.addr_title > span{color:#8c8c8c; font-size:14px; font-weight: 600;}
+.srch_addr_rst{height:calc(100vh - 220px); overflow: scroll;margin-top:10px;}
+.srch_addr_rst li{border-bottom: solid 1px #d7d7d7;padding:5px 0;}
+.srch_addr_rst li.selected{background-color: #f0eeee;} 
+.srch_addr_rst li td:nth-of-type(1){width:60px;vertical-align: top;}
+.srch_addr_rst li td:nth-of-type(2){line-height: 1.5;}
+.srch_addr_rst li td:nth-of-type(3){width:20%;text-align: center;}
+.srch_addr_rst li td .road{background-color: #70b5f5; color:#fff; display: inline-block; width:50px; text-align: center;}
+.srch_addr_rst li td .branch{background-color: #a3a3a3; color:#fff; display: inline-block; width:50px; text-align: center;}
+
+
+/* --------------------------------- CM070 인증서 비번 입력 --------------------------------------------- */
+.certi_pass:focus{border-bottom:solid 2px #0086ff !important; }
+
+
+/* -------------------------------- LN020 앱 접근 권한 안내 ------------------------*/
+.acc_title{border-bottom: solid 1px #d7d7d7;padding-bottom: 20px;}
+.acc_title > span{font-size: 15px; }
+.acc_title > p{font-size: 27px; font-weight: 600; }
+.acc_box{display: grid; grid-template-columns: 22% 78%; align-items: center;padding:20px 0; border-bottom: solid 1px #d7d7d7;}
+.acc_box > img{width:90%;}
+.acc_box > div{padding-left:10px;}
+.acc_box > div > p{font-size: 20px; font-weight: 600;}
+.acc_box > div > span{font-size: 13px; color:#8c8c8c;}
+
+
+/* -------------------------------- LN030 사용자 가이드 -------------------------------- */
+.user_guide_wrap{width:100%; position: relative; overflow: hidden;}
+.user_pagination{text-align: center; height:40px; line-height: 40px;}
+.user_pagination .swiper-pagination-bullet{width:10px; height:10px; margin:0 10px;}
+.user_guide_wrap .bg_blue{background-color: #0087de !important; display: flex; align-items: center;}
+.user_guide_wrap .bg_white{background-color: #fff !important;}
+.guide_contents{display: flex; flex-direction: column; justify-content: center; align-items: center; height:calc(100vh - 40px);}
+.app_btn_wrap{position: absolute; left:0; bottom: 0; width: 100%; padding: 12vh 70px;}
+
+
+/* -------------------------------- LN040 로그인 페이지 -------------------------------- */
+.head_img{padding:20px;}
+.head_img > img{height:30px;}
+.main_img{text-align: center; padding:3vh 0;} 
+.main_img > img{height:80px;}
+.login_box{padding:10px 20px 30px;} 
+.email_wrap{display: flex; align-items: center; justify-content: space-between;}
+.email_wrap > input[type='text']{width:40%; font-size:15px;height: 30px;line-height: 30px;}
+.email_wrap > svg{font-size:15px;}
+.email_wrap .email_combo{display: inline-block; width:28px;height:28px; background: url(../images/chevron-down.svg) no-repeat center /24px; border:solid 1px #d7d7d7; border-radius: 5px;}
+.pass_wrap{margin-top:20px;}
+.pass_wrap > input[type='password']{width:calc(100% - 20px); font-size:20px;height: 30px;line-height: 30px; letter-spacing: 3px;}
+.auto_login_wrap{margin:20px 0;}
+.auto_login_wrap > label{font-size:14px !important;color:#8c8c8c;padding:10px 0; background-image: url(../images/btn_combo00.png) !important;}
+.auto_login_wrap > input[type="checkbox"]:checked + label{background-image: url(../images/btn_combo01.png) !important;}
+.login_btn{font-size:18px;color:#fff;text-align: center;background-color: #005aab;border-radius: 5px; height: 40px; width:100%;}
+.find_wrap{margin:20px 0;display: flex; justify-content: space-between;}
+.find_wrap > a{color:#8c8c8c;}
+.join_btn{font-size:18px;color:#8c8c8c;background-color: #f0eeee;border-radius: 5px; height: 40px; width:100%; border:solid 1px #d7d7d7;margin-top:40px; }
+
+
+/* -------------------------------- LN050 전화번호 입력 -------------------------------- */
+.phone_wrap{display: grid; grid-template-columns: 20% 5% 30% 5% 30%; align-items: center;text-align: center;justify-content: space-around;}
+.phone_wrap > input{text-align: center;}
+
+
+/* --------------------------------- LN060 아이디 찾기 결과  ------------------------------*/
+.srch_id_list{height:calc(100% - 140px); margin:10px 0; overflow: scroll;}
+.srch_id_list li{border-bottom:solid 1px #d7d7d7; font-size: 15px;line-height: 50px;padding:0 10px; text-align: center;}
+
+
+/* --------------------------------- LN080 아이디 입력---------------------------------*/
+.radio_tab_wrap{display: grid; grid-template-columns: repeat(2, 1fr);}
+.radio_tab_wrap > input[type='radio']{display: none; }
+.radio_tab_wrap > input[type='radio'] + label{color:#8c8c8c; line-height: 44px; text-align: center; border:solid 1px #d2d2d2;font-weight: 600; font-size:18px;}
+.radio_tab_wrap > input[type='radio'] + label:nth-of-type(1){border-radius: 5px 0 0 5px;}
+.radio_tab_wrap > input[type='radio'] + label:nth-of-type(2){border-radius: 0 5px 5px 0;}
+.radio_tab_wrap > input[type='radio']:checked + label{color:#0086ff; border:solid 2px #0086ff;}
+
+
+/* --------------------------------- LN090 약관동의 --------------------------------------*/
+.agree_box{border:solid 1px #d2d2d2;background-color: #fff;border-radius: 5px;padding:10px;display: flex; align-items: center; margin:15px 0;}
+.agree_box > label{font-size:14px !important; color:#707070;max-width:60%; padding:10px 0;}
+.agree_box > span{font-size:14px; color:#8c8c8c;margin-left:auto;}
+.all_agree_wrap{border-top:solid 1px #d2d2d2; margin-top:20px;padding-top:20px;}
+
+
+/*----------------------------------- LN100 약관 상세  --------------------------------------*/
+.agree_detail_wrap{border:solid 1px #0086ff;padding:5px;}
+
+
+/* ---------------------------------  LN110 회원가입 기본 정보 페이지 -------------------------------*/
+.text_wrap > input[type='text']{width:calc(100% - 20px); }
+.status_on{display: inline-block; background-color: #0086ff; color:#fff; font-size:14px;padding:5px 10px; border-radius: 30px; font-weight: 600;}
+.status_off{display: inline-block; background-color: #f0eeee; color:#8c8c8c; font-size:14px; padding:5px 10px; border-radius: 30px;font-weight: 600;}
+
+
+/* ---------------------------------- MA020 정보표시 / 수정 ---------------------------------------------------*/
+.myinfo_btn_wrap .round_box{margin-top:10px;text-align: left; background: url(../images/login_icon_arrow.png) no-repeat 95% center /10px; height:60px;line-height: 60px; 
+    padding:0 20px;font-weight: 600;}
+
+
+/* ---------------------------------- MA040 회원탈퇴 ------------------------------------------------*/
+.warning_wrap{background-color:#f0eeee;padding:20px 0; text-align: center; font-weight:600; font-size: 20px; margin-top:30%;}
+.warning_wrap > span{font-weight:600; font-size: 18px; }
+.warning_wrap > img{height: 20px;}
+
+
+/* --------------------------------- MA050 복지현황 ------------------------------------------------*/
+.main_wrap {width: 100%;height: calc(100vh - 100px) !important; padding:30px 20px 0;position: relative; overflow: hidden;}
+.main_title{font-size:27px; letter-spacing: -1px;}
+.main_title .bold{font-weight:600;font-size: 27px;}
+.main_bg_box{display: block; height:25vh; background-repeat: no-repeat; background-size: 100% 100%;background-position: center;border-radius: 5px;padding:15px;margin:3vh 5px;}
+.main_bg_box.bg_blue{background-image: url(../images/main_box_blue.png); display: flex; flex-direction: column; justify-content: space-between; }
+.main_bg_box.bg_blue span.white_txt{padding-left:7px; font-size:16px;}
+.progress_wrap{position: relative; width:85%;margin:auto; height:10px;background-color: #2075c1;}
+.progress_wrap .progress_bar{position: absolute; width:100%;height:10px; z-index:3;
+    background: #78baf5;
+    background: -moz-linear-gradient(left,  #78baf5 0%, #ffffff 99%);
+    background: -webkit-linear-gradient(left,  #78baf5 0%,#ffffff 99%);
+    background: linear-gradient(to right,  #78baf5 0%,#ffffff 99%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#78baf5', endColorstr='#ffffff',GradientType=1 );
+    border-radius: 0 5px 5px 0;
+}
+.progress_wrap .st_point{display: inline-block; width:24px; height:24px; background-color: #78baf5; border-radius: 30px; position: absolute; left:-12px; top:-7px; z-index:5;}
+.progress_wrap .st_point::after{display: inline-block; content:''; width:10px; height:10px; background-color: #fff; border-radius: 30px; position: absolute; left:7px;top:7px;}
+.progress_wrap .ed_point{display: inline-block; width:24px; height:24px; background-color: #2075c1; border-radius: 30px; position: absolute; right:-10px;top:-7px;z-index:2;}
+.progress_wrap .ed_point::after{display: inline-block; content:''; width:10px; height:10px; background-color: #fff; border-radius: 30px; position: absolute; left:7px;top:7px;}
+.progress_wrap .rate{ position: absolute; top:20px; left:100%; margin-left:-30px; background: #ffffff; width: 60px; height:20px; line-height: 20px; display: block; color:#005aab; font-size: 16px; font-weight: 600; 
+    text-align: center;border-radius: 24px; z-index:10;}
+.progress_wrap .rate:after, .progress_wrap .rate:before { bottom: 100%; left: 50%; border: solid transparent; content: " "; height: 0; width: 0;position: absolute; pointer-events: none;top:-14px;}
+.progress_wrap .rate:after {border-color: rgba(255, 255, 255, 0); border-bottom-color: #ffffff; border-width: 8px; margin-left: -8px;}
+.how_comp_wrap{text-align: right;padding-top:10px;}
+.how_comp{color:#5b9dd8; border-bottom: solid 1px #5b9dd8;}
+.main_bg_box.bg_orange{ background-image: url(../images/main_box_yellow.png);color:#fff; text-align: center;position: relative; display: flex; align-items: center;justify-content: center;}
+.main_bg_box.bg_orange .white_txt{font-size: 16px;}
+.main_bg_box.bg_orange .arrow{position: absolute; bottom:7px;right:7px; width:25px;}
+.main_bg_box.bg_orange .cnt_txt{font-size:18px;color:#fff;}
+.main_bg_box.bg_orange .align_cnt{font-size:50px; font-weight: 600; color:#fff;}
+.main_bg_box.bg_orange.new::after{display: block; content: ''; width:80px; height:80px; background-image:url(../images/main_box_ribbon.png); background-size: 80px 80px; 
+    background-position:center; position: absolute; left:-6px; top:-6px;}
+.main_box{ display: block;background-color: #fff;border: solid 1px #d2d2d2;border-radius: 5px;padding: 20px;color: #000;text-align: center; margin-top:10px; position: relative; }
+.main_box .wel_cnt{font-size:40px; color:#005aab; font-weight: 600;}
+.main_box .arrow{position: absolute; bottom:7px; right:7px; width:25px;}
+.pagination_wrap{width:100%; height:50px; overflow: hidden; padding:0 20px; text-align: left; position: absolute; bottom:50px;left:0;right:0; display: flex; align-items: center;}
+.pagination_wrap .swiper-pagination-bullet{margin:10px; width:10px;height: 10px;  }
+.pagination_wrap .swiper-pagination-bullet-active{background-color:#005aab;}
+.my_info_btn_wrap{display: flex; align-items: center; justify-content: space-between;}
+.mydata_btn_wrap{margin-top:20px;}
+.mydata_btn_wrap .round_box{margin-bottom:2vh; text-align: left;height:60px; line-height: 60px;padding:0 20px; font-size:18px;font-weight: 600;}
+.welfare_btn_wrap{margin-top:30px;} 
+.welfare_btn_wrap .bg_round_box{border-radius: 5px;padding-left:20px; font-size: 18px;text-align: left;background-repeat: no-repeat;background-size: 100% 100%; 
+    color:#fff;margin-bottom: 10px;position: relative; height:60px; line-height: 60px;}
+.welfare_btn_wrap .bg_round_box.blue{background-image: url(../images/btn_560x100_blue.png); margin-bottom: 2vh;display: flex;justify-content: space-between; align-items: center;padding-right: 45px;}
+.welfare_btn_wrap .bg_round_box.sea{background-image: url(../images/btn_560x100_sea.png); display: flex;justify-content: space-between; align-items: center;padding-right: 45px;}
+.welfare_btn_wrap .bg_round_box .cnt_num{color:#fff; font-size: 20px; font-weight: 600; border-bottom: solid 1px #fff;}
+
+.main_welfare_list{height:calc(100vh - 200px);overflow: scroll; margin-top:10px;}
+.main_box .add_icon{padding:20px;}
+.main_box .add_icon > img{height:30px;}
+.main_edit_btn_wrap{display: flex; justify-content: space-between; align-items: center;}
+.main_box.on{border-color: #005aab;padding-bottom:50px;}
+.main_box.on .name_wrap{font-size:15px;padding:0 0 10px;}
+.main_box.on .name_wrap .name{font-size:24px; font-weight: 600;letter-spacing: -1px;}
+.main_box.on .reco_cnt_wrap{position: absolute; left:0; bottom:0; height:50px; line-height: 50px; background-color: #005aab;width:100%; color:#fff;text-align: left;padding:0 20px;
+    display: flex; align-items: center; justify-content: space-between; }
+.main_box.on .reco_cnt_wrap .white_txt{font-size: 15px;}
+.main_box.on .reco_cnt_wrap .reco_cnt{font-size:18px; font-weight: 600;color:#fff;border-bottom: solid 1px #fff; ;}
+/* .welfare_btn_wrap .bg_round_box.sea .cnt_num{color:#fff; font-size: 20px; font-weight: 600; position: absolute; top:10px; right:13%; border-bottom: solid 1px #fff;} */
+.main_box.on .name_wrap .lic_num{font-size:14px; margin-top:10px; font-weight: 600;}
+
+
+/* ----------------------------------- MA060 공인인증서 목록 ------------------------------------------ */
+.certibox{display: grid; grid-template-columns: 25% 70%; gap:5%; align-items: center;}
+.certibox li{text-align: left;}
+
+
+/* ------------------------------------ MA100 맞춤정책자금 목록 ----------------------------------------*/
+.fund_box_wrap{height:calc(100vh - 280px);overflow: scroll;margin-top:10px;}
+.fund_box{background-color: #fff; border: solid 1px #d2d2d2; border-radius: 5px; padding: 15px;margin-bottom:20px;}
+.fund_tag_wrap{display: flex;align-items: center; justify-content: space-between;margin-bottom:10px;}
+.fund_tag{color:#005aab;font-weight: 600;}
+.fund_box td{color:#8c8c8c;}
+.fund_box td:nth-of-type(1){width:80px;}
+.req_status.yellow{background-color: #eda320;} 
+
+
+/* ----------------------------------- MD010 mydata 메뉴목록 ------------------------------------------*/
+.mydata_btn_wrap .round_box:active{background-color:#f0eeee;}
+
+
+/* ----------------------------------- MD020 서류목록(개인/소상공인) + 편집모드 ------------------------ */
+.refresh_btn{margin-left:auto;margin-right:5px;height:44px;width:44px;}
+.tab_btn_wrap .gray_btn{position: absolute; right:0;}
+.edit_end_btn{display: none;}
+.doc_file_wrap{display: grid; grid-template-columns:repeat(3, 30%); grid-template-rows: repeat(6, 115px); gap:5%; height:calc(100vh - 250px); overflow: scroll;padding:20px;}
+.doc_file_wrap .doc_file input[type='checkbox']{display: none;}
+.doc_file_wrap .doc_file input[type='checkbox'] + label{display: none; }
+.doc_file{text-align: center; background-color:#f0eeee; border:solid 1px #8c8c8c; border-radius: 7px; height: 115px; position: relative;}
+.doc_file .doc_title{font-size:14px; color:#8c8c8c;text-align: center; margin: 15px 0 5px; height:70px; font-weight: 600;display: flex; align-items: center; justify-content: center;} 
+.doc_file .g_txt{display: none;}
+.doc_file.on{background: url(../images/img_file_bg.png) no-repeat center /100% 100%; border:none; }
+.doc_file.on .doc_title{color:#000;}
+.doc_file.on .g_txt{display: inline-block;}
+.doc_del_btn{width:60px;height:60px; border-radius: 40px;background-color: #005aab; color:#fff;text-align: center;position: absolute; bottom:65px; right:15px; display: none;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2); }
+.doc_del_btn > img{display: block;width:20px;margin:5px auto;}
+.doc_file_wrap.edit .doc_file.on input[type='checkbox'] + label{display: inline-block;width:25px;height:25px; background: url(../images/btn_combo00.png) no-repeat center /25px; padding-left:0;
+    position: absolute;top:-10px; left:-10px; z-index: 2;}
+.doc_file_wrap.edit .doc_file.on input[type='checkbox']:checked + label{background: url(../images/btn_combo01.png) no-repeat center /25px;}
+
+
+/* ----------------------------------- MD050 서류발급정보입력(1) ---------------------------------------*/
+.family_select_wrap{display: grid; grid-template-columns: 35% 60%; gap:5%}
+.family_select_wrap select{border-bottom: solid 2px #d9d9d9;padding-left:5px; height:30px; line-height: 30px;}
+.doc_radio > input[type='radio']{visibility: hidden;width:1px;}
+.doc_radio > input[type='radio'] + label{display: inline-block; background: url(../images/btn_radio00.png) no-repeat 0 center /20px; padding:5px 0 5px 25px; font-weight: 600;font-size:16px;}
+.doc_radio > input[type='radio']:checked + label{display: inline-block; background: url(../images/btn_radio01.png) no-repeat 0 center /20px; padding:5px 0 5px 25px;}
+.gray_btn{background-color: #f0eeee; border: solid 1px #d7d7d7; color:#8c8c8c;border-radius: 4px; line-height: 30px; min-width: 50px;padding:0 10px;}
+.doc_addr_wrap{display: grid; grid-template-columns: 75% 20%; gap:5%;}
+.id_number_wrap{display: grid; grid-template-columns: 45% 10% 45%; text-align: center;}
+.id_number_wrap > input{letter-spacing: 7px; text-align: center;}
+.id_number_wrap > svg{margin: auto;}
+.doc_radio_wrap{text-align: center;padding:15px 0;}
+.doc_radio_wrap .doc_radio{width:40%; display: inline-block;}
+
+
+/* ---------------------------------- MD060 서류발급정보입력(2) ----------------------------------------*/
+.doc_radio_3_wrap .doc_radio{width:32%; display: inline-block;}
+.doc_multi_radio_wrap{padding-left:10px;}
+.doc_multi_radio_wrap .doc_radio{width:40%; display: inline-block;}
+
+
+/* -------------------------------------ST010 환경설정 메뉴 목록 -------------------------------- */
+.setting_list li{padding:20px; border-bottom: solid 1px #d7d7d7; display: flex; align-items: center; justify-content: space-between; font-size: 16px; font-weight: 600;}
+.setting_list li:first-of-type{border-top: solid 5px #d7d7d7;} 
+.setting_list li:last-of-type{border-bottom: solid 5px #d7d7d7;} 
+.setting_list li.arrow_list{background: url(../images/login_icon_arrow.png) no-repeat 95% center /10px;}
+.setting_list li.arrow_list:active{background-color:#f0eeee;}
+.onoff_btn{background-color: #969696; font-size:12px; width:60px; height:24px; line-height: 24px; position: relative; border-radius: 24px;}
+.onoff_btn::before{content: ''; display: block; background-color: #fff; width: 14px; height: 14px; border-radius: 20px; position: absolute; top: 5px; left: 7px; }
+.onoff_btn::after{content: 'OFF'; color:#fff; font-weight: 600; position: absolute; top:0; left:26px;}
+.onoff_btn.on{background-color: #0086ff;font-size:12px; width:60px; height:24px; line-height: 24px; position: relative; border-radius: 24px;}
+.onoff_btn.on::before{content: ''; display: block; background-color: #fff; width: 14px; height: 14px; border-radius: 20px; position: absolute; top: 5px; left: 40px; }
+.onoff_btn.on::after{content: 'ON'; color:#fff; font-weight: 600; position: absolute; top:0; left:10px;}
+
+
+/* ------------------------------------ ST040 인증서 가져오기 ------------------------------------*/
+.certi_btn_wrap{margin-top: 20px;}
+.certi_btn{font-size:18px;color:#fff;text-align: center;background-color: #005aab;border-radius: 5px; height: 40px; width:100%;}
+.certi_btn:disabled{color:#969696; background-color: #d7dae0;}
+.certi_g_img_wrap{display: grid; grid-template-columns: 45% 10% 45%;align-items: center; justify-content: center; text-align: center;margin:5vh 0;}
+.certi_g_img_wrap > img{display: block; height:12px;margin:auto;}
+.certi_g_img_wrap div > img{height:80px;}
+.certi_g_img_wrap div > p{ font-size: 15px; font-weight: 600;margin-top:5px;}
+.certi_guide li{display: grid; grid-template-columns: 5% 95%;}
+.certi_guide li span{line-height: 1.5; color:#8c8c8c; font-size:14px;}
+
+
+/* ----------------------------------- ST060 알림함 ----------------------------------------------  */
+.noti_list{border-top:solid 1px #d9d9d9;padding-top:10px;}
+.noti_list > li{border-bottom:solid 1px #d9d9d9;padding:5px 0; display: grid; grid-template-columns: 10% 88%; gap:2%;}
+.noti_list > li .noti_icon{font-size: 16px;text-align: center;}
+.noti_list > li .g_txt{text-align: right;}
+
+
+/* ---------------------------------- WF010 맞춤 복지 설정(기본,상세) ----------------------------------*/
+.tab_btn_wrap{margin-bottom:20px;position: relative;}
+.tab_btn_wrap .tab_btn{display: inline-block; height:34px; line-height: 34px; text-align: center;background-color: #fff; color:#8c8c8c;border:solid 1px #d2d2d2; 
+    font-size: 15px; border-radius: 40px; margin-right:10px; padding:0 10px; width:115px;}
+.tab_btn_wrap .tab_btn.active{background-color: #005aab; border:solid 1px #005aab;color:#fff;}
+.tab_content{display: none;}
+.residence_wrap{display: grid; grid-template-columns: repeat(2,1fr);}
+.residence_wrap select{width:95%; border-bottom:solid 2px #d9d9d9; padding-left:10px;line-height: 30px;height:30px; box-sizing: border-box;}
+.residence_wrap input{width:95%; border-radius: 0;border-bottom: solid 2px #d9d9d9;}
+.family_chk_wrap{display:grid; grid-template-rows: repeat(2, 1fr); grid-template-columns: repeat(2 , 1fr); gap:20px 0;}
+.family_chk_wrap > label{height: 40px;line-height: 40px;}
+.family_chk_wrap select{line-height: 30px;height:30px; box-sizing: border-box;border-bottom:solid 2px #d9d9d9;padding-left:10px;}
+.info_wrap{border:solid 1px #d2d2d2; border-radius: 5px;padding:10px; }
+.info_wrap > table td{font-size: 16px; height:40px; line-height: 40px;}
+.info_wrap > table td:nth-of-type(1){width:110px;}
+.info_wrap > table td > input[type='text'],
+.info_wrap > table td > input[type='password']{width: 100%;font-size: 16px;}
+.info_wrap .phone_wrap{display: grid; grid-template-columns: 32% 32% 32%; gap:2%; align-items: center; text-align: center; justify-content: space-around;}
+.div_line{background-color: #f0eeee;width:100%; height:5px;}
+.doc_purpose{margin-bottom:20px;}
+.doc_purpose > select{width:100%;border-bottom: solid 2px #d9d9d9; line-height: 30px;}
+
+
+/* -----------------------------------  WF030 맞춤 복지 전체목록 ------------------------------------- */
+.srch_cnt_wrap{margin-top:20px; display: flex;align-items: center;}
+.srch_cnt_wrap .srch_cnt{font-size:16px; color:#000; font-weight: 600;}
+.srch_cnt_wrap .wel_set_btn{font-size:16px; color:#000;margin-left:auto; color:#8c8c8c;background-color: #f0eeee;border-radius: 5px; border:solid 1px #d7d7d7; padding:5px;}
+.wel_box_wrap{display: grid; grid-template-columns: repeat(2, calc(50% - 5px)); gap:10px; height:calc(100vh - 240px); margin-top:5px; padding:10px 0; overflow: scroll; grid-auto-rows: max-content;}
+.wel_box{border:solid 1px #9db1ce; background-color: #fff; height:180px; border-radius: 5px;padding:12px;position: relative;}
+.wel_tag{font-size:14px; color:#005aab;font-weight: 600;width:70%;display: block; text-overflow:ellipsis; overflow: hidden; white-space: nowrap;}
+.wel_title{font-size:20px; color:#000;max-height:112px; overflow: hidden; line-height: 1; font-weight: 600;}
+.wel_box .wel_period{position: absolute; bottom:12px;left:12px;font-size:14px; color:#78889d;line-height:1;}
+.wel_box.new{background-color: #e2ebf8;}
+.wel_box.new::after{content:"";display: block; position: absolute; top:10px; right:10px;width:38px; height:14px; background:url(../images/icon_new.png) no-repeat center /100%;}
+
+
+/* ------------------------------------ WF040 복지 상세(자체신청, URL신청연결) ------------------------------------- */
+.wel_info_wrap .wel_tag{text-align: right;width:100%;}
+.wel_info_wrap .wel_title{text-align: center;padding:20px 0;font-weight: 600;}
+.wel_info_wrap .summary_wrap{display: grid; grid-template-columns: repeat(3, 1fr); gap:0px;margin:20px auto 30px;width:95%;}
+.wel_info_wrap .summary_wrap > div{text-align: center;height:100px;}
+.wel_info_wrap .summary_wrap > div > img{height:60px;display: block;margin:auto;}
+.wel_info_wrap .summary_wrap > div > span{font-size: 14px;font-weight: 600;color:#005aab;}
+.wel_info_wrap .title{color:#000;margin-top:10px;}
+.wel_info_wrap .content{color:#707070;padding-bottom:10px;border-bottom:solid 1px #f0eeee;}
+.wel_info_wrap .key_txt{color:#00a88e;}
+
+
+/* -----------------------------------  WF050 신청 요약 -------------------------------------- */
+.city_wrap > select{line-height: 30px; width: 40%; border-bottom:solid 2px #d9d9d9;padding-left:10px;}
+.doc_box{display: flex;align-items: center; background-color: #fff; border: solid 1px #d2d2d2; border-radius: 5px; padding:0 20px; color: #000;height:60px;}
+.doc_box .doc_nm{ font-size: 18px; font-weight: 600;}
+.doc_box .status_off,
+.doc_box .status_on{width:80px;text-align: center;}
+
+/* -----------------------------------  WF070 신청 목록 ----------------------------------------- */
+.srch_pr_box{ line-height: 30px; display: grid; grid-template-columns: 40% 5% 40% 15%; position: relative; text-align: center; font-size:14px;}
+.srch_pr_box > input[type='text']{background: url(../images/calendar.svg) no-repeat 0 center /20px; padding-left:25px;}
+.srch_pr_box .srch_btn{ width:15%; height:30px; }
+.srch_pr_box .srch_btn svg {vertical-align: text-top;}
+.req_list_wrap{height:calc(100vh - 210px); overflow: scroll; padding:10px 0; margin-top:5px;}
+.req_list_wrap .round_box{text-align: left; margin-bottom:10px;}
+.req_title{font-size:20px; font-weight: 600; word-break: keep-all; line-height: 1;}
+.req_dt_wrap{display: flex; justify-content: space-between;padding-top:10px;}
+.req_dt{font-size: 13px;color:#707070;}
+.req_status{display: inline-block; padding:0 10px; border-radius: 20px; text-align: center; color:#fff;font-size: 13px; width:72px; height:23px; line-height: 23px; }
+.req_status.green{background-color: #00a88e;} /*진행중*/
+.req_status.gray{background-color: #eaeaea; color:#8c8c8c;}  /*신청완료*/
+.req_status.red{background-color: #ff6363;}   /*신청실패*/
+
+
+/* ------------------------------------- WF080 신청내역상세 --------------------------------------*/
+.req_fail_msg{background-color:#f0eeee;padding:10px;margin-bottom:10px;}
+.fail_txt{display: grid; grid-template-columns: 20% 80%; align-items: center;}
+.fail_txt > img{width:30px;margin:auto;}
+.req_fail_msg .red_txt{text-align: center;margin-top:10px;font-size:14px;font-weight: 600;}
+.info_wrap_2{border:solid 1px #d2d2d2; border-radius: 5px;padding:20px; }
+.info_wrap_2 li{font-size:18px;}
+.info_wrap_2 li input{margin-bottom:20px; font-size:18px;}
+.info_wrap_2 li > input{width:100%;}
+.info_wrap_2 .phone_wrap{display: grid; grid-template-columns: 32% 32% 32%; gap:2%; align-items: center; text-align: center; justify-content: space-around;}
+.info_wrap_2 li.flex{display: flex;justify-content: space-between;}

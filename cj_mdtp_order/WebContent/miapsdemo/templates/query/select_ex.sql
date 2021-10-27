@@ -1,0 +1,1 @@
+SELECT user_no, user_id, user_nm FROM miaps_user

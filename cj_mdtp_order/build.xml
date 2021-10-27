@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<project name="com.miaps.hybrid.dev" basedir="./" default="all">
+	<!-- Jenkins용 빌드파일 입니다. 로컬용이 아닙니다.  -->
+	
+	<!-- 개발서버 Tomcat -->
+	<property name="tomcat.dir" location="D:/MiAPS_Server/MiAPS6beta/apache-tomcat-8.5.11"/>
+	<!-- 로컬서버 Tomcat 
+	<property name="tomcat.dir" location="C:/Apache/apache-tomcat-8.5.58"/>
+	-->
+	
+	<property name="mink.profile" value="hybridtest" />
+	<property name="connector.src" location="src"/>
+	<property name="connector.classes" location="WebContent/WEB-INF/classes"/>
+	<property name="hybrid.project" value="miapsdemo"/> <!-- samples2, miapsdemo... -->
+	<property name="hybrid.resource.src" location="WebContent/${hybrid.project}" />
+	<property name="hybrid.resource.target" location="WebContent/webapp/${hybrid.project}_dist" />
+<!--	<property name="update.resouce.root" location="C:\Users\Administrator\.jenkins\workspace\UpdateResource"/>-->
+
+	<path id="app.libs">
+		<fileset dir="WebContent/WEB-INF/lib" />
+	</path>
+	<path id="tomcat.libs">
+		<fileset dir="${tomcat.dir}/lib" />		
+	</path>
+	<path id="compile.classpath">
+		<pathelement location="${connector.classes}" />
+		<path refid="app.libs"/>
+		<path refid="tomcat.libs"/>
+	</path>
+
+	<target name="connector_build">
+		<copy todir="${connector.classes}" overwrite="true">
+			<fileset dir="${connector.src}/${mink.profile}">
+				<include name="**/*.xml" />
+				<include name="**/*.properties" />
+				<include name="**/*.txt" />
+				<include name="**/*.ico" />
+			</fileset>
+		</copy>
+		<mkdir dir="${connector.classes}"/>
+		<javac debug="true" debuglevel="source,lines,vars" encoding="UTF-8" destdir="${connector.classes}" includeantruntime="false" source="1.8" target="1.8">
+			<src path="src" />
+			<classpath refid="compile.classpath"/>
+		</javac>
+	</target>
+
+	<target name="make_connector_jar">
+		<jar destfile="WebContent/WEB-INF/lib/miaps.connector.${mink.profile}.jar">
+			<fileset dir="${connector.classes}">
+				<include name="com/mink/connectors/spring/*.${mink.profile}.*" />
+				<include name="com/mink/connectors/${mink.profile}/**/*.*" />
+				<include name="com/mink/connectors/spring/message-common*.*" />
+				<include name="com/mink/connectors/spring/let/cop/**/*.*" />
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="make_war">
+		<war destfile="release/miaps.war">
+			<fileset dir="WebContent" excludes="samples2/,webapp/,WEB-INF/classes/,WEB-INF/jsp/asvc/deploy/deviceLogView.jsp" />
+		</war>
+	</target>
+
+	<target name="copy_hybrid_resource">
+		<copy todir="${hybrid.resource.target}">
+			<fileset dir="${hybrid.resource.src}">
+				<include name="*.json"/>
+			</fileset>
+		</copy>	
+		<copy todir="${hybrid.resource.target}/${hybrid.project}">
+			<fileset dir="${hybrid.resource.src}">
+				<include name="**/*"/>
+				<exclude name="**/upload.inf"/>
+			</fileset>
+		</copy>		
+	</target>
+	
+	<target name="all" depends="connector_build, make_connector_jar, copy_hybrid_resource" />
+
+</project>
